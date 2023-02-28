@@ -566,7 +566,7 @@ start_gen() {
 killall http-server.sh
 screen -dmS generador /bin/http-server.sh -start
 echo  #' >/bin/genon
-            chmod +rwx /bin/genon
+            chmod +x /bin/genon
             echo "00 * * * * root bash /bin/genon" >>/etc/crontab
             service cron restart
         } || {
@@ -590,7 +590,7 @@ message_gen() {
     echo $MSGNEW >/etc/menu_ito
     cat /etc/menu_ito >${SCPT_DIR}/menu_credito
     read -p "Ingresa tu Numero de Contacto o tu ALIAS de TELEGRAM: " MSGNEW
-    echo $MSGNEW >/etc/menu_numito && chmod +rwx /etc/menu_numito
+    echo $MSGNEW >/etc/menu_numito && chmod +x /etc/menu_numito
     msg -bar
 }
 
@@ -632,7 +632,7 @@ rmv_iplib() {
 
 bot_menu() {
     [[ -e /etc/nivbot ]] || echo "0" >/etc/nivbot
-    [[ -d /etc/ADM-db ]] && chmod +rwx /etc/ADM-db/*
+    [[ -d /etc/ADM-db ]] && chmod +x /etc/ADM-db/*
     echo -ne "\033[1;31m[ ! ] RESPALDANDO USUARIO ADMINISTRADOR "
     (
         [[ -e /etc/ADM-db/sources/costes ]] && mv /etc/ADM-db/sources/costes $HOME/costes
