@@ -279,11 +279,11 @@ while true; do
 	    chatuser="$(echo ${message_chat_id[$id]}|cut -d'-' -f2)"
 	    [[ -z $chatuser ]] && chatuser="$(echo ${callback_query_from_id[$id]}|cut -d'-' -f2)"
 	    echo $chatuser >&2
-	    echo "user id $chatuser"
+	    #echo "user id $chatuser"
 
 	    comando=(${message_text[$id]})
 	    [[ -z $comando ]] && comando=(${callback_query_data[$id]})
-	    echo "comando $comando"
+	    #echo "comando $comando"
 
 	    [[ ! -e "${CIDdir}/Admin-ID" ]] && echo "null" > ${CIDdir}/Admin-ID
 	    permited=$(cat ${CIDdir}/Admin-ID | awk '{print $1}')
