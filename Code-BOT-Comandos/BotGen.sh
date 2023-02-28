@@ -143,12 +143,12 @@ upimg_fun () {
         #bot_retorno+=" COMANDO NO PERMITIDO !!\n Quizas debes usar este /keygen \n O Posiblemente no estas Autorizado, clic aqui /prices o \n Contacta a $(cat < /etc/ADM-db/resell) y adquiere una subscripcion \n Toca aqui para ayuda /ayuda \n"
         #bot_retorno+="$LINE\n"
 	    #ShellBot.sendMessage --chat_id $var \
-							--text "<i>$(echo -e $bot_retorno)</i>" \
-							--parse_mode html
+							#--text "<i>$(echo -e $bot_retorno)</i>" \
+							#--parse_mode html
 		#sleep 5s
 		#msj_del ${message_message_id}
 		#msj_del ${MSG_id}
-							return 0	
+							#return 0	
 #}
 
 
