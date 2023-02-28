@@ -33,7 +33,7 @@ source ${SRC}/comandos
 source ${SRC}/update
 source ${SRC}/donar
 source ${SRC}/costes
-#source ${SRC}/kill_drop.sh
+source ${SRC}/kill_drop.sh
 
 # Token del bot
 bot_token="$(cat ${CIDdir}/token)"
