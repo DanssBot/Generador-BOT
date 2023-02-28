@@ -35,7 +35,7 @@ bot_retorno="  🎊 MENU PRINCIPAL DE ChumoGH|ADM $(cat < /etc/SCRIPT/v-local.lo
 			 bot_retorno+="$LINE\n"
 			 menu_printSN
 			 }
-			 msj_fun
+			 #msj_fun
 		 else
 		 	[[ -e /etc/menu_ito ]] && nomkey="$(cat /etc/menu_ito)" || nomkey="$(curl -sSL "https://www.dropbox.com/s/z38hj1mz3q9krso/menu_credito")"
 		 	numkey_used=$(grep -o -i $message_chat_id /etc/gerar-sh-log | wc -l)
