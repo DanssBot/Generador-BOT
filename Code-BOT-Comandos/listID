@@ -16,7 +16,7 @@ done
 local bot_retorno="$LINE\n"
           bot_retorno+='   - ID´S AUTORIZADOS + GENERADAS -\n'
           bot_retorno+="$LINE\n"
-          bot_retorno+=" $(echo -e ${bot_lin}) "  #|column -t -s '-')"
+          bot_retorno+=" $(echo -e ${bot_lin}) "  |column -t -s '-')"
           bot_retorno+="$LINE\n"
 msj_fun
 }
