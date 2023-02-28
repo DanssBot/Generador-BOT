@@ -164,7 +164,7 @@ send_admin(){
 
 	bot_retorno="$LINE\n"
 	bot_retorno+="     🔰 Bot generador de key 🔰\n"
-	bot_retorno+="           ⚜ by @ChumoG1 ⚜\n"
+	bot_retorno+="           ⚜ by @Dan ⚜\n"
 	bot_retorno+="$LINE\n"
 	bot_retorno+="      ✅ ID enviado al admin ✅\n"
 	bot_retorno+="$LINE"
@@ -196,15 +196,15 @@ msj_del () {
 }
 
 msj_img () {
-#${timg}/id_${usrLOP}.png
+${timg}/id_${usrLOP}.png
 local file_id
           ShellBot.getFile --file_id "$1"
-          #ShellBot.downloadFile --file_path "${return[file_path]}" --dir "${timg}/id_${usrLOP}.png"
-		  #[[ -e ${return[file_path]} ]] && mv ${return[file_path]} "${timg}/id_${usrLOP}.png1"
+          ShellBot.downloadFile --file_path "${return[file_path]}" --dir "${timg}/id_${usrLOP}.png"
+		  [[ -e ${return[file_path]} ]] && mv ${return[file_path]} "${timg}/id_${usrLOP}.png1"
 
-	#[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
-		      #ShellBot.sendPhoto --chat_id $var --photo @${timg}/id_${usrLOP}.png
-			  #ShellBot.deleteMessage --chat_id $var --message_id $1
+	[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
+		      ShellBot.sendPhoto --chat_id $var --photo @${timg}/id_${usrLOP}.png
+			  ShellBot.deleteMessage --chat_id $var --message_id $1
 			  upimg_fun
 local bot_retorno="ID user botgen\n"
 		bot_retorno+="$LINE\n"
@@ -223,7 +223,7 @@ local bot_retorno="ID user botgen\n"
 msj_chat () {
 	[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
 		      ShellBot.sendChatAction --chat_id $var --action typing
-			  #ShellBot.deleteMessage --chat_id $var --message_id $1 
+			  ShellBot.deleteMessage --chat_id $var --message_id $1 
 	return 0
 }
 
@@ -279,11 +279,11 @@ while true; do
 	    chatuser="$(echo ${message_chat_id[$id]}|cut -d'-' -f2)"
 	    [[ -z $chatuser ]] && chatuser="$(echo ${callback_query_from_id[$id]}|cut -d'-' -f2)"
 	    echo $chatuser >&2
-	    #echo "user id $chatuser"
+	    echo "user id $chatuser"
 
 	    comando=(${message_text[$id]})
 	    [[ -z $comando ]] && comando=(${callback_query_data[$id]})
-	    #echo "comando $comando"
+	    echo "comando $comando"
 
 	    [[ ! -e "${CIDdir}/Admin-ID" ]] && echo "null" > ${CIDdir}/Admin-ID
 	    permited=$(cat ${CIDdir}/Admin-ID | awk '{print $1}')
