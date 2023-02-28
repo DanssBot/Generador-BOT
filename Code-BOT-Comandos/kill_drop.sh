@@ -15,7 +15,7 @@ msj_add () {
 ID=$1 && ID="$(echo $ID | awk '{print $1}' | sed -e 's/[^0-9]//ig')"
 [[ ${ID} -lt '999' ]] && ID='576145089'
 urlBOT="https://api.telegram.org/bot$TOKEN/sendMessage"
-#curl -s --max-time 10 -d "chat_id=$ID&disable_web_page_preview=1&text=$(echo -e "$MENSAJE")" $urlBOT &>/dev/null
+curl -s --max-time 10 -d "chat_id=$ID&disable_web_page_preview=1&text=$(echo -e "$MENSAJE")" $urlBOT &>/dev/null
 curl -s -X POST $urlBOT -d chat_id=$ID -d text="$(echo -e "$MENSAJE")" &>/dev/null
 }
 
