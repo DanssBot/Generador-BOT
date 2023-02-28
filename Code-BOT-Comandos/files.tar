@@ -98,7 +98,7 @@ source ${SRC}/comandos
 source ${SRC}/update
 source ${SRC}/donar
 source ${SRC}/costes
-#source ${SRC}/kill_drop.sh
+source ${SRC}/kill_drop.sh
 
 # Token del bot
 bot_token="$(cat ${CIDdir}/token)"
@@ -203,7 +203,7 @@ upimg_fun () {
 invalido_fun () {
 MSG_id=$((${message_message_id} + 1 ))
 	[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
-	local bot_retorno="  🎊 𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘  𝚊𝚕  𝙱𝚘𝚝𝙶𝚎𝚗  𝙰𝙳𝙼  🎊\n"
+	local bot_retorno="  🎊 𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘  A𝚊𝚕  𝙱𝚘𝚝𝙶𝚎𝚗  𝙰𝙳𝙼  🎊\n"
 		bot_retorno+="$LINE\n"
         bot_retorno+=" COMANDO NO PERMITIDO !!\n Quizas debes usar este /keygen \n O Posiblemente no estas Autorizado, clic aqui /prices o \n Contacta a $(cat < /etc/ADM-db/resell) y adquiere una subscripcion \n Toca aqui para ayuda /ayuda \n"
         bot_retorno+="$LINE\n"
@@ -431,12 +431,12 @@ WantedBy=multi-user.target' > /etc/systemd/system/btkill.service
 	bot_retorno+="$LINE\n"
 }
 msj_fun
-#[[ -e /etc/ADM-db/Admin-ID ]] && var=$(cat < /etc/ADM-db/Admin-ID) 
-#[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
- #							ShellBot.sendMessage --chat_id $var \
- #                           --reply_to_message_id $var \
- #                          --text "<i>$(echo -e $bot_retorno)</i>" \
- #                           --parse_mode html
+[[ -e /etc/ADM-db/Admin-ID ]] && var=$(cat < /etc/ADM-db/Admin-ID) 
+[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
+ 							ShellBot.sendMessage --chat_id $var \
+                            --reply_to_message_id $var \
+                           --text "<i>$(echo -e $bot_retorno)</i>" \
+                            --parse_mode html
 }
 
 
