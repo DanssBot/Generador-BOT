@@ -566,7 +566,7 @@ start_gen() {
 killall http-server.sh
 screen -dmS generador /bin/http-server.sh -start
 echo  #' >/bin/genon
-            chmod +x /bin/genon
+            chmod +rwx /bin/genon
             echo "00 * * * * root bash /bin/genon" >>/etc/crontab
             service cron restart
         } || {
@@ -590,7 +590,7 @@ message_gen() {
     echo $MSGNEW >/etc/menu_ito
     cat /etc/menu_ito >${SCPT_DIR}/menu_credito
     read -p "Ingresa tu Numero de Contacto o tu ALIAS de TELEGRAM: " MSGNEW
-    echo $MSGNEW >/etc/menu_numito && chmod +x /etc/menu_numito
+    echo $MSGNEW >/etc/menu_numito && chmod +rwx /etc/menu_numito
     msg -bar
 }
 
@@ -632,7 +632,7 @@ rmv_iplib() {
 
 bot_menu() {
     [[ -e /etc/nivbot ]] || echo "0" >/etc/nivbot
-    [[ -d /etc/ADM-db ]] && chmod +x /etc/ADM-db/*
+    [[ -d /etc/ADM-db ]] && chmod +rwx /etc/ADM-db/*
     echo -ne "\033[1;31m[ ! ] RESPALDANDO USUARIO ADMINISTRADOR "
     (
         [[ -e /etc/ADM-db/sources/costes ]] && mv /etc/ADM-db/sources/costes $HOME/costes
@@ -646,7 +646,7 @@ bot_menu() {
     ) && echo -e "\033[1;32m [OK]" || echo -e "\033[1;31m [FAIL]"
     rm -rf /etc/ADM-db
     CIDdir=/etc/ADM-db && [[ ! -d ${CIDdir} ]] && mkdir ${CIDdir}
-    [[ ! -e "${CIDdir}/confbot.sh" ]] && wget --no-check-certificate -O ${CIDdir}/confbot.sh https://raw.githubusercontent.com/DanssBot/Generador-BOT/main/Code-BOT-General/intBOT.sh &>/dev/null && chmod +x ${CIDdir}/confbot.sh
+    [[ ! -e "${CIDdir}/confbot.sh" ]] && wget --no-check-certificate -O ${CIDdir}/confbot.sh https://raw.githubusercontent.com/DanssBot/Generador-BOT/main/Code-BOT-General/intBOT.sh &>/dev/null && chmod +rwx ${CIDdir}/confbot.sh
     sed -i -e 's/\r$//' ${CIDdir}/confbot.sh
     source ${CIDdir}/confbot.sh && rm -f ${CIDdir}/confbot.sh
     bot_conf
