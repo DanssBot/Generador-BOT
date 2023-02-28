@@ -50,7 +50,7 @@ reply () {
 									--parse_mode html \
 									--reply_markup "$(ShellBot.ForceReply)"
 	[[ "${callback_query_data}" = /del || "${message_text}" = /del ]] && listID_src
-	#[[ "${callback_query_data}" = /img || "${message_text}" = /img ]] && listID_src
+	[[ "${callback_query_data}" = /img || "${message_text}" = /img ]] && listID_src
 	[[ "${callback_query_data}" = '/banIP' || "${message_text}" = '/banIP' ]] && list_IP
 	
 }
