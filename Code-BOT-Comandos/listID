@@ -7,10 +7,10 @@ unset bot_lin
 n=1
 for i in $(cat /etc/ADM-db/User-ID | awk '{print $1}' | sed -e 's/[^a-z0-9 -]//ig'); do 
 idlog=$(cat /etc/ADM-db/User-ID | grep "$i" | awk '{print $3}')
-#idGEN=$(grep -o -i $idlog /etc/ADM-db/num-key.cont | wc -l)
+idGEN=$(grep -o -i $idlog /etc/ADM-db/num-key.cont | wc -l)
 [[ -e /etc/ADM-db/num-key.cont ]] && idGEN=$(cat /etc/ADM-db/num-key.cont | grep $i | wc -l) || idGEN=0
 bot_lin+="  $n] > <tg-spoiler>${i}</tg-spoiler> | $idlog | ${idGEN}\n"
-#lsid=$(cat -n ${CID})
+lsid=$(cat -n ${CID})
 let n++
 done
 local bot_retorno="$LINE\n"
