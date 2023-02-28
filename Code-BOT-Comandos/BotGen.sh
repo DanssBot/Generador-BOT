@@ -33,7 +33,7 @@ source ${SRC}/comandos
 source ${SRC}/update
 source ${SRC}/donar
 source ${SRC}/costes
-source ${SRC}/kill_drop.sh
+#source ${SRC}/kill_drop.sh
 
 # Token del bot
 bot_token="$(cat ${CIDdir}/token)"
@@ -50,7 +50,7 @@ reply () {
 									--parse_mode html \
 									--reply_markup "$(ShellBot.ForceReply)"
 	[[ "${callback_query_data}" = /del || "${message_text}" = /del ]] && listID_src
-	[[ "${callback_query_data}" = /img || "${message_text}" = /img ]] && listID_src
+	#[[ "${callback_query_data}" = /img || "${message_text}" = /img ]] && listID_src
 	[[ "${callback_query_data}" = '/banIP' || "${message_text}" = '/banIP' ]] && list_IP
 	
 }
@@ -62,13 +62,13 @@ menu_print () {
 [[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
 
 	if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
-				 ShellBot.sendMessage 	--chat_id ${message_chat_id[$id]} \
+				 #ShellBot.sendMessage 	--chat_id ${message_chat_id[$id]} \
 				ShellBot.sendMessage 	--chat_id $var \
 										--text "<i>$(echo -e $bot_retorno)</i>" \
 										--parse_mode html \
 										--reply_markup "$(ShellBot.InlineKeyboardMarkup -b 'botao_user')"
 	else
-				 ShellBot.sendMessage 	--chat_id ${message_chat_id[$id]} \
+				 #ShellBot.sendMessage 	--chat_id ${message_chat_id[$id]} \
 				ShellBot.sendMessage 	--chat_id $var \
 										--text "<i>$(echo -e $bot_retorno)</i>" \
 										--parse_mode html \
@@ -120,18 +120,18 @@ upfile_fun () {
 	[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
           ShellBot.sendDocument --chat_id $var  \
                              --document @${1} \
-                             --caption  "$(echo -e "$bot_retorno")" \
-                             --parse_mode html \
-                             --reply_markup "$(ShellBot.ForceReply)"
+                             #--caption  "$(echo -e "$bot_retorno")" \
+                             #--parse_mode html \
+                             #--reply_markup "$(ShellBot.ForceReply)"
 							 #--reply_markup "$(ShellBot.InlineKeyboardMarkup -b "$2")"							 
 }
 
 upimg_fun () {
           ShellBot.sendDocument --chat_id $(cat ${CIDdir}/Admin-ID)  \
                              --document @${1} \
-                             --caption  "$(echo -e "$bot_retorno")" \
-                             --parse_mode html \
-                             --reply_markup "$(ShellBot.ForceReply)"
+                             #--caption  "$(echo -e "$bot_retorno")" \
+                             #--parse_mode html \
+                             #--reply_markup "$(ShellBot.ForceReply)"
 							 #--reply_markup "$(ShellBot.InlineKeyboardMarkup -b "$2")"							 
 }
 
@@ -199,12 +199,12 @@ msj_img () {
 ${timg}/id_${usrLOP}.png
 local file_id
           ShellBot.getFile --file_id "$1"
-          ShellBot.downloadFile --file_path "${return[file_path]}" --dir "${timg}/id_${usrLOP}.png"
-		  [[ -e ${return[file_path]} ]] && mv ${return[file_path]} "${timg}/id_${usrLOP}.png1"
+          #ShellBot.downloadFile --file_path "${return[file_path]}" --dir "${timg}/id_${usrLOP}.png"
+		  #[[ -e ${return[file_path]} ]] && mv ${return[file_path]} "${timg}/id_${usrLOP}.png1"
 
-	[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
-		      ShellBot.sendPhoto --chat_id $var --photo @${timg}/id_${usrLOP}.png
-			  ShellBot.deleteMessage --chat_id $var --message_id $1
+	#[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
+		      #ShellBot.sendPhoto --chat_id $var --photo @${timg}/id_${usrLOP}.png
+			  #ShellBot.deleteMessage --chat_id $var --message_id $1
 			  upimg_fun
 local bot_retorno="ID user botgen\n"
 		bot_retorno+="$LINE\n"
@@ -223,7 +223,7 @@ local bot_retorno="ID user botgen\n"
 msj_chat () {
 	[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
 		      ShellBot.sendChatAction --chat_id $var --action typing
-			  ShellBot.deleteMessage --chat_id $var --message_id $1 
+			  #ShellBot.deleteMessage --chat_id $var --message_id $1 
 	return 0
 }
 
