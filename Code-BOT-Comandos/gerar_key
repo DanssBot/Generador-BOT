@@ -41,7 +41,7 @@ valuekey+="$(echo $(($RANDOM*10))|head -c 6)"
 oUP=$(wget -qO- ipv4.icanhazip.com)
 fun_list "$valuekey"
 keyfinal="$(ofus "$oUP:8888/${valuekey}/$LIST")"
-#local bot_retorno=" ═--💻  𝙎 𝘾 𝙍 𝙄 𝙋 𝙏  |  𝘾𝙝𝙪𝙢𝙤𝙂𝙃|𝘼𝘿𝙈   💻  --═\n" #--------------------------------------------------------------------------------------
+local bot_retorno=" ═--💻  𝙎 𝘾 𝙍 𝙄 𝙋 𝙏  |  𝘾𝙝𝙪𝙢𝙤𝙂𝙃|𝘼𝘿𝙈   💻  --═\n" #--------------------------------------------------------------------------------------
 local bot_retorno=" $LINE\n"  #--------------------------------------------------------------------------------------
 #   🚫 Sin TU RESELLER EN LA KEY 🚫\n
 [[ -z ${message_chat_tittle} ]] && grupCHAT="" || grupCHAT="ChatID : ${chatuser} "
