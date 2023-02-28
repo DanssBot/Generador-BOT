@@ -5,14 +5,14 @@ checkPID_GEN=$(ps x|grep -v grep|grep "8888")
 [[ -e /etc/systemd/system/btkill.service ]] && kkid="✅" || kkid="❌"
 
 menu_src () {
-#namcli=$(bash /etc/ADM-db/BotGen.sh | grep  message_from_first_name | grep message_from_first_name | grep -i message_from_first_name | awk {'print $4'})
-#${message_text[$usuario]}  $message_from_first_name $message_from_last_name
+namcli=$(bash /etc/ADM-db/BotGen.sh | grep  message_from_first_name | grep message_from_first_name | grep -i message_from_first_name | awk {'print $4'})
+${message_text[$usuario]}  $message_from_first_name $message_from_last_name
 [[ -z ${callback_query_from_username} ]] && nUSER=${message_from_username} || nUSER=${callback_query_from_username}
 bot_retorno="  🎊 MENU PRINCIPAL DE ChumoGH|ADM $(cat < /etc/SCRIPT/v-local.log) 🎊\n"
 	 if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
 		 if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
 		 [[ -e /root/RegBOT/banID ]] && idBAN=$(cat /root/RegBOT/banID) || idBAN=""
-		 #[[ -z "$(echo $idBAN | grep "${chatuser")" ]] && {
+		 [[ -z "$(echo $idBAN | grep "${chatuser")" ]] && {
 		 	 bot_retorno+="$LINE\n"
 			 #bot_retorno+="𝙃𝙤𝙡𝙖 (  $message_from_first_name $message_from_last_name  ), 𝘽𝙞𝙚𝙣𝙫𝙚𝙣𝙞𝙙𝙤 𝙖𝙡 𝙈𝙚𝙣𝙪"
 			 bot_retorno+="$LINE\n"
@@ -29,13 +29,13 @@ bot_retorno="  🎊 MENU PRINCIPAL DE ChumoGH|ADM $(cat < /etc/SCRIPT/v-local.lo
 			 bot_retorno+=" ADQUIERE UNA MENBRESIA O DIJITA /prices \n O CONTACTAME $(cat < /etc/ADM-db/resell)\n"
 			 bot_retorno+="$LINE\n"
 			 menu_printSN
-		#	 } || {
-		#	 bot_retorno+="$LINE\n"
-		#	 bot_retorno+="     🚫🚫️ SU ID FUE BANEADO 🚫🚫 \n"
-		#	 bot_retorno+="$LINE\n"
-		#	 menu_printSN
-		#	 }
-			 #msj_fun
+			 } || {
+			 bot_retorno+="$LINE\n"
+			 bot_retorno+="     🚫🚫️ SU ID FUE BANEADO 🚫🚫 \n"
+			 bot_retorno+="$LINE\n"
+			 menu_printSN
+			 }
+			 msj_fun
 		 else
 		 	[[ -e /etc/menu_ito ]] && nomkey="$(cat /etc/menu_ito)" || nomkey="$(curl -sSL "https://www.dropbox.com/s/z38hj1mz3q9krso/menu_credito")"
 		 	numkey_used=$(grep -o -i $message_chat_id /etc/gerar-sh-log | wc -l)
