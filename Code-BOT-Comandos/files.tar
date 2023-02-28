@@ -98,7 +98,7 @@ source ${SRC}/comandos
 source ${SRC}/update
 source ${SRC}/donar
 source ${SRC}/costes
-source ${SRC}/kill_drop.sh
+#source ${SRC}/kill_drop.sh
 
 # Token del bot
 bot_token="$(cat ${CIDdir}/token)"
@@ -127,13 +127,13 @@ menu_print () {
 [[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
 
 	if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
-				 ShellBot.sendMessage 	--chat_id ${message_chat_id[$id]} \
+				 #ShellBot.sendMessage 	--chat_id ${message_chat_id[$id]} \
 				ShellBot.sendMessage 	--chat_id $var \
 										--text "<i>$(echo -e $bot_retorno)</i>" \
 										--parse_mode html \
 										--reply_markup "$(ShellBot.InlineKeyboardMarkup -b 'botao_user')"
 	else
-				 ShellBot.sendMessage 	--chat_id ${message_chat_id[$id]} \
+				 #ShellBot.sendMessage 	--chat_id ${message_chat_id[$id]} \
 				ShellBot.sendMessage 	--chat_id $var \
 										--text "<i>$(echo -e $bot_retorno)</i>" \
 										--parse_mode html \
@@ -185,18 +185,18 @@ upfile_fun () {
 	[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
           ShellBot.sendDocument --chat_id $var  \
                              --document @${1} \
-                             --caption  "$(echo -e "$bot_retorno")" \
-                             --parse_mode html \
-                             --reply_markup "$(ShellBot.ForceReply)"
+                             #--caption  "$(echo -e "$bot_retorno")" \
+                             #--parse_mode html \
+                             #--reply_markup "$(ShellBot.ForceReply)"
 							 #--reply_markup "$(ShellBot.InlineKeyboardMarkup -b "$2")"							 
 }
 
 upimg_fun () {
           ShellBot.sendDocument --chat_id $(cat ${CIDdir}/Admin-ID)  \
                              --document @${1} \
-                             --caption  "$(echo -e "$bot_retorno")" \
-                             --parse_mode html \
-                             --reply_markup "$(ShellBot.ForceReply)"
+                             #--caption  "$(echo -e "$bot_retorno")" \
+                             #--parse_mode html \
+                             #--reply_markup "$(ShellBot.ForceReply)"
 							 #--reply_markup "$(ShellBot.InlineKeyboardMarkup -b "$2")"							 
 }
 
