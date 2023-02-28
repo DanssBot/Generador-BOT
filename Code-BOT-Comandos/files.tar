@@ -115,7 +115,7 @@ reply () {
 									--parse_mode html \
 									--reply_markup "$(ShellBot.ForceReply)"
 	[[ "${callback_query_data}" = /del || "${message_text}" = /del ]] && listID_src
-	#[[ "${callback_query_data}" = /img || "${message_text}" = /img ]] && listID_src
+	[[ "${callback_query_data}" = /img || "${message_text}" = /img ]] && listID_src
 	[[ "${callback_query_data}" = '/banIP' || "${message_text}" = '/banIP' ]] && list_IP
 	
 }
@@ -127,13 +127,13 @@ menu_print () {
 [[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
 
 	if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
-				# ShellBot.sendMessage 	--chat_id ${message_chat_id[$id]} \
+				 ShellBot.sendMessage 	--chat_id ${message_chat_id[$id]} \
 				ShellBot.sendMessage 	--chat_id $var \
 										--text "<i>$(echo -e $bot_retorno)</i>" \
 										--parse_mode html \
 										--reply_markup "$(ShellBot.InlineKeyboardMarkup -b 'botao_user')"
 	else
-				# ShellBot.sendMessage 	--chat_id ${message_chat_id[$id]} \
+				 ShellBot.sendMessage 	--chat_id ${message_chat_id[$id]} \
 				ShellBot.sendMessage 	--chat_id $var \
 										--text "<i>$(echo -e $bot_retorno)</i>" \
 										--parse_mode html \
@@ -185,18 +185,18 @@ upfile_fun () {
 	[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
           ShellBot.sendDocument --chat_id $var  \
                              --document @${1} \
-                             #--caption  "$(echo -e "$bot_retorno")" \
-                             #--parse_mode html \
-                             #--reply_markup "$(ShellBot.ForceReply)"
+                             --caption  "$(echo -e "$bot_retorno")" \
+                             --parse_mode html \
+                             --reply_markup "$(ShellBot.ForceReply)"
 							 #--reply_markup "$(ShellBot.InlineKeyboardMarkup -b "$2")"							 
 }
 
 upimg_fun () {
           ShellBot.sendDocument --chat_id $(cat ${CIDdir}/Admin-ID)  \
                              --document @${1} \
-                             #--caption  "$(echo -e "$bot_retorno")" \
-                             #--parse_mode html \
-                             #--reply_markup "$(ShellBot.ForceReply)"
+                             --caption  "$(echo -e "$bot_retorno")" \
+                             --parse_mode html \
+                             --reply_markup "$(ShellBot.ForceReply)"
 							 #--reply_markup "$(ShellBot.InlineKeyboardMarkup -b "$2")"							 
 }
 
@@ -344,11 +344,11 @@ while true; do
 	    chatuser="$(echo ${message_chat_id[$id]}|cut -d'-' -f2)"
 	    [[ -z $chatuser ]] && chatuser="$(echo ${callback_query_from_id[$id]}|cut -d'-' -f2)"
 	    echo $chatuser >&2
-	    #echo "user id $chatuser"
+	    echo "user id $chatuser"
 
 	    comando=(${message_text[$id]})
 	    [[ -z $comando ]] && comando=(${callback_query_data[$id]})
-	    #echo "comando $comando"
+	    echo "comando $comando"
 
 	    [[ ! -e "${CIDdir}/Admin-ID" ]] && echo "null" > ${CIDdir}/Admin-ID
 	    permited=$(cat ${CIDdir}/Admin-ID | awk '{print $1}')
