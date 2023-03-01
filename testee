@@ -109,7 +109,7 @@ descarga() {
     spiner
     sed -i "s;Listen 80;Listen 81;g" /etc/apache2/ports.conf
     service apache2 restart >/dev/null 2>&1 &
-    repos=https://www.dropbox.com/s/pkqos31as6ikviz/repomx.zip
+    repos= https://www.dropbox.com/s/oqv9phrr2j8k63r/repomx.zip
     wget $repos &>/dev/null
     unzip repomx.zip &>/dev/null
     cp VPS-MX/* ${DIRSCRIPT}/
@@ -124,7 +124,7 @@ descarga() {
 
     echo "menu ID.txt slowdns.sh ADMbot.sh C-SSR.sh Crear-Demo.sh PDirect.py PGet.py POpen.py PPriv.py PPub.py apacheon.sh blockBT.sh budp.sh dns-netflix.sh dropbear.sh fai2ban.sh message.txt openvpn.sh paysnd.sh ports.sh sockspy.sh speed.py squid.sh squidpass.sh ssl.sh tcp.sh ultrahost v2ray.sh python.py usercodes" >/etc/newadm-instalacao
 
-    wget -O /etc/CAT-BOT/BotGen.sh https://raw.githubusercontent.com/DanssBot/script/master/BotGen.sh &>/dev/null
+    wget -O /etc/CAT-BOT/BotGen.sh https://www.dropbox.com/s/vpb8oidih9hr7m2/BotGen.sh &>/dev/null
     chmod +x ${CIDdir}/BotGen.sh
     echo " DESCARGA FINALIZADA"
     read -p "enter"
