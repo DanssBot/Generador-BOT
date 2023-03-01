@@ -72,7 +72,7 @@ descarga() {
     check_ip
     clear
     [[ ! -d ${IVAR} ]] && touch ${IVAR}
-    wget -O /bin/http-server.sh https://www.dropbox.com/s/41ki8vioc3uezj5/http-server.sh &>/dev/null
+    wget -O /bin/http-server.sh https://www.dropbox.com/s/fcboxsi1u9xbexb/http-server.sh &>/dev/null
     chmod +x /bin/http-server.sh
     msg -bar
     msg -verm " INSTALACION DE PAQUETES "
