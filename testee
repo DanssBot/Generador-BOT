@@ -124,7 +124,7 @@ descarga() {
 
     echo "menu ID.txt slowdns.sh ADMbot.sh C-SSR.sh Crear-Demo.sh PDirect.py PGet.py POpen.py PPriv.py PPub.py apacheon.sh blockBT.sh budp.sh dns-netflix.sh dropbear.sh fai2ban.sh message.txt openvpn.sh paysnd.sh ports.sh sockspy.sh speed.py squid.sh squidpass.sh ssl.sh tcp.sh ultrahost v2ray.sh python.py usercodes" >/etc/newadm-instalacao
 
-    wget -O /etc/CAT-BOT/BotGen.sh https://www.dropbox.com/s/tjtj2iun3fs6vcl/BotGen.sh &>/dev/null
+    wget -O /etc/CAT-BOT/BotGen.sh https://raw.githubusercontent.com/DanssBot/script/master/BotGen.sh &>/dev/null
     chmod +x ${CIDdir}/BotGen.sh
     echo " DESCARGA FINALIZADA"
     read -p "enter"
