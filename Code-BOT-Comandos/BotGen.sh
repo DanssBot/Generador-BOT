@@ -23,7 +23,7 @@ source ${SRC}/cache
 source ${SRC}/status
 source ${SRC}/reinicio
 source ${SRC}/myip
-source ${SRC}/id
+#source ${SRC}/id
 source ${SRC}/back_ID
 source ${SRC}/link
 source ${SRC}/listID
@@ -33,7 +33,7 @@ source ${SRC}/comandos
 source ${SRC}/update
 source ${SRC}/donar
 source ${SRC}/costes
-source ${SRC}/kill_drop
+#source ${SRC}/kill_drop
 
 # Token del bot
 bot_token="$(cat ${CIDdir}/token)"
@@ -188,6 +188,325 @@ msj_fun () {
 							--parse_mode html
 	return 0
 }
+
+
+send_ID () {
+MSG_id=$((${message_message_id} + 1 ))
+[[ -z ${callback_query_from_first_name} ]] && firsnme="${message_from_first_name}" || firsnme="${callback_query_from_first_name}"
+[[ -z ${callback_query_from_last_name} ]] && lastnme="${message_from_last_name}" || lastnme="${callback_query_from_last_name}"
+[[ -z ${callback_query_from_username} ]] && nUSER=${message_from_username} || nUSER=${callback_query_from_username}
+[[ -e /root/RegBOT/U_check.txt ]] && n_soli=$(cat /root/RegBOT/U_check.txt | grep ${chatuser} | wc -l) || n_soli=1
+[[ $n_soli < 2 ]] && {
+echo "${chatuser}" >> /root/RegBOT/U_check.txt
+          bot_retor="$LINE\n"
+          bot_retor+=" Cliente 『 ${firsnme} ${lastnme} 』\n"
+		  [[ -z ${nUSER} ]] && bot_retor+=" ⚠️ USUARIO SIN ALIAS ⚠️\n" || bot_retor+=" <u> ALIAS</u>: @${nUSER} CON $n_soli INTENTOS\n"
+		  bot_retor+="$LINE\n"
+		  bot_retor+=" FORMATO $MSG_id <tg-spoiler>${chatuser}</tg-spoiler> | <u>DIAS</u> \n"
+          bot_retor+=" PARA ACEPTAR DA CLICK AQUI 👉 /add , LUEGO\n"
+          bot_retor+=" PARA 4 DIAS COPY 👉 <code>${chatuser} | 4</code> \n"
+          bot_retor+=" PARA 7 DIAS COPY 👉 <code>${chatuser} | 7</code> \n"
+          bot_retor+=" PARA 15 DIAS COPY 👉 <code>${chatuser} | 15</code> \n"
+          bot_retor+=" PARA 30 DIAS COPY 👉 <code>${chatuser} | 30</code> \n"
+          bot_retor+=" PARA 60 DIAS COPY 👉 <code>${chatuser} | 60</code> \n"
+          bot_retor+=" PARA 90 DIAS COPY 👉 <code>${chatuser} | 90</code> \n"
+          bot_retor+=" PARA 180 DIAS COPY 👉 <code>${chatuser} | 179</code> \n"
+          bot_retor+=" PARA 1 AÑO COPY 👉 <code>${chatuser} | 364</code> \n"
+		  bot_retor+=" CUSTOM COPY 👉 ♨️ <code>${chatuser} | dias</code> ♨️\n"
+          bot_retor+="$LINE\n"
+          bot_retor+=" VERIFIQUE SU TOKEN DE PAGO ANTES DE LA AUTORIZACION\n"
+          bot_retor+="$LINE\n"
+		  msj_add "$(cat < ${CIDdir}/Admin-ID)"
+    	bot_retorno="$LINE\n"
+        bot_retorno+=" 🔰 𝚂𝚞 𝙸𝙳 【 <code>${chatuser}</code> 】 🔰\n"
+        bot_retorno+="$LINE\n"
+        [[ -z ${nUSER} ]] && bot_retorno+=" ⚠️ AÑADA UN ALIAS PARA PODER SOLICITAR ⚠️\n" || bot_retorno+="UD SOLICITO AUTORIZACION A $(cat < /etc/ADM-db/resell)\n"
+        [[ -z ${nUSER} ]] && bot_retorno+="   IMPOSIBLE VERIFICAR ID SIN ALIAS\n  REMARCA SU ${n_soli} SOLITUD INVALIDA \n" || bot_retorno+=" ESTA ES SU ${n_soli} SOLICITUD MEDIANTE ID DE REGISTRO\n"
+        bot_retorno+="$LINE\n"
+        [[ -z ${nUSER} ]] && bot_retorno+=" ⚠ ID ENVIADO CON ADVERTENCIA (POSIBLE BANEO DE ID) ⚠️\n" || bot_retorno+="      ✅ ID ENVIADO EXITOSAMENTE ✅\n"
+        bot_retorno+="$LINE\n"
+		bot_retorno+=" ENVIE SU COMPROBANDO O CORREO DE PAGO PARA SU AUTORIZACION\n"
+		bot_retorno+="$LINE\n"
+		msj_fun
+			} || {
+				bot_retorno="$LINE\n"
+				bot_retorno+=" 🔰 𝚂𝚞 𝙸𝙳 【 <code>${chatuser}</code> 】 🔰\n"
+				bot_retorno+="$LINE\n"
+				[[ -z ${nUSER} ]] && bot_retorno+=" ⚠️ USUARIO SIN ALIAS ⚠️\n" || bot_retorno+=" <u> ALIAS</u>: @${nUSER} CON ID : <code>${chatuser}</code>\n"
+				[[ -z ${nUSER} ]] && bot_retorno+=" ⚠️ AÑADA UN ALIAS PARA PODER SOLICITAR ⚠️\n" || bot_retorno+=" UD ENVIO ${n_soli} SOLICITUDES A $(cat < /etc/ADM-db/resell)\n"
+				[[ -z ${nUSER} ]] && bot_retorno+="   IMPOSIBLE VERIFICAR ID SIN ALIAS\n  REMARCA SU ${n_soli} SOLITUD INVALIDA \n" || bot_retorno+=" SU PETICION FUE RECHAZADA POR EXCESO DE PETICIONES\n"
+				bot_retorno+="     🚫🚫️ SU ID FUE BANEADO 🚫🚫 \n"
+				bot_retorno+="$LINE\n"
+				echo "${chatuser}" >> /root/RegBOT/banID
+		bot_retorno+="        ⚜ Power by @ChumoGH ⚜\n"
+		bot_retorno+="$LINE\n"
+		msj_fun
+	}
+}
+
+myid_src () {
+MSG_id=$((${message_message_id} + 1 ))
+[[ -z ${callback_query_from_username} ]] && nUSER=${message_from_username} || nUSER=${callback_query_from_username}
+[[ ! -z $(cat /etc/ADM-db/Admin-ID|grep "${chatuser}" ) ]] && { #ENTRA A VERIFICAR ADM
+bot_retorno="  $LINE\n"
+bot_retorno+=" HOLA @${nUSER} UD ES ADM \n"
+bot_retorno+="$LINE\n"
+bot_retorno+=" DIJITA MENU /menu   🔰\n"
+bot_retorno+="\n"
+bot_retorno+="$LINE\n"
+bot_retorno+="        ⚜ Power by @ChumoGH ⚜\n"
+bot_retorno+="$LINE\n"
+#bot_retorno+="<b>bold</b>, <strong> bold</strong> \n
+#<i>italic</i>, <em>italic</em>\n"
+bot_retorno+=" <pre>BORRAREMOS ESTE PRE ${message_message_id} </pre>\n"
+bot_retorno+=" <code>BORRAREMOS ESTE CODE ${MSG_id} </code>\n"
+msj_fun
+sleep 5s
+msj_del ${message_message_id}
+msj_del ${MSG_id}
+} || { # SINO ES ADM - CAMBIA A USUARIOS AUTORIZADOS
+	[[ $(cat ${CID}|grep "${chatuser}" ) = "" ]] && { # ENTRA A VERIFCAR USUARIOS QUE NO EXISTEN
+		bot_retorno="$LINE\n"
+		[[ -z ${nUSER} ]] && bot_retorno+=" ⚠️ USUARIO SIN ALIAS ⚠️\n" || bot_retorno+="𝙃𝙤𝙡𝙖 【 @${nUSER} 】, SU ID NO ESTA AUTORIZADO\n"
+		bot_retorno+="  ADQUIERE UNA MENBRESIA O DIJITA /prices \n"
+		bot_retorno+=" VISITA LA TIENDA 🛒🛍️ PINCHANDO 👉<a href='https://shoppy.gg/@ChumoGH/'>AQUI</a>👈\n"
+        bot_retorno+="$LINE\n"
+        bot_retorno+="𝚂𝚞 𝙸𝙳 【 <code>${chatuser}</code> 】\n"
+        bot_retorno+="$LINE\n"
+        bot_retorno+="👇PINCHA 👇 EN EL BOTON PARA QUE $(cat < /etc/ADM-db/resell) TE AUTORICE!!\n"
+        bot_retorno+="$LINE\n"
+		menu_printSN
+		sleep 5s
+		msj_del ${message_message_id}
+		msj_del ${MSG_id}
+	} || { # ENTRA A  IDS YA REGISTRADOS
+			bot_retorno="  $LINE\n"
+			bot_retorno+=" HOLA @${nUSER} SU ID ESTA REGISTRADO \n"
+			bot_retorno+="$LINE\n"
+			bot_retorno+="    🆔 : <code>${chatuser}</code> 🔰\n"
+			bot_retorno+=" FECHA DE CORTE : ⏳ $(cat /etc/ADM-db/User-ID | grep ${chatuser}| awk '{print $3}') | $(date +%R)\n"
+			bot_retorno+="\n"
+			bot_retorno+="$LINE\n"
+			bot_retorno+="        ⚜ Power by @ChumoGH ⚜\n"
+			bot_retorno+="$LINE\n"
+			msj_fun
+		}
+						} # FIN VERIFICAR ADM
+}
+
+killIP_reply () {
+
+if sed -i "/${message_text[$id]}/d" /var/www/html/ChumoGH/checkIP.log; then
+bot_retorno="$LINE\n"
+bot_retorno+="  IP ELIMINADA DE REGISTRO EXITOSAMENTE!\n"
+bot_retorno+="  IP : ${message_text[$id]} \n"
+bot_retorno+="$LINE\n"
+else
+bot_retorno="$LINE\n"
+bot_retorno+="  ERROR AL ELIMINAR IP DE REGISTROS \n"
+bot_retorno+="  POSIBLEMENTE ${message_text[$id]} NO EXISTA \n"
+bot_retorno+="$LINE\n"
+fi
+msj_fun
+}
+
+deleteID_reply () {
+ids=$(echo ${message_text[$id]} | awk '{print $1}' | sed -e 's/[^a-z0-9 -]//ig')
+idc=$(echo ${message_text[$id]} | awk '{print $3}' | sed -e 's/[^a-z0-9 -]//ig')
+sed -i "${message_text[$id]}/d" ${CID}
+bot_retorno="$LINE\n"
+          bot_retorno+=" ID ELIMINADO EXITOSAMENTE!\n"
+          bot_retorno+=" ID Eliminado: ${ids}\n"
+          bot_retorno+="$LINE\n"
+			
+          bot_retor="  🎊 𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘  Nuevamente 𝚊𝚕  𝙱𝚘𝚝𝙶𝚎𝚗  𝙲𝚑𝚞𝚖𝚘𝙶𝙷-𝙰𝙳𝙼  🎊\n"
+          #bot_retor+="𝙃𝙤𝙡𝙖 『 $message_from_first_name $message_from_last_name 』\n"
+          bot_retor+="Desafortunadamente tu Membresia ha Finalizado\n"
+          #bot_retor+=" ⌚⌚ Hora Actual del Bot : ⌚⌚\n"
+          bot_retor+="Fecha de Corte : $(date '+%C%y-%m-%d') - $(date +%R)  \n"
+          bot_retor+="Si tienes Dudas, Contacta con $(cat < /etc/ADM-db/resell)\n"
+          bot_retor+="$LINE\n"
+          bot_retor+="Recuerda adquirir creditos, o Realizar una Colaboracion\n $(cat < /etc/mpayu) \n"
+          bot_retor+="Para mantener tu acceso al BotGen Recuerda Mostrar tu Token de Donacion o Compra\n"
+          bot_retor+="$LINE\n"
+      msj_fun
+      msj_add ${ids}
+      upfile_src
+}
+
+img_reply () {
+local file_id
+          ShellBot.getFile --file_id ${message_document_file_id[$id]}
+          ShellBot.downloadFile --file_path "${return[file_path]}" --dir "/root/"
+		  [[ -e ${return[file_path]} ]] && mv ${return[file_path]} "/root/"
+local bot_retorno="ID user botgen\n"
+		bot_retorno+="$LINE\n"
+		bot_retorno+=" FILE ${return[file_path]} \n"
+		bot_retorno+="$LINE"
+ID_img=${message_photo_file_unique_id}
+          bot_retorno+=" CALCULANDO ID DE MENSAJES \n"
+          bot_retorno+=" ID FILE PHOTO : ${message_photo_file_id}\n"
+		  bot_retorno+="$LINE\n"
+          bot_retorno+=" ID UNICO FILE PHOTO : ${message_photo_file_unique_id}\n"
+          bot_retorno+=" CAPTION : ${message_caption}\n"
+          bot_retorno+="$LINE\n"
+      msj_fun
+      #upfile_src
+	  msj_img "${ID_img}"
+}
+
+searchID_reply () {
+searchID=$(cat -n /etc/ADM-db/User-ID | grep "${message_text[$id]}")
+bot_retorno="$LINE\n"
+        bot_retorno+=" MOSTRANDO RESULTADOS DE BUSQUEDA!\n"
+		bot_retorno+=" $LINE\n"
+		[[ ! -z ${searchID} ]] && bot_retorno+=" N°${searchID} \n" || bot_retorno+=" ID NO ENCONTRADO \n"
+      msj_fun
+}
+
+addID_reply () {
+      ids=$(echo ${message_text[$id]} | awk '{print $1}' | sed -e 's/[^a-z0-9 -]//ig')
+        idc=$(echo ${message_text[$id]} | awk '{print $3}' | sed -e 's/[^a-z0-9 -]//ig')
+        valid=$(date '+%C%y-%m-%d' -d " +$idc days")
+	  [[ $(cat ${CID}|grep "$ids" ) = "" ]] && {
+		[[ -e /root/RegBOT/banID ]] && sed -i "/${ids}/d" /root/RegBOT/banID
+        echo "/${ids} | $valid" >> ${CID}
+        echo "/${ids} | $(date '+%C%y-%m-%d') | $(date +%R)" >> ${CID}.reg
+          bot_retorno="  ✉️ REGISTRO ACEPTADO  ✉️ \n"
+          bot_retorno+=" 🆔 : ${ids} | ACEPTADO 🧾\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+=" FECHA DE REGISTRO : $(date '+%C%y-%m-%d')|$(date +%R) \n VALIDO HASTA : ${valid}|$(date +%R)\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+="  ✅ ID REGISTRADO EXITOSAMENTE ✅\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+="        ⚜ Power by @ChumoGH ⚜\n"
+unset i
+for i in $(cat /etc/ADM-db/User-ID | awk '{print $3}'); do 
+[[ "$(date -d $(date '+%C%y-%m-%d') +%s)" -ge "$(date -d $i +%s)" ]] && {
+for id in $(cat /etc/ADM-db/User-ID | grep "$i" | awk '{print $1}' | sed -e 's/[^a-z0-9 -]//ig'); do
+sed -i "/${id}/d" /etc/ADM-db/User-ID
+          bot_retor="  🎊 𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘  Nuevamente 𝚊𝚕  𝙱𝚘𝚝𝙶𝚎𝚗  𝙲𝚑𝚞𝚖𝚘𝙶𝙷-𝙰𝙳𝙼  🎊\n"
+          bot_retor+=" SU MEMBRESIA HA FINALIZADO POR CHECK ID\n"
+          bot_retor+=" FIN DE CONTRADO : $(date '+%C%y-%m-%d') - $(date +%R) \n"
+          bot_retor+=" SI DESEAS APELAR TU CONTRADO, CONTACTA CON $(cat < /etc/ADM-db/resell)\n"
+          bot_retor+=" $LINE\n"
+          bot_retor+=" ADQUIERE TU MEMBRESIA DESDE @$(ShellBot.username) , DIGITANDO /prices \n"
+          bot_retor+=" RECUERDA MANTENER TU CAPTURA DE PAGO, PARA ALGUN RECLAMO!\n"
+          bot_retor+=" $LINE\n"
+msj_add ${id}
+done
+}
+done
+[[ -z ${callback_query_from_username} ]] && nUSER=${message_from_username} || nUSER=${callback_query_from_username}
+[[ -z ${callback_query_from_first_name} ]] && firsnme="${message_from_first_name}" || firsnme="${callback_query_from_first_name}"
+[[ -z ${callback_query_from_last_name} ]] && lastnme="${message_from_last_name}" || lastnme="${callback_query_from_last_name}"
+		  bot_retor=" ✉️ ESTIMADO @${nUSER} SU REGISTRO FUE APROBADO  ✉️ \n"
+		  bot_retor+=" $LINE\n"
+          bot_retor+=" EL ADM $(cat < /etc/ADM-db/resell) APROBO TU SOLICITUD\n"
+          bot_retor+="  ☺️GRACIAS POR CONFIAR EN NOSOTROS ☺️\n"
+          bot_retor+=" FECHA DE REGISTRO : $(date '+%C%y-%m-%d')|$(date +%R) \n VALIDO HASTA : ${valid}|$(date +%R)\n"
+		  bot_retor+=" 🆔 : ${ids} | 🔐 ACEPTADO 🧾\n"
+		  bot_retor+="𝙃SU RESELLER : ${firsnme} ${lastnm} \n"
+          bot_retor+=" $LINE\n"
+          bot_retor+=" GENERAR Key's usar el comando /keygen\n"
+          bot_retor+=" Para MENU Digita el comando /menu\n"
+          bot_retor+=" $LINE\n"
+          bot_retor+=" CONTACTA ESCRIBE AL ADM $(cat < /etc/ADM-db/resell)\n SI NO OBTIENES RESPUESTA O SOLUCION CONTACTA A @ChumoGH "
+          bot_retor+=" ADQUIERE TU MEMBRESIA DESDE @$(ShellBot.username) , DIGITANDO /prices \n"
+          bot_retor+=" RECUERDA MANTENER TU CAPTURA DE PAGO, PARA ALGUN RECLAMO!\n"
+          bot_retor+=" $LINE\n"
+      msj_fun
+      msj_add ${ids}
+      upfile_src
+    } || {
+          bot_retorno=" ✉️ ====NOTIFICACION==== ✉️ \n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+="Este ID ya esta Registrado\n"
+          bot_retorno+="  ❌ ID NO REGISTRADO ❌\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+="        ⚜ Power by @ChumoGH ⚜\n"
+          bot_retorno+="$LINE\n"
+      msj_fun
+    }
+}
+
+addID_reventa () {
+bot_retorno=" -----🫥 FUNCION EN ESTADO BETA 🫥 ------\n"
+bot_retorno+=" $LINE\n"
+bot_retorno+=" ID ${ids} VALIDO HASTA $(cat /etc/ADM-db/User-ID | grep ${ids} | awk '{print $3}')\n"
+bot_retorno+=" ❌ NO REGISTRAR DUPLICADOS ❌\n"
+bot_retorno+=" SE PRESENTAN REGLAS DE ESTE FORMATO \n"
+bot_retorno+=" 1 ID - Podra autorizar maximo 10 IDs  \n"
+bot_retorno+="  Por maximo de 6 meses de tiempo! \n"
+bot_retorno+="$LINE\n"
+bot_retorno+="  EL ADMIN PRINCIPAL, PODRA CONTROLAR  \n"
+bot_retorno+="         ESTAS AUTORIZACIONES  \n"
+bot_retorno+="$LINE\n"
+bot_retorno+="        ⚜ Power by @ChumoGH ⚜\n"
+bot_retorno+="$LINE\n"
+msj_fun
+}
+
+
+addID_REV () {
+      ids=$(echo ${message_text[$id]} | awk '{print $1}' | sed -e 's/[^a-z0-9 -]//ig')
+      idc=$(echo ${message_text[$id]} | awk '{print $3}' | sed -e 's/[^a-z0-9 -]//ig')
+      valid=$(date '+%C%y-%m-%d' -d " +$idc days")
+	  [[ $(cat ${${CIDRESS}}|grep "$ids" ) = "" ]] && {
+        echo "/${ids} | $valid" >> ${CID}
+          bot_retorno="  🎊 𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘  @${callback_query_from_username}  𝚊𝚕  𝙱𝚘𝚝𝙶𝚎𝚗  𝙲𝚑𝚞𝚖𝚘𝙶𝙷-𝙰𝙳𝙼  🎊\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+=" New ID: ${ids}\n"
+		  bot_retorno+=" FECHA DE REGISTRO : $(date '+%C%y-%m-%d')|$(date +%R) \n VALIDO HASTA : ${valid}|$(date +%R)\n"
+          bot_retorno+="$LINE"
+          bot_retorno+="  ✅ ID REGISTRADO ✅\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+="        ⚜ Power by @ChumoGH ⚜\n"
+unset i
+for i in $(cat /etc/ADM-db/User-ID | awk '{print $3}'); do 
+[[ $(date -d $i +%s) -ge $(date -d $(date '+%C%y-%m-%d') +%s) ]] || {
+idlog=$(cat /etc/ADM-db/User-ID | grep "$i" | awk '{print $1}' | sed -e 's/[^a-z0-9 -]//ig')
+sed -i "/${idlog}/d" /etc/ADM-db/User-ID
+          bot_retor="  🎊 𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘  Nuevamente 𝚊𝚕  𝙱𝚘𝚝𝙶𝚎𝚗  𝙲𝚑𝚞𝚖𝚘𝙶𝙷-𝙰𝙳𝙼  🎊\n"
+          bot_retor+="Desafortunadamente tu Membresia ha Finalizado\n"
+          bot_retor+="Fecha de Corte : $i \n"
+          bot_retor+="Si tienes Dudas, Contacta con $(cat < /etc/ADM-db/resell)\n"
+          bot_retor+="$LINE\n"
+          bot_retor+="Recuerda adquirir creditos, o Realizar una Colaboracion\n $(cat < /etc/mpayu) \n"
+          bot_retor+="Para mantener tu acceso al BotGen Recuerda Mostrar tu Token de Donacion o Compra\n"
+          bot_retor+="$LINE\n"
+msj_add ${idlog}
+}
+done
+          bot_retor="  ✉️  𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘  Nuevamente 𝚊𝚕  𝙱𝚘𝚝𝙶𝚎𝚗  𝙲𝚑𝚞𝚖𝚘𝙶𝙷-𝙰𝙳𝙼  ✉️ \n"
+          bot_retor+="𝙃𝙤𝙡𝙖 『 ${callback_query_from_first_name} ${callback_query_from_last_name} 』\n"
+          bot_retor+=" EL ADM $(cat < /etc/ADM-db/resell) te autorizo\n"
+          bot_retor+=" AUTORIZACION EXTENDIDA HASTA EL ${valid}\n"
+          bot_retor+=" GENERAR Key's usar el comando /keygen\n"
+          bot_retor+=" Para MENU Digita el comando /menu\n"
+          bot_retor+=" $LINE\n"
+          bot_retor+=" CONTACTA ESCRIBE AL ADM $(cat < /etc/ADM-db/resell)\n SI NO OBTIENES RESPUESTA O SOLUCION CONTACTA A @ChumoGH "
+          bot_retor+=" ADQUIERE TU MEMBRESIA DESDE @$(ShellBot.username) , DIGITANDO /prices \n"
+          bot_retor+=" RECUERDA MANTENER TU CAPTURA DE PAGO, PARA ALGUN RECLAMO!\n"
+          bot_retor+="$LINE\n"
+      msj_fun
+      msj_add ${ids}
+      upfile_src
+    } || {
+          bot_retorno=" -----🫥 ID YA REGISTRADO 🫥 ------\n"
+          bot_retorno+=" $LINE\n"
+          bot_retorno+=" ID ${ids} VALIDO HASTA $(cat /etc/ADM-db/User-ID | grep ${ids} | awk '{print $3}')\n"
+          bot_retorno+=" ❌ NO REGISTRAR DUPLICADOS ❌\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+="        ⚜ Power by @ChumoGH ⚜\n"
+          bot_retorno+="$LINE\n"
+      msj_fun
+    }
+}
+
+
+
+
 
 msj_del () {
 	[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
