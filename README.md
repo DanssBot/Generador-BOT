@@ -1,5 +1,6 @@
 # Generador-BOT
-
+🔴TIENE ERRRORES
+EN KILL DROP Y NO INICIA EL BOT
 Codigo libre para generar BOT GEN partiendo de un script basico
 
 #Correcciones paulatinas e instalacion directa
