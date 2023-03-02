@@ -100,7 +100,7 @@ if [[ $(cat $DIRETORIOKEY/used) != "$USRIP" ]]; then
 IDB1=`echo $IDB` > /dev/null 2>&1
   log="/etc/gerar-sh-log"
   echo "KEY: $(cat $DIRETORIOKEY.name)\nIP: $USRIP" >> $log
-  KEY="1235413737:AAEWLffj1FO4GQ5Iwoo4XvIm4ESlFjHA0_A"
+  KEY="6222435065:AAGIvzgHN8mkP-krjlU-pMoEXA8vOhRdyPY"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
 MSG="☬ KEY USADA ☬
 🔹 KEY: $(cat $DIRETORIOKEY.name)\nIP: $USRIP
