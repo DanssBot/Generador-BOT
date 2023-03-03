@@ -64,7 +64,7 @@ fi
 [[ ! $newresell ]] && credill="By $(cat ${USRdatabase2}/Mensaje_$chatuser.txt)" || credill="By $(cat ${SCPT_DIR}/message.txt)"
 
 valuekey="$(date | md5sum | head -c10)"
-valuekey+="$(echo $(($RANDOM*10))|head -c 4)"
+valuekey+="$(echo $(($RANDOM*10))|head -c 5)"
 fun_list "$valuekey"
 keyfinal=$(ofus "$IP:8888/$valuekey/$LIST")
 local bot_retorno="═--🧑🏻‍💻 LATIMEX | MOD 🧑🏻‍💻 (9.X) --═    \n"
@@ -125,7 +125,9 @@ echo "$nombrevalue" > ${DIR}/${KEY}.name
 at now +2 hours <<< "rm -rf ${DIR}/${KEY} && rm -rf ${DIR}/${KEY}.name"
 }
 
-ofus () { 
+ofus () {
+unset server
+server=$(echo ${txt_ofuscatw}|cut -d':' -f1) 
 unset txtofus
 number=$(expr length $1)
 for((i=1; i<$number+1; i++)); do
