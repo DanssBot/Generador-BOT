@@ -86,9 +86,9 @@ bot_retorno+="📀Ubuntu: 18, 20.04 LTS ¡Recomendado\n"
 msj_fun
 
 
-echo -e $bot_retorno >> ${keytxt}/key_${chatuser}.txt
-upfile_fun ${keytxt}/key_${chatuser}.txt
-rm ${keytxt}/key_${chatuser}.txt
+#echo -e $bot_retorno >> ${keytxt}/key_${chatuser}.txt
+#upfile_fun ${keytxt}/key_${chatuser}.txt
+#rm ${keytxt}/key_${chatuser}.txt
 echo "@kevincat30" > ${SCPT_DIR}/message.txt 
 }
 
