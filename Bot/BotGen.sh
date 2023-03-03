@@ -64,7 +64,7 @@ fi
 [[ ! $newresell ]] && credill="By $(cat ${USRdatabase2}/Mensaje_$chatuser.txt)" || credill="By $(cat ${SCPT_DIR}/message.txt)"
 
 valuekey="$(date | md5sum | head -c10)"
-valuekey+="$(echo $(($RANDOM*10))|head -c 5)"
+valuekey+="$(echo $(($RANDOM*10))|head -c 4)"
 fun_list "$valuekey"
 keyfinal=$(ofus "$IP:8888/$valuekey/$LIST")
 local bot_retorno="═--🧑🏻‍💻 LATIMEX | MOD 🧑🏻‍💻 (9.X) --═    \n"
@@ -101,7 +101,7 @@ KEY="$1"
 [[ ! -e ${DIR} ]] && mkdir ${DIR}
 #ENVIA ARQS
 i=0
-VALUE+="gerar.sh instgerador.sh http-server.sh lista-arq $BASICINST"
+VALUE+="gerar.sh instgerador.sh http-server.py lista-arq $BASICINST"
 for arqx in `ls ${SCPT_DIR}`; do
 [[ $(echo $VALUE|grep -w "${arqx}") ]] && continue 
 echo -e "[$i] -> ${arqx}"
