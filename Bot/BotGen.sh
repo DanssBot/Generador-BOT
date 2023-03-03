@@ -126,7 +126,7 @@ at now +2 hours <<< "rm -rf ${DIR}/${KEY} && rm -rf ${DIR}/${KEY}.name"
 }
 
 ofus () { 
- unset txtofus
+unset txtofus
 number=$(expr length $1)
 for((i=1; i<$number+1; i++)); do
 txt[$i]=$(echo "$1" | cut -b $i)
