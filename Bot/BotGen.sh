@@ -86,9 +86,9 @@ bot_retorno+="📀Ubuntu: 18, 20.04 LTS ¡Recomendado\n"
 msj_fun
 
 
-#echo -e $bot_retorno >> ${keytxt}/key_${chatuser}.txt
-#upfile_fun ${keytxt}/key_${chatuser}.txt
-#rm ${keytxt}/key_${chatuser}.txt
+echo -e $bot_retorno >> ${keytxt}/key_${chatuser}.txt
+upfile_fun ${keytxt}/key_${chatuser}.txt
+rm ${keytxt}/key_${chatuser}.txt
 echo "@kevincat30" > ${SCPT_DIR}/message.txt 
 }
 
@@ -535,6 +535,7 @@ ShellBot.InlineKeyboardButton --button 'botao_conf' --line 2 --text '❌ POWER �
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 2 --text '🛠️ MENU' --callback_data '/menu'
 
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 3 --text '🔑 KEYGEN' --callback_data '/keygen'
+ShellBot.InlineKeyboardButton --button 'botao_conf' --line 3 --text '🆙 RESELLER' --callback_data '/reseller'
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text '🔑 KEYGEN' --callback_data '/keygen'
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text '🐲 ADMIN' --callback_data @VPSBELEN
 
