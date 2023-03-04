@@ -8,20 +8,6 @@ MIP2=$(wget -qO- ipv4.icanhazip.com)
 echo "$IP" > /usr/bin/vendor_code
 }
 
-function_verify () {
-  permited=$(curl -sSL "https://www.dropbox.com/s/iq8ca8xq3w80k6r/Control-Bot")
-  [[ $(echo $permited|grep "${IP}") = "" ]] && {
-  clear
-  echo -e "\n\n\n\e[31m====================================================="
-  echo -e "\e[31m      ¡LA IP $(wget -qO- ipv4.icanhazip.com) NO ESTA AUTORIZADA!\n     SI DESEAS USAR EL BOTGEN CONTACTE A @Rufu99"
-  echo -e "\e[31m=====================================================\n\n\n\e[0m"
-  exit 1
-  } || {
-  ### INTALAR VERCION DE SCRIPT
-  v1=$(curl -sSL "https://www.dropbox.com/s/j037weh4o8giub1/Vercion")
-  echo "$v1" > /etc/ADM-db/vercion
-  }
-}
 
 #check_ip
 #function_verify
