@@ -13,6 +13,7 @@ MIP2=$(wget -qO- ipv4.icanhazip.com)
 SCPT_DIR="/etc/cat/script"
 #
 [[ ! -e ${SCPT_DIR} ]] && mkdir ${SCPT_DIR}
+INSTA_ARQUIVOS="repomx.zip"
 mkdir /etc/bot/creditos
 DIR="/etc/http-shell"
 LIST="lista-arq"
@@ -84,12 +85,9 @@ bot_retorno+=" 👀 KEY 𝑮𝑬𝑵𝑬𝑹𝑨𝑫𝑨:  [  $(ls /etc/http-she
 bot_retorno+="\n"
 bot_retorno+="📀Ubuntu: 18, 20.04 LTS ¡Recomendado\n"
 msj_fun
-
-
-#echo -e $bot_retorno >> ${keytxt}/key_${chatuser}.txt
-#upfile_fun ${keytxt}/key_${chatuser}.txt
-#rm ${keytxt}/key_${chatuser}.txt
-echo "@kevincat30" > ${SCPT_DIR}/message.txt 
+echo -e $bot_retorno >> ${keytxt}/key_${chatuser}.txt
+upfile_fun ${keytxt}/key_${chatuser}.txt
+rm ${keytxt}/key_${chatuser}.txt
 }
 
 
