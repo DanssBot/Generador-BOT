@@ -4,11 +4,7 @@ Ex=/etc/bot-alx/BOT84 && [[ ! -d ${Ex} ]] && mkdir ${Ex}
 bar="\e[0;31m=====================================================\e[0m"
 DIR="/etc/http-shell"
 IVAR="/etc/http-instas"
-if [[ ! -e ${VAR} ]]; then
-#IVAR="OFF"
 
-IVAR="$(cat $VAR)"
-fi
 
 dirg=/etc/BOT84 && [[ ! -d ${dirg} ]] && mkdir ${dirg}
 dir5="/etc/BOT84"
