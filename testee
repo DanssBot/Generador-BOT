@@ -344,7 +344,7 @@ fi
 }
 						
   exit 1
-  } || {
+  { || {
   ### INTALAR VERSION DE SCRIPT
   v1=$(curl -sSL "https://raw.githubusercontent.com/lacasitamx/version/master/vercion")
   echo "$v1" > /etc/bot-alx/version
