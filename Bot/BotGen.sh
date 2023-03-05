@@ -15,7 +15,7 @@ echo "$IP" > /usr/bin/vendor_code
 SCPT_DIR="/etc/cat/script"
 #
 [[ ! -e ${SCPT_DIR} ]] && mkdir ${SCPT_DIR}
-INSTA_ARQUIVOS="repomx.zip"
+
 mkdir /etc/bot/creditos
 DIR="/etc/http-shell"
 LIST="lista-arq"
