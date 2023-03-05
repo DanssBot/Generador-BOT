@@ -9,7 +9,7 @@ IVAR="OFF"
 else
 IVAR="$(cat $VAR)"
 fi
-#
+
 dirg=/etc/BOT84 && [[ ! -d ${dirg} ]] && mkdir ${dirg}
 dir5="/etc/BOT84"
 
@@ -63,7 +63,7 @@ msg -ama "$distro $vercion"
 echo "$distro $vercion" > /etc/bot-alx/system
 msg -verm " INSTALACION DE PAQUETES "
 msg -bar
-#
+
 #by rufu99
 msg -verd "	INSTALL UPDATE"
 	apt update -y
@@ -113,12 +113,12 @@ ufw allow 81/tcp &>/dev/null
 ufw allow 8888/tcp &>/dev/null
 #read -p "enter"
 
-#botmen
+botmen
  }
 
 unistall(){
-#dir=/etc/bot-al && [[ ! -d ${dir} ]]
-#SR="${dir}/sources" && [[ ! -d ${SR} ]]
+dir=/etc/bot-al && [[ ! -d ${dir} ]]
+SR="${dir}/sources" && [[ ! -d ${SR} ]]
 rm -rf ${Ex}
 rm -rf ${dir5}
 killall Botk.sh
@@ -153,20 +153,20 @@ echo -e "$bar"
 echo "DESCARGANDO ARCHIVOS KEYGEN......"
 echo -e "$bar"
 mxofc=https://www.dropbox.com/s/o3wyvhaxxb5sj8h/SCRIPTMX.zip
-#
+
 wget $mxofc &>/dev/null
 unzip SCRIPTMX.zip &>/dev/null
 
 cp SCRIPT/* ${dir5}
-#[[ ! -e ${dir5}/ID ]] && touch ${dir5}/ID
+[[ ! -e ${dir5}/ID ]] && touch ${dir5}/ID
 chmod +x ${dir5}/*
-#
+
 rm -rf SCRIPTMX.zip
 rm -rf SCRIPT
 echo -e "$bar"
 echo -e "\e[1;33m DESCARGANDO BOT"
 echo -e "$bar"
-#kill -9 $(ps aux |grep -v grep |grep -w "Botk.sh"|grep dmS|awk '{print $2}') &>/dev/null
+kill -9 $(ps aux |grep -v grep |grep -w "Botk.sh"|grep dmS|awk '{print $2}') &>/dev/null
 [[ ! -d /etc/st ]] && mkdir /etc/st
 [[ ! -d /etc/st/bt ]] && mkdir /etc/st/bt
 
@@ -180,8 +180,8 @@ echo -e "$bar"
 echo -e "\e[1;33m INSTALACION COMPLETA"
 echo -e "$bar"
 rm -rf .bash_history
-#read -p "enter"
-#botmen
+read -p "enter"
+botmen
 }
 #
 
@@ -201,16 +201,16 @@ echo -e "  \033[1;32mtoken Agregado con exito!" && echo -e "$bar"
 
 admin(){
 clear
-#echo -e "$bar"
-#echo -e "\e[97m Aqui Agregaras el @usuario del bot sin el @., ejemplo conectedmx_bot\n y quedara configurada de esta manera http://t.me/conectedmx_bot"
-#echo -n "Nombre de usuario del BOT: "
-#read user
-#echo -e "\e[93m Su link del bot: \e[43m http://t.me/$user \e[0m"
-#echo "$user" > ${Ex}/slogan
-#echo -e "$bar"
-#echo -e "  \033[1;32mslogan Agregado con exito!" && echo -e "$bar"
-#sleep 2s
-#clear
+echo -e "$bar"
+echo -e "\e[97m Aqui Agregaras el @usuario del bot sin el @., ejemplo conectedmx_bot\n y quedara configurada de esta manera http://t.me/conectedmx_bot"
+echo -n "Nombre de usuario del BOT: "
+read user
+echo -e "\e[93m Su link del bot: \e[43m http://t.me/$user \e[0m"
+echo "$user" > ${Ex}/slogan
+echo -e "$bar"
+echo -e "  \033[1;32mslogan Agregado con exito!" && echo -e "$bar"
+sleep 2s
+clear
 
 echo -e "$bar"
 echo -e "  \033[1;37mIngrese su ID de telegram \n si aun no sabe cual es su ID ingresar en el bot @conectedmx_bot ahi dale en /start para saber su id númerico ,despues de eso solo copia su id y peguelo aquí abajo.."
@@ -220,8 +220,8 @@ read id
 echo "$id" > ${Ex}/Admin-ID
 echo -e "$bar"
 echo -e "  \033[1;32mID Agregado con exito!" && echo -e "$bar"
-#read -p "enter"
-#botmen
+read -p "enter"
+botmen
 }
 
 start_bot(){
@@ -250,9 +250,9 @@ WantedBy=multi-user.target" > /etc/systemd/system/Btg.service
     echo -e "$bar"
 echo -e "\033[1;32m                BOT ACTIVADO"
 echo -e "$bar"
-#echo -e "============================"
+echo -e "============================"
 else
-#killall Bot.sh &>/dev/null
+killall Bot.sh &>/dev/null
 systemctl stop Btg &>/dev/null
 systemctl disable Btg &>/dev/null
 rm /etc/systemd/system/Btg.service &>/dev/null
@@ -260,7 +260,7 @@ clear
 echo -e "$bar"
 echo -e "\033[1;31m            BOT DESACTIVADA"
 echo -e "$bar"
-#read -p "Presione Enter para continuar "
+read -p "Presione Enter para continuar "
 fi
 }
 
@@ -285,12 +285,12 @@ echo -e "$bar"
 echo -e "\033[1;31m            BOT DESACTIVADO"
 echo -e "$bar"
 fi
-#echo "00" > /root/.bash_history
-#botmen
+echo "00" > /root/.bash_history
+botmen
 }
 
 startmx1() {
-#unset PIDGEN
+unset PIDGEN
 PIDGEN=$(ps aux|grep -v grep|grep "http-server.sh")
 if [[ -z $PIDGEN ]]; then
 screen -dmS generador3 /bin/http-server.sh -start
@@ -300,9 +300,9 @@ echo -e "============================"
 rm -rf .bash_history
 
 else
-#killall http-server.sh
+killall http-server.sh
 kill -9 $(ps aux |grep -v grep |grep -w "http-server.sh"|grep dmS|awk '{print $2}') &>/dev/null
-#sed -i '/http-server.sh/ d' /etc/crontab
+sed -i '/http-server.sh/ d' /etc/crontab
 echo -e "============================"
 echo -e "\e[31m GENERADOR DESACTIVADO"
 echo -e "============================"
@@ -420,8 +420,8 @@ case $opcion in
 echo "	DETENIENDO BOT"
 sleep 1.s
 start_bot
-#kill -9 $(ps aux |grep -v grep |grep -w "Botk.sh"|grep dmS|awk '{print $2}') &>/dev/null
-#echo "	BOT DETENIDA CON EXITO"
+kill -9 $(ps aux |grep -v grep |grep -w "Botk.sh"|grep dmS|awk '{print $2}') &>/dev/null
+echo "	BOT DETENIDA CON EXITO"
 sleep 1s
 clear
 echo -e " ACTUALIZANDO BOT "
@@ -435,7 +435,7 @@ mxofc=https://www.dropbox.com/s/o3wyvhaxxb5sj8h/SCRIPTMX.zip
 wget $mxofc &>/dev/null
 unzip SCRIPTMX.zip &>/dev/null
 cp SCRIPT/* ${dir5}
-#[[ ! -e ${dir5}/ID ]] && touch ${dir5}/ID
+[[ ! -e ${dir5}/ID ]] && touch ${dir5}/ID
 chmod +x ${dir5}/*
 #
 rm -rf SCRIPTMX.zip
