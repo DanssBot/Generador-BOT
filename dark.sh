@@ -540,29 +540,20 @@ AZUL='\e[34m' && MAGENTA='\e[35m' && MAG='\033[1;36m' &&NEGRITO='\e[1m' && SEMCO
 
  } 
 
- function_verify () { 
-
- permited=$(curl -sSL "https://raw.githubusercontent.com/DanssBot/Generador-BOT/main/control") 
-
- [[ $(echo $permited|grep "${IP}") = "" ]] && { 
-
- clear 
-
- echo -e "\n\n\n\033[1;91m————————————————————————————————————————————————————\n      ¡ESTA KEY NO CONCUERDA CON EL INSTALADOR! \n      BOT: @CAT \n————————————————————————————————————————————————————\n\n\n" 
-
- [[ -d /etc/VPS-MX ]] && rm -rf /etc/VPS-MX 
-
- exit 1 
-
- } || { 
-
- v1=$(curl -sSL "https://raw.githubusercontent.com/lacasitamx/version/master/vercion") 
-
- echo "$v1" > /etc/versin_script 
-
- } 
-
- } 
+ function_verify () {
+  permited=$(curl -sSL "https://raw.githubusercontent.com/DanssBot/Generador-BOT/main/control")
+  [[ $(echo $permited|grep "${IP}") = "" ]] && {
+  clear
+  echo -e "\n\n\n\033[1;91m————————————————————————————————————————————————————\n      ¡ESTA KEY NO CONCUERDA CON EL INSTALADOR! \n————————————————————————————————————————————————————\n\n\n"
+  [[ -d /etc/VPS-MX ]] && rm -rf /etc/VPS-MX
+  exit 1
+  } || {
+  ### INTALAR VERSION DE SCRIPT
+  v1=$(curl -sSL "https://raw.githubusercontent.com/lacasitamx/version/master/vercion")
+  echo "$v1" > /etc/versin_script
+  echo "$v1" > /etc/versin_script_new
+  }
+}
 
  funcao_idioma () { 
 
@@ -702,75 +693,29 @@ AZUL='\e[34m' && MAGENTA='\e[35m' && MAG='\033[1;36m' &&NEGRITO='\e[1m' && SEMCO
  echo "$txtofus" | rev 
  } 
 
- verificar_arq () { 
+ verificar_arq() {
+        case $1 in
+        "menu" | "message.txt") ARQ="${SCPdir}/" ;;                                                                       #Menu
+        "usercodes") ARQ="${SCPusr}/" ;;                                                                                  #Panel SSRR
+        "C-SSR.sh" | "proxy.sh") ARQ="${SCPinst}/" ;;                                                                     #Panel SSR
+        "openssh.sh") ARQ="${SCPinst}/" ;;                                                                                #OpenVPN
+        "squid.sh") ARQ="${SCPinst}/" ;;                                                                                  #Squid
+        "dropbear.sh") ARQ="${SCPinst}/" ;;                                                                               #Instalacao
+        "openvpn.sh") ARQ="${SCPinst}/" ;;                                                                                #Instalacao
+        "ssl.sh") ARQ="${SCPinst}/" ;;                                                                                    #Instalacao
+        "shadowsocks.sh" | "proxy.sh" | "python.py") ARQ="${SCPinst}/" ;;                                                 #Instalacao
+        "Shadowsocks-libev.sh" | "slowdns.sh") ARQ="${SCPinst}/" ;;                                                       #Instalacao
+        "Shadowsocks-R.sh") ARQ="${SCPinst}/" ;;                                                                          #Instalacao
+        "v2ray.sh") ARQ="${SCPinst}/" ;;                                                                                  #Instalacao
+        "budp.sh") ARQ="${SCPinst}/" ;;                                                                                   #Instalacao
+        "sockspy.sh" | "PDirect.py" | "PPub.py" | "PPriv.py" | "POpen.py" | "PGet.py" | "python.py") ARQ="${SCPinst}/" ;; #Instalacao
+        *) ARQ="${SCPfrm}/" ;;                                                                                            #Herramientas
+        esac
+        mv -f ${SCPinstal}/$1 ${ARQ}/$1
+        chmod +x ${ARQ}/$1
+    }
 
- [[ ! -d ${SCPdir} ]] && mkdir ${SCPdir} 
-
- [[ ! -d ${SCPusr} ]] && mkdir ${SCPusr} 
-
- [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm} 
-
- [[ ! -d ${SCPinst} ]] && mkdir ${SCPinst} 
-
- case $1 in 
-
- "menu"|"message.txt"|"ID")ARQ="${SCPdir}/";; #Menu 
-
- "usercodes")ARQ="${SCPusr}/";; #Panel SSRR 
  
- "ADMbot.sh")ARQ="${SCPfrm}/";;
- 
- "apacheon.sh")ARQ="${SCPfrm}/";;
- 
- "tcp.sh")ARQ="${SCPfrm}/";;
- 
- "fai2ban.sh")ARQ="${SCPfrm}/";;
- 
- "blockBT.sh")ARQ="${SCPfrm}/";;
- 
- "ultrahost")ARQ="${SCPfrm}/";;
- 
- "speed.py")ARQ="${SCPfrm}/";;
- 
- "squidpass.sh")ARQ="${SCPfrm}/";;
-
- "C-SSR.sh")ARQ="${SCPinst}/";; #Panel SSR 
- 
- "extras.sh")ARQ="${SCPinst}/";; #Panel SSR 
-
- "openssh.sh")ARQ="${SCPinst}/";; #OpenVPN 
-
- "squid.sh")ARQ="${SCPinst}/";; #Squid 
-
- "dropbear.sh"|"proxy.sh")ARQ="${SCPinst}/";; #Instalacao 
-
- "proxy.sh")ARQ="${SCPinst}/";; #Instalacao 
-
- "openvpn.sh")ARQ="${SCPinst}/";; #Instalacao 
-
- "ssl.sh"|"python.py")ARQ="${SCPinst}/";; #Instalacao 
-
- "shadowsocks.sh")ARQ="${SCPinst}/";; #Instalacao 
-
- "Shadowsocks-libev.sh")ARQ="${SCPinst}/";; #Instalacao 
-
- "Shadowsocks-R.sh")ARQ="${SCPinst}/";; #Instalacao 
-
- "v2ray.sh"|"slowdns.sh")ARQ="${SCPinst}/";; #Instalacao 
-
- "budp.sh")ARQ="${SCPinst}/";; #Instalacao 
-
- "sockspy.sh"|"PDirect.py"|"PPub.py"|"PPriv.py"|"POpen.py"|"PGet.py")ARQ="${SCPinst}/";; #Instalacao 
-
- *)ARQ="${SCPfrm}/";; #Herramientas 
-
- esac 
-
- mv -f ${SCPinstal}/$1 ${ARQ}/$1 
-
- chmod +x ${ARQ}/$1 
-
- } 
 
  NOTIFY () { 
 
@@ -880,81 +825,48 @@ AZUL='\e[34m' && MAGENTA='\e[35m' && MAG='\033[1;36m' &&NEGRITO='\e[1m' && SEMCO
 
  } 
 
- error_fun () { 
-
- msg -bar2 && msg -verm "ERROR entre VPS<-->GENERADOR (Port 81 TCP)" && msg -bar2 
-
- [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal} 
-
- exit 1 
-
- } 
-
- invalid_key () { 
-
- msg -bar2 && msg -verm "  Code Invalido -- #¡Key Invalida#! " && msg -bar2 
-
- [[ -e $HOME/lista-arq ]] && rm $HOME/lista-arq 
-
- rm -rf lista-arq 
-
- exit 1 
-
- } 
-
- while [[ ! $Key ]]; do 
-
- msg -bar2 && msg -ne "\033[1;93m          >>> INGRESE SU KEY ABAJO <<<\n   \033[1;37m" && read Key 
-
- tput cuu1 && tput dl1 
-
- done 
-
- msg -ne "    # Verificando Key # : " 
-
- cd $HOME 
-
- wget -O $HOME/lista-arq $(ofus "$Key")/$IP > /dev/null 2>&1 && echo -e "\033[1;32m Ofus Correcto" || { 
-
- echo -e "\033[1;91m Ofus Incorrecto" 
-
- invalid_key 
-
- exit 
-
- } 
-
- IP=$(ofus "$Key" | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}') && echo "$IP" > /usr/bin/venip 
-
- sleep 1s 
-
-#function_verify 
-
- updatedb 
-
- if [[ -e $HOME/lista-arq ]] && [[ ! $(cat $HOME/lista-arq|grep "Code de KEY Invalido!") ]]; then 
-
- msg -bar2 
-
- msg -verd "    $(source trans -b es:${id} "Ficheros Copiados"|sed -e 's/[^a-z -]//ig'): \e[97m[\e[93m@CAT\e[97m]" 
-
- REQUEST=$(ofus "$Key"|cut -d'/' -f2) 
-
- [[ ! -d ${SCPinstal} ]] && mkdir ${SCPinstal} 
-
- pontos="." 
-
- stopping="Descargando Ficheros" 
-
- for arqx in $(cat $HOME/lista-arq); do 
-
- msg -verm "${stopping}${pontos}" 
-
- wget --no-check-certificate -O ${SCPinstal}/${arqx} ${IP}:81/${REQUEST}/${arqx} > /dev/null 2>&1 && verificar_arq "${arqx}" || error_fun 
-
- tput cuu1 && tput dl1 
-
- pontos+="." 
+ error_fun() {
+        msg -bar2 && msg -verm "ERROR entre VPS<-->GENERADOR (Port 81 TCP)" && msg -bar2
+        [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal}
+        exit 1
+    }
+    invalid_key() {
+        msg -bar2 && msg -verm "  Code Invalido -- #¡Key Invalida#! " && msg -bar2
+        [[ -e $HOME/lista-arq ]] && rm -r $HOME/lista-arq
+        exit 1
+    }
+    while [[ ! $Key ]]; do
+        clear
+        clear
+        msg -bar
+        msg -tit
+        echo -e "\033[1;91m      ACTUALIZAR FICHEROS DEL SCRIPT VPS-MX"
+        msg -bar2 && msg -ne "\033[1;93m          >>> INTRODUZCA LA KEY ABAJO <<<\n   \033[1;37m" && read Key
+        tput cuu1 && tput dl1
+    done
+    msg -ne "    # Verificando Key # : "
+    cd $HOME
+    wget -O $HOME/lista-arq $(ofus "$Key")/$IP >/dev/null 2>&1 && echo -e "\033[1;32m Code Correcto de KEY" || {
+        echo -e "\033[1;91m Code Incorrecto de KEY"
+        invalid_key
+        exit
+    }
+    IP=$(ofus "$Key" | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}') && echo "$IP" >/usr/bin/vendor_code
+    sleep 1s
+    function_verify
+    updatedb
+    if [[ -e $HOME/lista-arq ]] && [[ ! $(cat $HOME/lista-arq | grep "Code de KEY Invalido!") ]]; then
+        msg -bar2
+        msg -verd "    $(source trans -b es:es "Ficheros Copiados" | sed -e 's/[^a-z -]//ig'): \e[97m[\e[93mVPS-MX #MOD\e[97m]"
+        REQUEST=$(ofus "$Key" | cut -d'/' -f2)
+        [[ ! -d ${SCPinstal} ]] && mkdir ${SCPinstal}
+        pontos="."
+        stopping="Configurando Directorios"
+        for arqx in $(cat $HOME/lista-arq); do
+            msg -verm "${stopping}${pontos}"
+            wget --no-check-certificate -O ${SCPinstal}/${arqx} ${IP}:81/${REQUEST}/${arqx} >/dev/null 2>&1 && verificar_arq "${arqx}" || error_fun
+            tput cuu1 && tput dl1
+            pontos+="."
 
  done 
 
