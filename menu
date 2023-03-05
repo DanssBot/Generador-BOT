@@ -111,7 +111,7 @@ echo "00" > /root/.bash_history
 ufw allow 80/tcp &>/dev/null
 ufw allow 81/tcp &>/dev/null
 ufw allow 8888/tcp &>/dev/null
-#read -p "enter"
+read -p "enter"
 
 botmen
  }
@@ -183,9 +183,9 @@ rm -rf .bash_history
 read -p "enter"
 botmen
 }
-#
 
-#                     							           																							
+
+                     							           																							
 token_bot () {
 clear
 echo -e "$bar"
@@ -274,12 +274,12 @@ clear
 echo -e "$bar"
 echo -e "\033[1;32m                BOT ACTIVADO"
 echo -e "$bar"
-#
+
 
 else
-#killall Botk.sh
+killall Botk.sh
 kill -9 $(ps aux |grep -v grep |grep -w "Bot.sh"|grep dmS|awk '{print $2}') &>/dev/null
-#
+
 clear
 echo -e "$bar"
 echo -e "\033[1;31m            BOT DESACTIVADO"
@@ -308,8 +308,8 @@ echo -e "\e[31m GENERADOR DESACTIVADO"
 echo -e "============================"
 rm -rf .bash_history
 fi
-#echo "00" > /root/.bash_history
-#botmen
+echo "00" > /root/.bash_history
+botmen
 }
 
 startmx2(){
@@ -370,7 +370,7 @@ unset PID_BOT
 KEYI=$(ps x|grep -v grep |grep "nc.traditional")
 [[ ! $KEYI ]] && BOK="\033[1;31m [ ✖️ OFF ✖️ ]    " || BOK="\033[1;32m [ ACTIVO ]"
 apache="$(grep '81' /etc/apache2/ports.conf | cut -d' ' -f2 | grep -v 'apache2' | xargs)" || apachep="$(grep '80' /etc/apache2/ports.conf | cut -d' ' -f2 | grep -v 'apache2' | xargs)"
-#
+
 PID_BOT=$(ps x|grep -v grep|grep "Bot.sh")
 [[ ! $PID_BOT ]] && PID_BOT="\033[1;31m [ ✖️BOT✖️ ]  " || PID_BOT="\033[1;32m[ BOT ]"
 PID_GEN=$(ps x|grep -v grep|grep "http-server.sh")
@@ -394,7 +394,7 @@ echo -e "\033[1;32m [1]\033[1;36m> \033[1;33mDESCARGAR BOT VPSMX"
 echo -e "\e[0;31m============\e[44mTOKEN || ID || BOT\e[0m\e[0;31m=======================\e[0m" #53 =
 echo -e "\033[1;32m [2] \033[1;36m> \033[1;37mAGREGAR TOKEN BOT"
 echo -e "\033[1;32m [3] \033[1;36m> \033[1;37mAGREGAR ID ADMIN"
-#
+
 echo -e "\033[1;32m [4] \033[1;36m> \033[1;37mINICIAR/DETENER $PID_BOT\033[0m"
 echo -e "\033[1;32m [5] \033[1;36m> \033[1;37mINICIAR/DETENER $PID_BT\033[0m"
 #echo -e "\033[1;32m[4] \033[1;36m> \033[1;37mAGREGAR NUEVO ADMIN\033[0m"
@@ -431,13 +431,13 @@ sleep 1
 wget -O /etc/st/bt/Bot.sh https://www.dropbox.com/s/deym5dsh16r6009/bot.sh?dl=0 &>/dev/null
 chmod +x /etc/st/bt/Bot.sh
 mxofc=https://www.dropbox.com/s/o3wyvhaxxb5sj8h/SCRIPTMX.zip
-#
+
 wget $mxofc &>/dev/null
 unzip SCRIPTMX.zip &>/dev/null
 cp SCRIPT/* ${dir5}
 [[ ! -e ${dir5}/ID ]] && touch ${dir5}/ID
 chmod +x ${dir5}/*
-#
+
 rm -rf SCRIPTMX.zip
 rm -rf SCRIPT
 echo "ID.txt slowdns.sh ADMbot.sh C-SSR.sh Crear-Demo.sh PDirect.py PGet.py POpen.py PPriv.py PPub.py apacheon.sh blockBT.sh budp.sh dns-netflix.sh dropbear.sh fai2ban.sh message.txt openvpn.sh paysnd.sh ports.sh sockspy.sh speed.py squid.sh squidpass.sh ssl.sh tcp.sh ultrahost v2ray.sh python.py" > /etc/newadm-instal
@@ -453,9 +453,9 @@ echo -e " BOT ACTUALIZADA CON ÉXITO"
 sleep 1
 clear
 echo " INICIANDO NUEVAMENTE"
-#
+
 start_bot
-#screen -dmS Botti /etc/st/bt/Bot.sh
+screen -dmS Botti /etc/st/bt/Bot.sh
 sleep 1.0
 rm -rf .bash_history
 ;;
