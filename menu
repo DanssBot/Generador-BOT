@@ -55,7 +55,7 @@ esac
 
 updatex(){
 clear
-#dpkg --configure -a
+dpkg --configure -a
 
 msg -bar
 os_system
