@@ -1,6 +1,6 @@
 #by ruffu
 CIDdir=/etc/bot-alx && [[ ! -d ${CIDdir} ]] && mkdir ${CIDdir}
-Ex=/etc/bot-alx/BOT84 && [[ ! -d ${Ex} ]] && mkdir ${Ex}
+DIRSCRIPT =/etc/bot-alx/BOT84 && [[ ! -d ${DIRSCRIPT} ]] && mkdir ${DIRSCRIPT}
 bar="\e[0;31m=====================================================\e[0m"
 DIR="/etc/http-shell"
 IVAR="/etc/http-instas"
