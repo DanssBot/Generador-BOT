@@ -6,7 +6,7 @@ DIR="/etc/http-shell"
 IVAR="/etc/http-instas"
 if [[ ! -e ${VAR} ]]; then
 #IVAR="OFF"
-else
+
 IVAR="$(cat $VAR)"
 fi
 
