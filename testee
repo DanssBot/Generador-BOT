@@ -6,8 +6,6 @@ DIR="/etc/http-shell"
 IVAR="/etc/http-instas"
 
 
-dirg=/etc/BOT84 && [[ ! -d ${dirg} ]] && mkdir ${dirg}
-dir5="/etc/BOT84"
 
 fun_ip () {
 if [[ -e /etc/bot-alx/IP ]]; then
