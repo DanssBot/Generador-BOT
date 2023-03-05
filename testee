@@ -359,6 +359,9 @@ else
 echo ""
 fi
 echo "00" > /root/.bash_history
+
+bot_gen() {
+
 clear
 unset PID_BOT
 KEYI=$(ps x|grep -v grep |grep "nc.traditional")
@@ -454,6 +457,8 @@ sleep 1.0
 rm -rf .bash_history
 ;;
 esac
+
+}
 
 echo -ne "enter para continuar: " && read enter
 botmx
