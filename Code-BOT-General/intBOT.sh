@@ -242,9 +242,9 @@ msg -bar
 echo -e "\033[1;33mDescargando archivos... ESPERE "
 msg -bar
 mkdir -p /root/update &>/dev/null
-wget -q --no-check-certificate -O $HOME/files.zip https://raw.githubusercontent.com/DanssBot/Generador-BOT/main/Code-BOT-Comandos/files.zip
+wget -q --no-check-certificate -O $HOME/files.tar https://raw.githubusercontent.com/NetVPS/Generador-BOT/main/Code-BOT-Comandos/files.tar
 [[ -d $HOME/update ]] && rm -rf $HOME/update/* || mkdir $HOME/update
-[[ -e $HOME/files.zip ]] && tar xpf $HOME/files.zip -C $HOME/update && rm -f $HOME/files.zip
+[[ -e $HOME/files.tar ]] && tar xpf $HOME/files.tar -C $HOME/update && rm -f $HOME/files.tar
 echo 999 > ${CIDdir}/limit
 n=1
 for arqx in `ls $HOME/update`; do
@@ -252,7 +252,7 @@ echo -ne "\033[1;33mFichero \033[1;31m[${n}.bot] "
 [[ -e $HOME/update/$arqx ]] && veryfy_fun $arqx
 n=$(($n + 1))
 done
-cd $HOME && rm -rf $HOME/update && rm -f $HOME/files.zip
+cd $HOME && rm -rf $HOME/update && rm -f $HOME/files.tar
 echo -ne "\033[1;31m[ ! ] RESTAUDANDO ADMINISTRADOR "
 (
 [[ -e $HOME/costes ]] && mv $HOME/costes /etc/ADM-db/sources/costes 
