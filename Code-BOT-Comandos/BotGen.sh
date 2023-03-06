@@ -10,7 +10,7 @@ CIDRESS="${CIDdir}/RESSELLERS" && [[ ! -e ${CIDRESS} ]] &&  mkdir ${CIDRESS}
 keytxt="${CIDdir}/keys" && [[ ! -d ${keytxt} ]] && mkdir ${keytxt}
 timg="${CIDimg}/img" && [[ ! -d ${timg} ]] && mkdir ${timg}
 [[ $(dpkg --get-selections|grep -w "jq"|head -1) ]] || apt-get install jq -y &>/dev/null
-[[ ! -e "/bin/ShellBot.sh" ]] && wget -O /bin/ShellBot.sh https://raw.githubusercontent.com/DanssBot/Generador-BOT/main/Otros/ShellBot.sh &> /dev/null
+[[ ! -e "/bin/ShellBot.sh" ]] && wget -O /bin/ShellBot.sh https://raw.githubusercontent.com/NetVPS/Generador-BOT/main/Otros/ShellBot.sh &> /dev/null
 [[ -e /etc/texto-bot ]] && rm /etc/texto-bot
 LINE="   ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••"
 
@@ -62,13 +62,13 @@ menu_print () {
 [[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
 
 	if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
-				 #ShellBot.sendMessage 	--chat_id ${message_chat_id[$id]} \
+				# ShellBot.sendMessage 	--chat_id ${message_chat_id[$id]} \
 				ShellBot.sendMessage 	--chat_id $var \
 										--text "<i>$(echo -e $bot_retorno)</i>" \
 										--parse_mode html \
 										--reply_markup "$(ShellBot.InlineKeyboardMarkup -b 'botao_user')"
 	else
-				 #ShellBot.sendMessage 	--chat_id ${message_chat_id[$id]} \
+				# ShellBot.sendMessage 	--chat_id ${message_chat_id[$id]} \
 				ShellBot.sendMessage 	--chat_id $var \
 										--text "<i>$(echo -e $bot_retorno)</i>" \
 										--parse_mode html \
@@ -138,18 +138,18 @@ upimg_fun () {
 invalido_fun () {
 MSG_id=$((${message_message_id} + 1 ))
 	[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
-	local bot_retorno="  🎊 𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘  𝚊𝚕  𝙱𝚘𝚝𝙶𝚎𝚗  𝙰𝙳𝙼  🎊\n"
+	local bot_retorno="  🎊 𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘  𝚊𝚕 xxxx  𝙱𝚘𝚝𝙶𝚎𝚗  𝙰𝙳𝙼  🎊\n"
 		bot_retorno+="$LINE\n"
         bot_retorno+=" COMANDO NO PERMITIDO !!\n Quizas debes usar este /keygen \n O Posiblemente no estas Autorizado, clic aqui /prices o \n Contacta a $(cat < /etc/ADM-db/resell) y adquiere una subscripcion \n Toca aqui para ayuda /ayuda \n"
         bot_retorno+="$LINE\n"
 	    ShellBot.sendMessage --chat_id $var \
-							#--text "<i>$(echo -e $bot_retorno)</i>" \
-							#--parse_mode html
-		#sleep 5s
-		#msj_del ${message_message_id}
-		#msj_del ${MSG_id}
-							#return 0	
-#}
+							--text "<i>$(echo -e $bot_retorno)</i>" \
+							--parse_mode html
+		sleep 5s
+		msj_del ${message_message_id}
+		msj_del ${MSG_id}
+							return 0	
+}
 
 
 send_admin(){
@@ -164,9 +164,9 @@ send_admin(){
 
 	bot_retorno="$LINE\n"
 	bot_retorno+="     🔰 Bot generador de key 🔰\n"
-	bot_retorno+="           ⚜ by @Dan ⚜\n"
+	bot_retorno+="           ⚜ by @ChumoGH ⚜\n"
 	bot_retorno+="$LINE\n"
-	bot_retorno+="      ✅ ID enviado al admin ✅\n"
+	bot_retorno+="      ✅ ID enviado XX admin ✅\n"
 	bot_retorno+="$LINE"
 	comand_boton "atras"
 
@@ -189,7 +189,6 @@ msj_fun () {
 	return 0
 }
 
-
 msj_del () {
 	[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
 		      ShellBot.deleteMessage --chat_id $var --message_id $1 			  
@@ -197,7 +196,7 @@ msj_del () {
 }
 
 msj_img () {
-${timg}/id_${usrLOP}.png
+#${timg}/id_${usrLOP}.png
 local file_id
           ShellBot.getFile --file_id "$1"
           #ShellBot.downloadFile --file_path "${return[file_path]}" --dir "${timg}/id_${usrLOP}.png"
@@ -250,10 +249,10 @@ botao_user=''
 botao_donar=''
 unset botao_send_id
 botao_send_id=''
-ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "ENVIAR al DAN" --callback_data '/sendid'
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "ENVIAR al ADM" --callback_data '/sendid'
 ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "menu" --callback_data '/menu'
 
-ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text 'new ID' --callback_data '/add'
+ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text 'NEW ID' --callback_data '/add'
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text 'QUITAR 🗑' --callback_data '/del'
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text 'LISTAR 📋' --callback_data '/list'
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text ' 🔎 ID' --callback_data '/buscar'
