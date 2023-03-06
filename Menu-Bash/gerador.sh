@@ -2,7 +2,7 @@
 clear
 unset readvalue
 [[ ! -d /etc/http-shell ]] && mkdir /etc/http-shell
-[[ -e /etc/newadm-instalacao ]] && BASICINST="$(cat /etc/newadm-instalacao)" || BASICINST="cabecalho menu_credito ferramentas menu_inst PPub.py usercodes payloads ssl paysnd.sh verifica PDirect.py v-local.log PGet.py ultrahost menu POpen.py shadowsocks.sh fai2ban PPriv.py"
+[[ -e /etc/newadm-instalacao ]] && BASICINST="$(cat /etc/newadm-instalacao)" || BASICINST="cabecalho menu_credito ferramentas menu_inst PPub.py usercodes payloads PDirect.py v-local.log PGet.py ultrahost menu POpen.py shadowsocks.sh fai2ban PPriv.py"
 IVAR="/etc/http-instas"
 source <(curl -sSL https://raw.githubusercontent.com/DanssBot/Generador-BOT/main/Otros/msg) >/dev/null
 #!/bin/bash
