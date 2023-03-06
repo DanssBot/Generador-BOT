@@ -402,7 +402,7 @@ fix_key() {
     read -p " RESELLER deL Keys : " nomkey
     [[ $nomkey = 0 ]] && return
     [[ -z $nomkey ]] && {
-        [[ -e /etc/menu_ito ]] && nomkey="$(cat /etc/menu_ito)" || nomkey="$(curl -sSL "https://www.dropbox.com/s/z38hj1mz3q9krso/menu_credito")"
+        [[ -e /etc/menu_ito ]] && nomkey="$(cat /etc/menu_ito)" || nomkey="$(curl -sSL "https://raw.githubusercontent.com/DanssBot/Multi-Script/main/ChuGH-5.7u/adm-lite/menu_credito")"
     }
     msg -bar
     echo " Bienvenido, Porfavor ingresa el numero de keys a generar"
