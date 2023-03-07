@@ -485,6 +485,8 @@ echo "$1" > ${USRdatabase2}/Mensaje_$chatuser.txt
           bot_retorno+="$LINE\n"
           bot_retorno+="Nuevo Reseller: $1\nPARA REGRESAR /menu\n"
           bot_retorno+="$LINE"
+          
+          menu_print
       
           [[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
 	     ShellBot.sendMessage --chat_id $var \
