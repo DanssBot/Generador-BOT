@@ -10,7 +10,7 @@ MIP2=$(wget -qO- ipv4.icanhazip.com)
 
 #check_ip
 #function_verify
-  [[ -e /etc/newadm-instalacao ]] && BASICINST="$(cat /etc/newadm-instalacao)" || BASICINST="menu ID.txt slowdns.sh ADMbot.sh C-SSR.sh Crear-Demo.sh PDirect.py PGet.py POpen.py PPriv.py PPub.py apacheon.sh blockBT.sh budp.sh dns-netflix.sh dropbear.sh fai2ban.sh message.txt openvpn.sh paysnd.sh ports.sh sockspy.sh speed.py squid.sh squidpass.sh ssl.sh tcp.sh ultrahost v2ray.sh python.py usercodes"
+  [[ -e /etc/newadm-instalacao ]] && BASICINST="$(cat /etc/newadm-instalacao)" || BASICINST="ADMbot.sh C-SSR.sh Crear-Demo.sh ID.txt PDirect.py PGet.py POpen.py PPriv.py PPub.py apacheon.sh blockBT.sh budp.sh dns-netflix.sh dropbear.sh fai2ban.sh menu message.txt openvpn.sh paysnd.sh ports.sh python.py shadowsocks.sh slowdns.sh sockspy.sh speed.py squid.sh squidpass.sh ssl.sh tcp.sh ultrahost usercodes v2ray.sh"
 SCPT_DIR="/etc/cat/script"
 #
 [[ ! -e ${SCPT_DIR} ]] && mkdir ${SCPT_DIR}
@@ -86,9 +86,9 @@ bot_retorno+=" 👀 KEY 𝑮𝑬𝑵𝑬𝑹𝑨𝑫𝑨:  [  $(ls /etc/http-she
 bot_retorno+="\n"
 bot_retorno+="📀Ubuntu: 18, 20.04 LTS ¡Recomendado\n"
 msj_fun
-echo -e $bot_retorno >> ${keytxt}/key_${chatuser}.txt
-upfile_fun ${keytxt}/key_${chatuser}.txt
-rm ${keytxt}/key_${chatuser}.txt
+#echo -e $bot_retorno >> ${keytxt}/key_${chatuser}.txt
+#upfile_fun ${keytxt}/key_${chatuser}.txt
+#rm ${keytxt}/key_${chatuser}.txt
 }
 
 
