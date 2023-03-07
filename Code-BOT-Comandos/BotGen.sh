@@ -19,7 +19,7 @@ source ShellBot.sh
 source ${SRC}/menu
 source ${SRC}/ayuda
 source ${SRC}/cache
-source ${SRC}/invalido
+#source ${SRC}/invalido
 source ${SRC}/status
 source ${SRC}/reinicio
 source ${SRC}/myip
@@ -135,21 +135,21 @@ upimg_fun () {
 							 #--reply_markup "$(ShellBot.InlineKeyboardMarkup -b "$2")"							 
 }
 
-invalido_fun () {
-MSG_id=$((${message_message_id} + 1 ))
-	[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
-	local bot_retorno="  🎊 𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘  𝚊𝚕 xxxx  𝙱𝚘𝚝𝙶𝚎𝚗  𝙰𝙳𝙼  🎊\n"
-		bot_retorno+="$LINE\n"
-        bot_retorno+=" COMANDO NO PERMITIDO !!\n Quizas debes usar este /keygen \n O Posiblemente no estas Autorizado, clic aqui /prices o \n Contacta a $(cat < /etc/ADM-db/resell) y adquiere una subscripcion \n Toca aqui para ayuda /ayuda \n"
-        bot_retorno+="$LINE\n"
-	    ShellBot.sendMessage --chat_id $var \
-							--text "<i>$(echo -e $bot_retorno)</i>" \
-							--parse_mode html
-		sleep 5s
-		msj_del ${message_message_id}
-		msj_del ${MSG_id}
-							return 0	
-}
+#invalido_fun () {
+#MSG_id=$((${message_message_id} + 1 ))
+	#[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
+	#local bot_retorno="  🎊 𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘  𝚊𝚕 xxxx  𝙱𝚘𝚝𝙶𝚎𝚗  𝙰𝙳𝙼  🎊\n"
+		#bot_retorno+="$LINE\n"
+        #bot_retorno+=" COMANDO NO PERMITIDO !!\n Quizas debes usar este /keygen \n O Posiblemente no estas Autorizado, clic aqui /prices o \n Contacta a $(cat < /etc/ADM-db/resell) y adquiere una subscripcion \n Toca aqui para ayuda /ayuda \n"
+        #bot_retorno+="$LINE\n"
+	    #ShellBot.sendMessage --chat_id $var \
+							#--text "<i>$(echo -e $bot_retorno)</i>" \
+							#--parse_mode html
+		#sleep 5s
+		#msj_del ${message_message_id}
+		#msj_del ${MSG_id}
+							#return 0	
+#}
 
 
 send_admin(){
