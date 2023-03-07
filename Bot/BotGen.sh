@@ -87,7 +87,7 @@ bot_retorno+=" 👀 𝗞𝗘𝗬 𝗜𝗡𝗦𝗧𝗔𝗟𝗔𝗗𝗢𝗦: [$k_u
 bot_retorno+="$LINE\n"
 bot_retorno+="📀 𝙐𝙗𝙪𝙣𝙩𝙪: 𝟭𝟴, 𝟮𝟬.𝟬𝟰 𝙇𝙏𝙎 ¡𝙍𝙚𝙘𝙤𝙢𝙚𝙣𝙙𝙖𝙙𝙤\n"
 bot_retorno+="$LINE\n"
-bot_retorno+="📀 𝗔𝗱𝗾𝘂𝗶𝗲𝗿𝗲 𝗧𝘂 𝗮𝗰𝗰𝗲𝘀𝗼 𝗘𝗻 @LATMXDANBOT\n"
+bot_retorno+="🚦 𝗔𝗱𝗾𝘂𝗶𝗲𝗿𝗲 𝗧𝘂 𝗮𝗰𝗰𝗲𝘀𝗼 𝗘𝗻 @LATMXDANBOT\n"
 
 msj_fun
 #echo -e $bot_retorno >> ${keytxt}/key_${chatuser}.txt
@@ -394,6 +394,8 @@ msj_fun
 listID_src () {
 lsid=$(cat -n ${CID})
 local bot_retorno="$LINE\n"
+          bot_retorno+="•🦠 ─━─━ 𝗔𝗖𝗖𝗘𝗦𝗢𝗦 𝗕𝗢𝗧 ━─━─ 🦠•\n"
+          bot_retorno+="$LINE\n"
           bot_retorno+="LISTA DE ID CON ACCESO AL BOT\n"
           bot_retorno+="$LINE\n"
           bot_retorno+="${lsid}\n"
