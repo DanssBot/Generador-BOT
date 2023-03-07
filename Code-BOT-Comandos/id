@@ -65,6 +65,7 @@ bot_retorno+=" DIJITA MENU /menu   🔰\n"
 bot_retorno+="\n"
 bot_retorno+="$LINE\n"
 bot_retorno+="        ⚜ Power by @ChumoGH ⚜\n"
+bot_retorno+="        ⚜ Power MOD @cisdan ⚜\n"
 bot_retorno+="$LINE\n"
 #bot_retorno+="<b>bold</b>, <strong> bold</strong> \n
 #<i>italic</i>, <em>italic</em>\n"
@@ -79,7 +80,7 @@ msj_del ${MSG_id}
 		bot_retorno="$LINE\n"
 		[[ -z ${nUSER} ]] && bot_retorno+=" ⚠️ USUARIO SIN ALIAS ⚠️\n" || bot_retorno+="𝙃𝙤𝙡𝙖 【 @${nUSER} 】, SU ID NO ESTA AUTORIZADO\n"
 		bot_retorno+="  ADQUIERE UNA MENBRESIA O DIJITA /prices \n"
-		bot_retorno+=" VISITA LA TIENDA 🛒🛍️ PINCHANDO 👉<a href='https://shoppy.gg/@ChumoGH/'>AQUI</a>👈\n"
+		bot_retorno+=" VISITA LA TIENDA 🛒🛍️ PINCHANDO 👉<a href='https://shoppy.gg/'>AQUI</a>👈\n"
         bot_retorno+="$LINE\n"
         bot_retorno+="𝚂𝚞 𝙸𝙳 【 <code>${chatuser}</code> 】\n"
         bot_retorno+="$LINE\n"
@@ -98,6 +99,7 @@ msj_del ${MSG_id}
 			bot_retorno+="\n"
 			bot_retorno+="$LINE\n"
 			bot_retorno+="        ⚜ Power by @ChumoGH ⚜\n"
+                        bot_retorno+="        ⚜ Power MOD @cisdan ⚜\n"
 			bot_retorno+="$LINE\n"
 			msj_fun
 		}
@@ -253,6 +255,7 @@ bot_retorno+="  EL ADMIN PRINCIPAL, PODRA CONTROLAR  \n"
 bot_retorno+="         ESTAS AUTORIZACIONES  \n"
 bot_retorno+="$LINE\n"
 bot_retorno+="        ⚜ Power by @ChumoGH ⚜\n"
+bot_retorno+="        ⚜ Power Mod @cisdan ⚜\n"
 bot_retorno+="$LINE\n"
 msj_fun
 }
@@ -309,6 +312,7 @@ done
           bot_retorno+=" ❌ NO REGISTRAR DUPLICADOS ❌\n"
           bot_retorno+="$LINE\n"
           bot_retorno+="        ⚜ Power by @ChumoGH ⚜\n"
+          bot_retorno+="        ⚜ Power Mod @cisdan ⚜\n"
           bot_retorno+="$LINE\n"
       msj_fun
     }
