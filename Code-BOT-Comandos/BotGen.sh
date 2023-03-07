@@ -163,10 +163,11 @@ send_admin(){
 	bot_retorno2+="$LINE"
 
 	bot_retorno="$LINE\n"
-	bot_retorno+="     🔰 Bot generador de key 🔰\n"
-	bot_retorno+="           ⚜ by @ChumoGH ⚜\n"
+	bot_retorno+="     🌐 Bot generador de key 🌐\n"
+	bot_retorno+="           𒈒 by ChumoGH 𒈒\n"
+        bot_retorno+="           𒈒 Mod @cisdan 𒈒\n"
 	bot_retorno+="$LINE\n"
-	bot_retorno+="      ✅ ID enviado XX admin ✅\n"
+	bot_retorno+="      ✅ Tu ID fue enviado al admin ✅\n"
 	bot_retorno+="$LINE"
 	comand_boton "atras"
 
@@ -250,7 +251,7 @@ botao_donar=''
 unset botao_send_id
 botao_send_id=''
 ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "ENVIAR al ADM" --callback_data '/sendid'
-ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "menu" --callback_data '/menu'
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "MENU" --callback_data '/menu'
 
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text 'NEW ID' --callback_data '/add'
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text 'QUITAR 🗑' --callback_data '/del'
