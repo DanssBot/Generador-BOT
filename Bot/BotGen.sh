@@ -80,7 +80,7 @@ bot_retorno+="💾 |--- 𝗜𝗻𝘀𝘁𝗮𝗹𝗮𝗱𝗼𝗿:\n"
 bot_retorno+="\n"
 bot_retorno+="$LINE\n"
 bot_retorno+="\n"
-bot_retorno+="<code>wget https://raw.githubusercontent.com/cisdan/latam/main/LATIMEX.sh; chmod 777 LATIMEX.sh; ./LATIMEX.sh</code>\n"
+bot_retorno+="<code>wget https://raw.githubusercontent.com/cisdan/latam/main/latmx.sh; chmod 777 latmx.sh; ./latmx.sh</code>\n"
 bot_retorno+="\n"
 bot_retorno+="$LINE\n"
 bot_retorno+="\n"
@@ -212,8 +212,8 @@ upfile_fun () {
 invalido_fun () {
 	[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
 local bot_retorno="━━━━━━━━━━━━━━━━━━━━\n"
-         bot_retorno+="        🔰 Bot generador de key 🔰 \n"
-         bot_retorno+="         ⚜ by @Johan_AlfaPro ⚜\n"
+         bot_retorno+="        🇲🇽 𝗕𝗼𝘁 𝗴𝗲𝗻𝗲𝗿𝗮𝗱𝗼𝗿 𝗱𝗲 𝗸𝗲𝘆 🇲🇽 \n"
+         bot_retorno+="         ⚜ by @cisdan ⚜\n"
          bot_retorno+="       Quizas debes usar este /keygen\n"
          bot_retorno+=" ━━━━━━━━━━━━━━━━━━━━\n"
 	     ShellBot.sendMessage --chat_id $var \
@@ -368,8 +368,8 @@ addID_reply () {
           bot_retorno+="New ID: ${message_text[$id]}\n"
           bot_retorno+="$LINE\n"
 
-          bot_retor="•💥 ─━─━ 𝗕𝗜𝗘𝗡𝗩𝗘𝗡𝗜𝗗𝗢 ━─━─ 💥•\n"
-          bot_retor+="   🔰 Bot generador de key 🔰\n"
+          bot_retor="•🦠 ─━─━ 𝗕𝗜𝗘𝗡𝗩𝗘𝗡𝗜𝗗𝗢 ━─━─ 🦠•\n"
+          bot_retor+="   🇲🇽 𝗕𝗼𝘁 𝗴𝗲𝗻𝗲𝗿𝗮𝗱𝗼𝗿 𝗱𝗲 𝗸𝗲𝘆 🇲🇽\n"
           bot_retor+="    ⚜ by @cisdan ⚜\n"
           bot_retor+="$LINE\n"
           bot_retor+="El Administrador te autorizo a\n"
@@ -382,7 +382,7 @@ addID_reply () {
       msj_add ${message_text[$id]}
       upfile_src
     } || {
-          bot_retorno="====ERROR====\n"
+          bot_retorno="•🦠 ─━─━ 𝗘𝗥𝗥𝗢𝗥 ━─━─ 🦠•\n"
           bot_retorno+="Este ID ya existe\n"
           bot_retorno+="$LINE\n"
       msj_fun
@@ -391,9 +391,9 @@ addID_reply () {
 
 link_src () {
 	bot_retorno="$LINE\n"
-	bot_retorno+="SCRIPT VPS-MX 8.8\n"
+	bot_retorno+="SCRIPT LATMX 1.x\n"
 	bot_retorno+="$LINE\n"
-	bot_retorno+="<code>wget https://raw.githubusercontent.com/VPSMAXDARK/OFicial-V8.8X-VPS-MX.DARK/master/LACASITA.sh; chmod 777 LACASITA.sh; ./LACASITA.sh</code>\n"
+	bot_retorno+="<code>wget https://raw.githubusercontent.com/cisdan/latam/main/latmx.sh; chmod 777 latmx.sh; ./latmx.sh</code>\n"
 	bot_retorno+="$LINE\n"
 msj_fun
 }
