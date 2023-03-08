@@ -334,7 +334,9 @@ msj_fun
 
 
 myid_src () {
-bot_retorno="━━━━━━━━━━━━━━━\n"
+bot_retorno="┅┅┅⋙💥❯❯ ❯❯❲ 𝗕𝗢𝗧 ❳❮❮ ❮❮💥⋘┅┅┅\n"
+          bot_retorno+="\n"
+          bot_retorno+="🦠SU 🆔 USER PRIVADO🦠\n"
           bot_retorno+="ID:<code>${chatuser}</code>\n"
           bot_retorno+="━━━━━━━━━━━━━━━\n"
 msj_fun
@@ -343,8 +345,9 @@ msj_fun
 deleteID_reply () {
 delid=$(sed -n ${message_text[$id]}p ${CID})
 sed -i "${message_text[$id]}d" ${CID}
-bot_retorno="$LINE\n"
-          bot_retorno+="ID eliminado con exito!\n"
+bot_retorno="┅┅┅⋙💥❯❯ ❯❯❲ 𝗕𝗢𝗧 ❳❮❮ ❮❮💥⋘┅┅┅\n"
+          bot_retorno+="\n"
+          bot_retorno+="🔴ID eliminado con exito!🔴\n"
           bot_retorno+="ID: ${delid}\n"
           bot_retorno+="$LINE\n"
 msj_fun
@@ -354,17 +357,22 @@ msj_fun
 addID_reply () {
       [[ $(cat ${CID}|grep "${message_text[$id]}") = "" ]] && {
         echo "/${message_text[$id]}" >> ${CID}
-          bot_retorno="•💥 ─━─━ 𝗖𝗢𝗠𝗣𝗟𝗘𝗧𝗔𝗗𝗢 ━─━─ 💥•\n"
-          bot_retorno+="✅ *ID agregado * ✅\n"
+          bot_retorno="┅┅┅⋙💥❯❯ ❯❯❲ 𝗕𝗢𝗧 ❳❮❮ ❮❮💥⋘┅┅┅\n"
+          bot_retorno+="\n"
+          bot_retorno+="✅ *ID agregado Exitosamente* ✅\n"
           bot_retorno+="$LINE\n"
+          bot_retorno+="✉️ NUEVO USUARIO REGISTRADO ✉️\n"
           bot_retorno+="$(< ${CID})\n"
           bot_retorno+="$LINE\n"
           bot_retorno+="New ID: ${message_text[$id]}\n"
           bot_retorno+="$LINE\n"
 
-          bot_retor="•🦠 ─━─━ 𝗕𝗜𝗘𝗡𝗩𝗘𝗡𝗜𝗗𝗢 ━─━─ 🦠•\n"
+          bot_retor="┅┅┅⋙💥❯❯ ❯❯❲ 𝗕𝗢𝗧 ❳❮❮ ❮❮💥⋘┅┅┅\n"
+          bot_retorno+="\n"
+          bot_retorno+="•🦠 ─━─━ 𝗕𝗜𝗘𝗡𝗩𝗘𝗡𝗜𝗗𝗢 ━─━─ 🦠•\n"
+          bot_retorno+="\n"
           bot_retor+="   🇲🇽 𝗕𝗼𝘁 𝗴𝗲𝗻𝗲𝗿𝗮𝗱𝗼𝗿 𝗱𝗲 𝗸𝗲𝘆 🇲🇽\n"
-          bot_retor+="    ⚜ by @cisdan ⚜\n"
+          bot_retor+="    ⚜ Hola @${message_from_username[$id]} ⚜\n"
           bot_retor+="$LINE\n"
           bot_retor+="El Administrador te autorizo a\n"
           bot_retor+="usar el bot generador de keys\n"
@@ -406,7 +414,7 @@ msj_fun
 }
 
 ayuda_id(){
-bot_retorno="┅┅┅⋙💥❯❯ ❯❯❲ 𝗕𝗢𝗧 ❳❮❮ ❮❮💥⋘┅┅┅"
+bot_retorno="┅┅┅⋙💥❯❯ ❯❯❲ 𝗕𝗢𝗧 ❳❮❮ ❮❮💥⋘┅┅┅\n"
 bot_retorno+="      🔘      𝗕𝗼𝘁 𝗚𝗲𝗻𝗲𝗿𝗮𝗱𝗼𝗿      🔘\n"
 bot_retorno+="       ⚜ by @cisdan ⚜\n"
 bot_retorno+="                 <code>${chatuser}</code>\n"
