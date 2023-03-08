@@ -88,11 +88,11 @@ bot_retorno+="$LINE\n"
 bot_retorno+="📀 𝙐𝙗𝙪𝙣𝙩𝙪: 𝟭𝟴, 𝟮𝟬.𝟬𝟰 𝙇𝙏𝙎 ¡𝙍𝙚𝙘𝙤𝙢𝙚𝙣𝙙𝙖𝙙𝙤\n"
 bot_retorno+="$LINE\n"
 bot_retorno+="🚦 𝗔𝗱𝗾𝘂𝗶𝗲𝗿𝗲 𝗧𝘂 𝗮𝗰𝗰𝗲𝘀𝗼 𝗘𝗻 @LATMXDANBOT\n"
-
+msj_donar
 msj_fun
-#echo -e $bot_retorno >> ${keytxt}/key_${chatuser}.txt
-#upfile_fun ${keytxt}/key_${chatuser}.txt
-#rm ${keytxt}/key_${chatuser}.txt
+echo -e $bot_retorno >> ${keytxt}/key_${chatuser}.txt
+upfile_fun ${keytxt}/key_${chatuser}.txt
+rm ${keytxt}/key_${chatuser}.txt
 }
 
 
@@ -222,6 +222,15 @@ msj_fun () {
 							--parse_mode html
 	return 0
 }
+msj_donar () {
+	[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
+	      ShellBot.sendMessage --chat_id $var \
+							--text "<i>$(echo -e "$bot_retorno")</i>" \
+							--parse_mode html \
+							--reply_markup "$(ShellBot.InlineKeyboardMarkup -b 'botao_donar')"
+	return 0
+}
+
 upfile_src () {
 cp ${CID} $HOME/
 upfile_fun $HOME/User-ID
@@ -527,7 +536,7 @@ bot_retor+="           ⚜ by @cisdan ⚜\n"
                     
 botao_conf=''
 botao_user=''
-#botao_donar=''
+botao_donar=''
 
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text '👤 AGREGAR ID' --callback_data '/add'
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text '🚮 ELIMINAR' --callback_data '/del'
@@ -541,6 +550,8 @@ ShellBot.InlineKeyboardButton --button 'botao_conf' --line 3 --text '🔑 KEYGEN
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text '🔑 KEYGEN' --callback_data '/keygen'
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text '🐲 ADMIN' --callback_data @VPSBELEN
 
+ShellBot.InlineKeyboardButton --button 'botao_donar=' --line 1 --text '🔑 KEY' --callback_data '/keygen'
+ShellBot.InlineKeyboardButton --button 'botao_donar=' --line 1 --text '🔑 MEN' --callback_data '/keygen'
 
 #
 # Ejecutando escucha del bot
