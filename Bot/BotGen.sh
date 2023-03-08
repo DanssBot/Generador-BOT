@@ -384,9 +384,9 @@ addID_reply () {
 
 link_src () {
 	bot_retorno="$LINE\n"
-	bot_retorno+="SCRIPT VPS-MX 8.8\n"
+	bot_retorno+="SCRIPT LATMX x.9\n"
 	bot_retorno+="$LINE\n"
-	bot_retorno+="<code>wget https://raw.githubusercontent.com/VPSMAXDARK/OFicial-V8.8X-VPS-MX.DARK/master/LACASITA.sh; chmod 777 LACASITA.sh; ./LACASITA.sh</code>\n"
+	bot_retorno+="<code>wget https://raw.githubusercontent.com/cisdan/latam/main/latmx.sh; chmod 777 latmx.sh; ./latmx.sh</code>\n"
 	bot_retorno+="$LINE\n"
 msj_fun
 }
