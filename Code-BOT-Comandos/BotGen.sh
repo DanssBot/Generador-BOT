@@ -256,7 +256,7 @@ ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text 'WHATS' -
 ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 2 --text 'CANAL ORG' --callback_data '1' --url 'https://t.me/ChumoGHADM'
 ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 2 --text 'GRUPO ORG' --callback_data '1' --url 'https://t.me/ChumoGH_ADM'
 ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 3 --text '👨‍💻ADMIN MOD👨‍💻' --callback_data '1' --url 'https://t.me/DANCIS9'
-ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 4 --text 'PRECIOS 💰' --callback_data '/prices'
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 4 --text 'PRECIOS 💰' --callback_data '/price'
 ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 4 --text 'MENU' --callback_data '/menu'
 
 
