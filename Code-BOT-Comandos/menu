@@ -18,6 +18,7 @@ bot_retorno="  ✨ BIENVENIDO A ADMcgh/ChumoGH $(cat < /etc/SCRIPT/v-local.log) 
 			 #bot_retorno+="$LINE\n"
 			 bot_retorno+="  ⚠️ <code>${chatuser}</code> AUN NO ESTAS AUTORIZADO 🚫"
 			 bot_retorno+="$LINE\n"
+                         bot_retorno+="| ⏰: (date '+%C%y-%m-%d') | 📅 : $(date +%R) \n"
 			 bot_retorno+="| HOLA @${nUSER} SU ID NO ESTA VERIFICADO \n"
                          bot_retorno+="| SELECCIONA UN OPCION DE ABAJO !!! \n"
 			 #bot_retorno+="$LINE\n"
