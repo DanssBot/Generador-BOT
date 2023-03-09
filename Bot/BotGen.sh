@@ -540,7 +540,14 @@ ShellBot.InlineKeyboardButton --button 'botao_conf' --line 2 --text '🛠️ MEN
 
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 3 --text '🔑 KEYGEN' --callback_data '/keygen'
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text '🔑 KEYGEN' --callback_data '/keygen'
-ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text '🐲 ADMIN' --callback_data @VPSBELEN
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text '🆔' --callback_data '/ID'
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text 'WHATS' --callback_data '1' --url 'https://www.paypal.me/Rufu99'
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 2 --text 'CANAL ORG' --callback_data '1' --url 'https://t.me/ChumoGHADM'
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 2 --text 'GRUPO ORG' --callback_data '1' --url 'https://t.me/ChumoGH_ADM'
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 3 --text '👨‍💻ADMIN MOD👨‍💻' --callback_data '1' --url 'https://t.me/ChumoGHADM'
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 4 --text 'PRECIOS 💰' --callback_data '1' --url 'https://t.me/ChumoGH_ADM'
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 4 --text 'MENU' --callback_data '1' --url 'https://t.me/ChumoGH_ADM'
+
 
 
 #
