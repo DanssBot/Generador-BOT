@@ -250,8 +250,15 @@ botao_user=''
 botao_donar=''
 unset botao_send_id
 botao_send_id=''
-ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "ENVIAR al ADM" --callback_data '/sendid'
-ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "MENU" --callback_data '/menu'
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "MI ID" --callback_data '/ID'
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "SOLICITAR" --callback_data '/sendid'
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text 'WHATS' --callback_data '1' --url 'https://walink.co/e7fe4a'
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 2 --text 'CANAL ORG' --callback_data '1' --url 'https://t.me/ChumoGHADM'
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 2 --text 'GRUPO ORG' --callback_data '1' --url 'https://t.me/ChumoGH_ADM'
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 3 --text '👨‍💻ADMIN MOD👨‍💻' --callback_data '1' --url 'https://t.me/DANCIS9'
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 4 --text 'PRECIOS 💰' --callback_data '/prices'
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 4 --text 'MENU' --callback_data '/menu'
+
 
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text 'NEW ID' --callback_data '/add'
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text 'QUITAR 🗑' --callback_data '/del'
