@@ -15,7 +15,7 @@ bot_retorno="  ✨ BIENVENIDO A ADMcgh/ChumoGH $(cat < /etc/SCRIPT/v-local.log) 
 		 #[[ -z "$(echo $idBAN | grep "${chatuser")" ]] && {
 		 	 bot_retorno+="$LINE\n"
 			 #bot_retorno+="𝙃𝙤𝙡𝙖 (  $message_from_first_name $message_from_last_name  ), 𝘽𝙞𝙚𝙣𝙫𝙚𝙣𝙞𝙙𝙤 𝙖𝙡 𝙈𝙚𝙣𝙪"
-			 bot_retorno+="$LINE\n"
+			 #bot_retorno+="$LINE\n"
 			 bot_retorno+="  ⚠️ <code>${chatuser}</code> AUN NO ESTAS AUTORIZADO 🚫"
 			 bot_retorno+="$LINE\n"
 			 bot_retorno+="| HOLA @${nUSER} SU ID NO ESTA VERIFICADO \n"
