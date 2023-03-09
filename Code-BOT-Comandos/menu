@@ -1,7 +1,7 @@
 #!/bin/bash
 unset checkPID_GEN
 checkPID_GEN=$(ps x|grep -v grep|grep "8888")
-[[ ! $checkPID_GEN ]] && PID_GEN='(😰) OFF' || PID_GEN='(🤗) ON'
+[[ ! $checkPID_GEN ]] && PID_GEN='(🟢) OFF' || PID_GEN='(🤗) ON'
 [[ -e /etc/systemd/system/btkill.service ]] && kkid="✅" || kkid="❌"
 
 menu_src () {
