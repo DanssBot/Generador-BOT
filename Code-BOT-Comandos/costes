@@ -22,7 +22,8 @@ local msg
 		  msg+=" BOT PREMIUM CON ACCESO Ilimitado \n Incluyendo tu reseller en la Key! \n Soporte, Actualizaciones y MAS!!)\n"
 		  msg+='•••••••••••••••••••••••••••••••••••••••••••••••••\n'  
 		  msg+=" VISITA NUESTRO CATALOGO EN https://shoppy.gg/ \n"
-		  msg+='•••••••••••••••••••••••••••••••••••••••••••••••••\n'  
+		  msg+='•••••••••••••••••••••••••••••••••••••••••••••••••\n' 
+          menu_printSN 
           ShellBot.sendMessage	--chat_id "${message_chat_id[$id]}" \
 							--reply_to_message_id "${message_message_id[$id]}" \
 							--text "<i>$(echo -e $msg)</i>" \
