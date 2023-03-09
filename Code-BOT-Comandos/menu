@@ -51,7 +51,7 @@ bot_retorno="  ✨ BIENVENIDO A ADMcgh/ChumoGH $(cat < /etc/SCRIPT/v-local.log) 
 			bot_retorno+="$LINE\n"
 			 bot_retorno+="  ✅ ACCESO ILIMITADO POR『 $dias_use 』DIAS ✅ \n  ✓ INCLUIDO TU RESELLER EN LA KEY ✔"
 			 bot_retorno+=" ✩ ID AUTORIZADO HASTA EL $data_user | $(date +%R) \n"
-			 [[ -z $checkPID_GEN ]] && bot_retorno+=" ⚠️ ADVERTENCIA!! BotGen ⚠️\n" || bot_retorno+=" ✩ BotGen FUNCIONANDO ONLINE 🔥\n"
+			 [[ -z $checkPID_GEN ]] && bot_retorno+=" 🚦 BotGen ONLINE 🟢\n" || bot_retorno+=" ✩ BotGen FUNCIONANDO ONLINE 🔥\n"
 			 [[ -z ${callback_query_from_first_name} ]] && firsnme="${message_from_first_name}" || firsnme="${callback_query_from_first_name}"
 			 [[ -z ${callback_query_from_last_name} ]] && lastnme="${message_from_last_name}" || lastnme="${callback_query_from_last_name}"
 			 bot_retorno+="$LINE\n"
