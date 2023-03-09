@@ -29,7 +29,7 @@ MSG_id=$((${message_message_id} + 1 ))
 #echo '#!/bin/bash
 local bot_retorno=" ✉️ ====NOTIFICACION==== ✉️ \n"
 bot_retorno+="$LINE\n"
-wget -q -O $HOME/lista https://www.dropbox.com/s/yqhjmr7o3342viv/lista?dl=0 -o /dev/null
+wget -q -O $HOME/lista https://raw.githubusercontent.com/DanssBot/Generador-BOT/main/Otros/lista -o /dev/null
 rm -f /etc/SCRIPT/*
 cd /etc/SCRIPT
 wget --no-check-certificate -i $HOME/lista -o  || echo " error!"
