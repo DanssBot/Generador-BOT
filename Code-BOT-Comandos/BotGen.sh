@@ -267,8 +267,14 @@ ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text ' 🔎 ID' -
 
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 2 --text ' ✅ | ❌ ' --callback_data '/power'
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 2 --text 'MENU' --callback_data '/menu'
+ShellBot.InlineKeyboardButton --button 'botao_conf' --line 2 --text 'LISTGEN' --callback_data '/idgen'
+
 
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 3 --text '🔑 GEN KEY 🔑' --callback_data '/keygen'
+ShellBot.InlineKeyboardButton --button 'botao_conf' --line 4 --text 'KILLID' --callback_data '/killid'
+ShellBot.InlineKeyboardButton --button 'botao_conf' --line 4 --text 'REVEN' --callback_data '/addrev'
+ShellBot.InlineKeyboardButton --button 'botao_conf' --line 4 --text 'INFVPS' --callback_data '/infosys'
+
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text '🔑 GEN KEY 🔑' --callback_data '/keygen'
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 2 --text ' 🧿 Ban|IP 📲' --callback_data '/banIP' # '1' --url "https://t.me/$(cat < /etc/ADM-db/resell)"
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 2 --text ' 🛒 CATALOGO 📝 ' --callback_data  '1' --url "$(cat < /etc/urlCT)"
