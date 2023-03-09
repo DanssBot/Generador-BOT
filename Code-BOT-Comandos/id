@@ -218,14 +218,14 @@ done
           bot_retor+="  ☺️GRACIAS POR CONFIAR EN NOSOTROS ☺️\n"
           bot_retor+=" FECHA DE REGISTRO : $(date '+%C%y-%m-%d')|$(date +%R) \n VALIDO HASTA : ${valid}|$(date +%R)\n"
 		  bot_retor+=" 🆔 : ${ids} | 🔐 ACEPTADO 🧾\n"
-		  bot_retor+="𝙃SU RESELLER : ${firsnme} ${lastnm} \n"
+		  bot_retor+="SU RESELLER : ${firsnme} ${lastnm} \n"
           bot_retor+=" $LINE\n"
           bot_retor+=" GENERAR Key's usar el comando /keygen\n"
           bot_retor+=" Para MENU Digita el comando /menu\n"
           bot_retor+=" $LINE\n"
-          bot_retor+=" CONTACTA ESCRIBE AL ADM $(cat < /etc/ADM-db/resell)\n SI NO OBTIENES RESPUESTA O SOLUCION CONTACTA A @ChumoGH "
-          bot_retor+=" ADQUIERE TU MEMBRESIA DESDE @$(ShellBot.username) , DIGITANDO /prices \n"
-          bot_retor+=" RECUERDA MANTENER TU CAPTURA DE PAGO, PARA ALGUN RECLAMO!\n"
+          #bot_retor+=" CONTACTA ESCRIBE AL ADM $(cat < /etc/ADM-db/resell)\n SI NO OBTIENES RESPUESTA O SOLUCION CONTACTA A @ChumoGH "
+          bot_retor+=" ADQUIERE TU MEMBRESIA DESDE @$(ShellBot.username)  \n"
+          bot_retor+=" DIGITANDO O DANDO CLIK 👉 /prices\n"
           bot_retor+=" $LINE\n"
       msj_fun
       msj_add ${ids}
