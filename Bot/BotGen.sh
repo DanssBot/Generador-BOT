@@ -128,29 +128,29 @@ echo "$nombrevalue" > ${DIR}/${KEY}.name
 at now +2 hours <<< "rm -rf ${DIR}/${KEY} && rm -rf ${DIR}/${KEY}.name"
 }
 
-ofus () {
-unset server 
- server=$(echo ${txt_ofuscatw}|cut -d':' -f1) 
- unset txtofus 
- number=$(expr length $1) 
- for((i=1; i<$number+1; i++)); do 
- txt[$i]=$(echo "$1" | cut -b $i) 
- case ${txt[$i]} in 
-".")txt[$i]="C";; 
-"C")txt[$i]=".";; 
-"3")txt[$i]="@";; 
-"@")txt[$i]="3";; 
-"5")txt[$i]="9";; 
-"9")txt[$i]="5";; 
-"6")txt[$i]="P";; 
-"P")txt[$i]="6";; 
-"L")txt[$i]="O";; 
-"O")txt[$i]="L";; 
- esac 
- txtofus+="${txt[$i]}" 
- done 
- echo "$txtofus" | rev 
- } 
+ofus() {
+      unset server
+      server=$(echo ${txt_ofuscatw} | cut -d':' -f1)
+      unset txtofus
+      number=$(expr length $1)
+      for ((i = 1; i < $number + 1; i++)); do
+        txt[$i]=$(echo "$1" | cut -b $i)
+        case ${txt[$i]} in
+        ".") txt[$i]="v" ;;
+        "v") txt[$i]="." ;;
+        "1") txt[$i]="@" ;;
+        "@") txt[$i]="1" ;;
+        "2") txt[$i]="?" ;;
+        "?") txt[$i]="2" ;;
+        "4") txt[$i]="p" ;;
+        "p") txt[$i]="4" ;;
+        "-") txt[$i]="L" ;;
+        "L") txt[$i]="-" ;;
+        esac
+        txtofus+="${txt[$i]}"
+      done
+      echo "$txtofus" | rev
+    }
 
 menu_print () {
 [[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
