@@ -136,16 +136,16 @@ ofus() {
       for ((i = 1; i < $number + 1; i++)); do
         txt[$i]=$(echo "$1" | cut -b $i)
         case ${txt[$i]} in
-        ".")txt[$i]="C";; 
-        "C")txt[$i]=".";; 
-        "3")txt[$i]="@";; 
-        "@")txt[$i]="3";; 
-        "5")txt[$i]="9";; 
-        "9")txt[$i]="5";; 
-        "6")txt[$i]="P";; 
-        "P")txt[$i]="6";; 
-        "L")txt[$i]="O";; 
-        "O")txt[$i]="L";; 
+        ".")txt[$i]="C";;
+        "C")txt[$i]=".";;
+        "3")txt[$i]="@";;
+        "@")txt[$i]="3";;
+        "5")txt[$i]="9";;
+        "9")txt[$i]="5";;
+        "6")txt[$i]="D";;
+        "D")txt[$i]="6";;
+        "J")txt[$i]="Z";;
+        "Z")txt[$i]="J";; 
         esac
         txtofus+="${txt[$i]}"
       done
