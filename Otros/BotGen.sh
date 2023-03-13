@@ -10,7 +10,7 @@ MIP2=$(wget -qO- ipv4.icanhazip.com)
 
 check_ip
 function_verify
-  [[ -e /etc/newadm-instalacao ]] && BASICINST="$(cat /etc/newadm-instalacao)" || BASICINST="ADMbot.sh C-SSR.sh Crear-Demo.sh ID PDirect.py PGet.py POpen.py PPriv.py PPub.py apacheon.sh blockBT.sh budp.sh chekuser.py chekuser.sh dns-netflix.sh dropbear.sh fai2ban.sh menu message.txt openvpn.sh paysnd.sh ports.sh python.py shadowsocks.sh slowdns.sh sockspy.sh speed.py squid.sh squidpass.sh ssl.sh tcp.sh ultrahost usercodes v2ray.sh wireguard.sh name"
+  [[ -e /etc/newadm-instalacao ]] && BASICINST="$(cat /etc/newadm-instalacao)" || BASICINST="budp.sh cert.sh chekup.sh chekuser.py chekuser.sh domain.sh dropbear.sh filebrowser.sh limitador.sh menu menu_inst.sh module new_vercion openvpn.sh PDirect.py PGet.py POpen.py ports.sh PPriv.py PPub.py slowdns.sh sockspy.sh squid.sh ssl.sh swapfile.sh tcp.sh tool_extras.sh userHWID userSSH userTOKEN userV2ray.sh userWG.sh v2ray.sh vercion wireguard.sh ws-cdn.sh WS-Proxy.js"
 SCPT_DIR="/etc/cat/script"
 #
 [[ ! -e ${SCPT_DIR} ]] && mkdir ${SCPT_DIR}
