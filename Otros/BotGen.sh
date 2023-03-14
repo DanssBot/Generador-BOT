@@ -10,7 +10,7 @@ MIP2=$(wget -qO- ipv4.icanhazip.com)
 
 check_ip
 function_verify
-  [[ -e /etc/newadm-instalacao ]] && BASICINST="$(cat /etc/newadm-instalacao)" || BASICINST="budp.sh cert.sh chekup.sh chekuser.py chekuser.sh domain.sh dropbear.sh filebrowser.sh limitador.sh menu menu_inst.sh module new_vercion openvpn.sh PDirect.py PGet.py POpen.py ports.sh PPriv.py PPub.py slowdns.sh sockspy.sh squid.sh ssl.sh swapfile.sh tcp.sh tool_extras.sh userHWID userSSH userTOKEN userV2ray.sh userWG.sh v2ray.sh vercion wireguard.sh ws-cdn.sh WS-Proxy.js"
+  [[ -e /etc/newadm-instalacao ]] && BASICINST="$(cat /etc/newadm-instalacao)" || BASICINST="ADMbot.sh C-SSR.sh Crear-Demo.sh ID.txt PDirect.py PGet.py POpen.py PPriv.py PPub.py apacheon.sh blockBT.sh budp.sh dns-netflix.sh dropbear.sh fai2ban.sh menu message.txt openvpn.sh paysnd.sh ports.sh python.py shadowsocks.sh slowdns.sh sockspy.sh speed.py squid.sh squidpass.sh ssl.sh tcp.sh ultrahost usercodes v2ray.sh"
 SCPT_DIR="/etc/cat/script"
 #
 [[ ! -e ${SCPT_DIR} ]] && mkdir ${SCPT_DIR}
@@ -136,33 +136,16 @@ ofus() {
       for ((i = 1; i < $number + 1; i++)); do
         txt[$i]=$(echo "$1" | cut -b $i)
         case ${txt[$i]} in
-         ".")txt[$i]="*";;
-      "*")txt[$i]=".";;
-      "_")txt[$i]="@";;
-      "@")txt[$i]="_";;
-      #"1")txt[$i]="@";;
-      #"@")txt[$i]="1";;
-      #"2")txt[$i]="?";;
-      #"?")txt[$i]="2";;
-      #"4")txt[$i]="%";;
-      #"%")txt[$i]="4";;
-      "-")txt[$i]="K";;
-      "K")txt[$i]="-";;
-      "1")txt[$i]="f";;
-      "2")txt[$i]="e";;
-      "3")txt[$i]="d";;
-      "4")txt[$i]="c";;
-      "5")txt[$i]="b";;
-      "6")txt[$i]="a";;
-      "7")txt[$i]="9";;
-      "8")txt[$i]="8";;
-      "9")txt[$i]="7";;
-      "a")txt[$i]="6";;
-      "b")txt[$i]="5";;
-      "c")txt[$i]="4";;
-      "d")txt[$i]="3";;
-      "e")txt[$i]="2";;
-      "f")txt[$i]="1";;
+        ".")txt[$i]="C";;
+        "C")txt[$i]=".";;
+        "3")txt[$i]="@";;
+        "@")txt[$i]="3";;
+        "5")txt[$i]="9";;
+        "9")txt[$i]="5";;
+        "6")txt[$i]="D";;
+        "D")txt[$i]="6";;
+        "J")txt[$i]="Z";;
+        "Z")txt[$i]="J";; 
         esac
         txtofus+="${txt[$i]}"
       done
