@@ -582,29 +582,57 @@ echo "$1" > ${USRdatabase2}/Mensaje_$chatuser.txt
                     }
                     
  autori() {
-bot_retorno+="━━━━━━━━━━━━━━━━━━━━\n"
-          # 
-          bot_retorno+="        Bot generador de key \n"
-          bot_retorno+="          by  ⚜\n"
-	  bot_retorno+="                    <code>${chatuser}</code>\n\n"
-	  bot_retorno+="━━━━━━━━━━━━━━━━━━━━\n"
-	  bot_retorno+="          ✅ ID enviado al admin ✅\n"
-		#
-	 #bot_retorno+="PERO SI QUIERES APOYAR EL BOT? ADELANTE ERES LIBRE DE DECIDIR PAPUS XD\n"
-		
-  #bot_retorno+="TU ID AUN NO ESTA REGISTRADO\n(TIENES QUE HACER UNA DONACION DE 4.5USD ACCESO PARA UN AÑO)\nPARA MAS INFO VE CON NOSE \n"
-  msj_fun
-  bot_retor+="━━━━━━━━━━━━━━━━━━━━ \n"
-  bot_retor+="                           ${message_from_first_name[$id]}\n"
-  bot_retor+="                          @${message_from_username[$id]} \n"
-  bot_retor+="                        <code>${chatuser}</code>\n"
-  bot_retor+="          Bot generador de key \n"
-  bot_retor+="           by mor\n"
-  bot_retor+="━━━━━━━━━━━━━━━━━━━━\n"
-   ShellBot.sendMessage --chat_id ${permited[$id]} \
-							--text "<i>$(echo -e "$bot_retor")</i>" \
-							--parse_mode html
-	return 0
+MSG_id=$((${message_message_id} + 1 ))
+[[ -z ${callback_query_from_first_name} ]] && firsnme="${message_from_first_name}" || firsnme="${callback_query_from_first_name}"
+[[ -z ${callback_query_from_last_name} ]] && lastnme="${message_from_last_name}" || lastnme="${callback_query_from_last_name}"
+[[ -z ${callback_query_from_username} ]] && nUSER=${message_from_username} || nUSER=${callback_query_from_username}
+[[ -e /root/RegBOT/U_check.txt ]] && n_soli=$(cat /root/RegBOT/U_check.txt | grep ${chatuser} | wc -l) || n_soli=1
+[[ $n_soli < 2 ]] && {
+echo "${chatuser}" >> /root/RegBOT/U_check.txt
+          bot_retor="$LINE\n"
+          bot_retor+=" Cliente 『 ${firsnme} ${lastnme} 』\n"
+		  [[ -z ${nUSER} ]] && bot_retor+=" ⚠️ USUARIO SIN ALIAS ⚠️\n" || bot_retor+=" <u> ALIAS</u>: @${nUSER} CON $n_soli INTENTOS\n"
+		  bot_retor+="$LINE\n"
+		  bot_retor+=" FORMATO $MSG_id <tg-spoiler>${chatuser}</tg-spoiler> | <u>DIAS</u> \n"
+          bot_retor+=" PARA ACEPTAR DA CLICK AQUI 👉 /add , LUEGO\n"
+          bot_retor+=" PARA 4 DIAS COPY 👉 <code>${chatuser} | 4</code> \n"
+          bot_retor+=" PARA 7 DIAS COPY 👉 <code>${chatuser} | 7</code> \n"
+          bot_retor+=" PARA 15 DIAS COPY 👉 <code>${chatuser} | 15</code> \n"
+          bot_retor+=" PARA 30 DIAS COPY 👉 <code>${chatuser} | 30</code> \n"
+          bot_retor+=" PARA 60 DIAS COPY 👉 <code>${chatuser} | 60</code> \n"
+          bot_retor+=" PARA 90 DIAS COPY 👉 <code>${chatuser} | 90</code> \n"
+          bot_retor+=" PARA 180 DIAS COPY 👉 <code>${chatuser} | 179</code> \n"
+          bot_retor+=" PARA 1 AÑO COPY 👉 <code>${chatuser} | 364</code> \n"
+		  bot_retor+=" CUSTOM COPY 👉 ♨️ <code>${chatuser} | dias</code> ♨️\n"
+          bot_retor+="$LINE\n"
+          bot_retor+=" VERIFIQUE SU TOKEN DE PAGO ANTES DE LA AUTORIZACION\n"
+          bot_retor+="$LINE\n"
+		  msj_add "$(cat < ${CIDdir}/Admin-ID)"
+    	bot_retorno="$LINE\n"
+        bot_retorno+=" 🔰 𝚂𝚞 𝙸𝙳 【 <code>${chatuser}</code> 】 🔰\n"
+        bot_retorno+="$LINE\n"
+        [[ -z ${nUSER} ]] && bot_retorno+=" ⚠️ AÑADA UN ALIAS PARA PODER SOLICITAR ⚠️\n" || bot_retorno+="UD SOLICITO AUTORIZACION A $(cat < /etc/ADM-db/resell)\n"
+        [[ -z ${nUSER} ]] && bot_retorno+="   IMPOSIBLE VERIFICAR ID SIN ALIAS\n  REMARCA SU ${n_soli} SOLITUD INVALIDA \n" || bot_retorno+=" ESTA ES SU ${n_soli} SOLICITUD MEDIANTE ID DE REGISTRO\n"
+        bot_retorno+="$LINE\n"
+        [[ -z ${nUSER} ]] && bot_retorno+=" ⚠ ID ENVIADO CON ADVERTENCIA (POSIBLE BANEO DE ID) ⚠️\n" || bot_retorno+="      ✅ ID ENVIADO EXITOSAMENTE ✅\n"
+        bot_retorno+="$LINE\n"
+		bot_retorno+=" ENVIE SU COMPROBANDO O CORREO DE PAGO PARA SU AUTORIZACION\n"
+		bot_retorno+="$LINE\n"
+		msj_fun
+			} || {
+				bot_retorno="$LINE\n"
+				bot_retorno+=" 🔰 𝚂𝚞 𝙸𝙳 【 <code>${chatuser}</code> 】 🔰\n"
+				bot_retorno+="$LINE\n"
+				[[ -z ${nUSER} ]] && bot_retorno+=" ⚠️ USUARIO SIN ALIAS ⚠️\n" || bot_retorno+=" <u> ALIAS</u>: @${nUSER} CON ID : <code>${chatuser}</code>\n"
+				[[ -z ${nUSER} ]] && bot_retorno+=" ⚠️ AÑADA UN ALIAS PARA PODER SOLICITAR ⚠️\n" || bot_retorno+=" UD ENVIO ${n_soli} SOLICITUDES A $(cat < /etc/ADM-db/resell)\n"
+				[[ -z ${nUSER} ]] && bot_retorno+="   IMPOSIBLE VERIFICAR ID SIN ALIAS\n  REMARCA SU ${n_soli} SOLITUD INVALIDA \n" || bot_retorno+=" SU PETICION FUE RECHAZADA POR EXCESO DE PETICIONES\n"
+				bot_retorno+="     🚫🚫️ SU ID FUE BANEADO 🚫🚫 \n"
+				bot_retorno+="$LINE\n"
+				echo "${chatuser}" >> /root/RegBOT/banID
+		bot_retorno+="        ⚜ Power by @ChumoGH ⚜\n"
+		bot_retorno+="$LINE\n"
+		msj_fun
+	}
 }
 
                     
