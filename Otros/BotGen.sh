@@ -642,7 +642,7 @@ while true; do
 				case ${message_reply_to_message_text[$id]} in
 					'/del')deleteID_reply;;
 					'/add')addID_reply;;
-                                        #'/resell')error_fun;;
+                                        
 					*)invalido_fun;;
 				esac
 
