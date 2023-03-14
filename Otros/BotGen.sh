@@ -403,13 +403,13 @@ addID_reply () {
           bot_retorno+="$LINE\n"
           bot_retorno+="  ✅ ID REGISTRADO EXITOSAMENTE ✅\n"
           bot_retorno+="$LINE\n"
-          bot_retorno+="        ⚜ Power by @ChumoGH ⚜\n"
+          bot_retorno+="        ⚜ Power ⚜\n"
 unset i
 for i in $(cat /etc/CAT-BOT/User-ID | awk '{print $3}'); do 
 [[ "$(date -d $(date '+%C%y-%m-%d') +%s)" -ge "$(date -d $i +%s)" ]] && {
 for id in $(cat /etc/CAT-BOT/User-ID | grep "$i" | awk '{print $1}' | sed -e 's/[^a-z0-9 -]//ig'); do
 sed -i "/${id}/d" /etc/CAT-BOT/User-ID
-          bot_retor="  🎊 𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘  Nuevamente 𝚊𝚕  𝙱𝚘𝚝𝙶𝚎𝚗  𝙲𝚑𝚞𝚖𝚘𝙶𝙷-𝙰𝙳𝙼  🎊\n"
+          bot_retor="   HOLA DE NUEVO AL BOT 🤖 \n"
           bot_retor+=" SU MEMBRESIA HA FINALIZADO POR CHECK ID\n"
           bot_retor+=" FIN DE CONTRADO : $(date '+%C%y-%m-%d') - $(date +%R) \n"
           bot_retor+=" SI DESEAS APELAR TU CONTRADO, CONTACTA CON $(cat < /etc/ADM-db/resell)\n"
@@ -510,16 +510,16 @@ bot_retorno="┅┅┅ BOTGEN MOROCHO ┅┅┅\n"
 			dias_use=$(($variavel_soma / 86400))
 			[[ "$dias_use" -le 0 ]] && dias_use=0 || dias_use=$(($dias_use + 1))
 			bot_retorno+="$LINE\n"
-			 bot_retorno+="  ✅ ACCESO ILIMITADO POR『 $dias_use 』DIAS ✅ \n"
-			 bot_retorno+=" ✩ ID AUTORIZADO HASTA EL $data_user | $(date +%R) \n"
+			 bot_retorno+="ACCESO ILIMITADO POR ⏳ $dias_use DIAS \n"
+			 bot_retorno+="ID AUTORIZADO HASTA EL $data_user | $(date +%R) \n"
 		    bot_retorno+="HORA Y FECHA 📆 $(printf '%(%D⏰%H:%M:%S)T')\n"
-		bot_retorno+="┇NOMBRE ${message_from_first_name[$id]}\n"
+		bot_retorno+="NOMBRE TELEGRAM ${message_from_first_name[$id]}\n"
 		bot_retorno+="ID [${chatuser}] \n"
-		bot_retorno+="USER @${message_from_username[$id]} \n"
+		bot_retorno+="USUARIO @${message_from_username[$id]} \n"
 		#bot_retorno+="USER: @${message_from_username[$id]}\n"
 		bot_retorno+="RESELLER: $credi\n"
 		bot_retorno+="KEY USADAS: [$k_used] \n"
-		bot_retorno+="DIAS REST PRÓXIMO \n"
+		#bot_retorno+="DIAS REST PRÓXIMO \n"
 		bot_retorno+="/resell (add nuevo reseller)\n"
 	    bot_retorno+="/instalador (link de instalacion)\n"
 		bot_retorno+="/gerar (Generar una key)\n"
@@ -613,8 +613,8 @@ botao_donar=''
 unset botao_send_id
 botao_send_id=''
 ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "MI ID" --callback_data '/ID'
-ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "SOLICITAR" --callback_data '/sendid'
-ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text 'ACCES' --callback_data '/acceso'
+#ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "SOLICITAR" --callback_data '/sendid'
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 2 --text 'SOLICITAR' --callback_data '/acceso'
 
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text '👤 AGREGAR ID' --callback_data '/add'
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text '🚮 ELIMINAR' --callback_data '/del'
