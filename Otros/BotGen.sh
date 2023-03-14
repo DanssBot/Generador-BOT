@@ -590,8 +590,6 @@ ShellBot.InlineKeyboardButton --button 'botao_conf' --line 3 --text '🔑 RESELL
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text '🔑 KEYGEN' --callback_data '/keygen'
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text ID' --callback_data '/ID'
 
-
-
 #
 # Ejecutando escucha del bot
 while true; do
@@ -617,7 +615,6 @@ while true; do
 				/[Aa]cceso|[Aa]cceso)autori &;;
 				 /[Mm]enu|[Mm]enu|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)menu_src &;;
 				 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp)ayuda_id &;;
-                                 /sendid)send_ID;;
 				 /*|*)invalido_fun &;;
 			 esac
 		 else
@@ -641,7 +638,6 @@ while true; do
 				case ${message_reply_to_message_text[$id]} in
 					'/del')deleteID_reply;;
 					'/add')addID_reply;;
-                                        
 					*)invalido_fun;;
 				esac
 
