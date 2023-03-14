@@ -358,15 +358,28 @@ deleteID_src () {
 }
 
 deleteID_reply () {
+ids=$(echo ${message_text[$id]} | awk '{print $1}' | sed -e 's/[^a-z0-9 -]//ig')
+idc=$(echo ${message_text[$id]} | awk '{print $3}' | sed -e 's/[^a-z0-9 -]//ig')
 sed -i "${message_text[$id]}/d" ${CID}
 bot_retorno="$LINE\n"
           bot_retorno+=" ID ELIMINADO EXITOSAMENTE!\n"
-          bot_retorno+=" ID Borrado: ${message_text[$id]}\n"
+          bot_retorno+=" ID Eliminado: ${ids}\n"
           bot_retorno+="$LINE\n"
+			
+          bot_retor="  🎊 𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘  Nuevamente 𝚊𝚕  𝙱𝚘𝚝𝙶𝚎𝚗  𝙲𝚑𝚞𝚖𝚘𝙶𝙷-𝙰𝙳𝙼  🎊\n"
+          #bot_retor+="𝙃𝙤𝙡𝙖 『 $message_from_first_name $message_from_last_name 』\n"
+          bot_retor+="Desafortunadamente tu Membresia ha Finalizado\n"
+          #bot_retor+=" ⌚⌚ Hora Actual del Bot : ⌚⌚\n"
+          bot_retor+="Fecha de Corte : $(date '+%C%y-%m-%d') - $(date +%R)  \n"
+          bot_retor+="Si tienes Dudas, Contacta con $(cat < /etc/ADM-db/resell)\n"
+          bot_retor+="$LINE\n"
+          bot_retor+="Recuerda adquirir creditos, o Realizar una Colaboracion\n $(cat < /etc/mpayu) \n"
+          bot_retor+="Para mantener tu acceso al BotGen Recuerda Mostrar tu Token de Donacion o Compra\n"
+          bot_retor+="$LINE\n"
+      msj_fun
+      msj_add ${ids}
+      upfile_src
 
-
-msj_fun
-upfile_src
 }
 
 
@@ -376,29 +389,58 @@ addID_src () {
 }
 
 addID_reply () {
-      [[ $(cat ${CID}|grep "${message_text[$id]}") = "" ]] && {
-       valid=$(date '+%C%y-%m-%d' -d " +$idc days")
-        echo "/${message_text[$id]}} | $valid" >> ${CID}
-        echo "/${message_text[$id]}} | $(date '+%C%y-%m-%d') | $(date +%R)" >> ${CID}.reg
-        echo "/${message_text[$id]}" >> ${CID}
-          bot_retorno=" Bienvenido al bot MOROCHO\n"
-          bot_retorno+="✅ *ID agregado * ✅\n"
+     ids=$(echo ${message_text[$id]} | awk '{print $1}' | sed -e 's/[^a-z0-9 -]//ig')
+        idc=$(echo ${message_text[$id]} | awk '{print $3}' | sed -e 's/[^a-z0-9 -]//ig')
+        valid=$(date '+%C%y-%m-%d' -d " +$idc days")
+	  [[ $(cat ${CID}|grep "$ids" ) = "" ]] && {
+		#[[ -e /root/RegBOT/banID ]] && sed -i "/${ids}/d" /root/RegBOT/banID
+        echo "/${ids} | $valid" >> ${CID}
+        echo "/${ids} | $(date '+%C%y-%m-%d') | $(date +%R)" >> ${CID}.reg
+          bot_retorno="  ✉️ REGISTRO ACEPTADO  ✉️ \n"
+          bot_retorno+=" 🆔 : ${ids} | ACEPTADO 🧾\n"
           bot_retorno+="$LINE\n"
-          bot_retorno+=" FECHA DE REGISTRO : $(date '+%C%y-%m-%d')| $(date +%R)\n"
-          bot_retorno+="$(< ${CID})\n"
-          bot_retorno+="VALIDO HASTA ${valid}|$(date +%R)\n"
-          bot_retorno+="New ID: ${message_text[$id]}\n"
-          bot_retorno+="$LINE"
-
-          bot_retor="   Bienvenido al bot MOROCHO\n"
-          bot_retor+="El Administrador $(cat < /etc/ADM-db/resell) te autoriso\n"
-          bot_retor+="Para GENERAR Key's usar el comando /keygen\n"
-          bot_retor+="Para MENU Digita el comando /menu\n"
-          bot_retor+="Para actualizar el menu de comandos\n"
-          bot_retor+="Recuerda adquirir creditos\n"
-          bot_retor+="$LINE\n"
+          bot_retorno+=" FECHA DE REGISTRO : $(date '+%C%y-%m-%d')|$(date +%R) \n VALIDO HASTA : ${valid}|$(date +%R)\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+="  ✅ ID REGISTRADO EXITOSAMENTE ✅\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+="        ⚜ Power by @ChumoGH ⚜\n"
+unset i
+for i in $(cat /etc/CAT-BOT/User-ID | awk '{print $3}'); do 
+[[ "$(date -d $(date '+%C%y-%m-%d') +%s)" -ge "$(date -d $i +%s)" ]] && {
+for id in $(cat /etc/CAT-BOT/User-ID | grep "$i" | awk '{print $1}' | sed -e 's/[^a-z0-9 -]//ig'); do
+sed -i "/${id}/d" /etc/CAT-BOT/User-ID
+          bot_retor="  🎊 𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘  Nuevamente 𝚊𝚕  𝙱𝚘𝚝𝙶𝚎𝚗  𝙲𝚑𝚞𝚖𝚘𝙶𝙷-𝙰𝙳𝙼  🎊\n"
+          bot_retor+=" SU MEMBRESIA HA FINALIZADO POR CHECK ID\n"
+          bot_retor+=" FIN DE CONTRADO : $(date '+%C%y-%m-%d') - $(date +%R) \n"
+          bot_retor+=" SI DESEAS APELAR TU CONTRADO, CONTACTA CON $(cat < /etc/ADM-db/resell)\n"
+          bot_retor+=" $LINE\n"
+          bot_retor+=" ADQUIERE TU MEMBRESIA DESDE @$(ShellBot.username) , DIGITANDO /prices \n"
+          bot_retor+=" RECUERDA MANTENER TU CAPTURA DE PAGO, PARA ALGUN RECLAMO!\n"
+          bot_retor+=" $LINE\n"
+msj_add ${id}
+done
+}
+done
+[[ -z ${callback_query_from_username} ]] && nUSER=${message_from_username} || nUSER=${callback_query_from_username}
+[[ -z ${callback_query_from_first_name} ]] && firsnme="${message_from_first_name}" || firsnme="${callback_query_from_first_name}"
+[[ -z ${callback_query_from_last_name} ]] && lastnme="${message_from_last_name}" || lastnme="${callback_query_from_last_name}"
+		  bot_retor=" ✉️ ESTIMADO @${nUSER} SU REGISTRO FUE APROBADO  ✉️ \n"
+		  bot_retor+=" $LINE\n"
+          bot_retor+=" EL ADM $(cat < /etc/ADM-db/resell) APROBO TU SOLICITUD\n"
+          bot_retor+="  ☺️GRACIAS POR CONFIAR EN NOSOTROS ☺️\n"
+          bot_retor+=" FECHA DE REGISTRO : $(date '+%C%y-%m-%d')|$(date +%R) \n VALIDO HASTA : ${valid}|$(date +%R)\n"
+		  bot_retor+=" 🆔 : ${ids} | 🔐 ACEPTADO 🧾\n"
+		  bot_retor+="SU RESELLER : ${firsnme} ${lastnm} \n"
+          bot_retor+=" $LINE\n"
+          bot_retor+=" GENERAR Key's usar el comando /keygen\n"
+          bot_retor+=" Para MENU Digita el comando /menu\n"
+          bot_retor+=" $LINE\n"
+          #bot_retor+=" CONTACTA ESCRIBE AL ADM $(cat < /etc/ADM-db/resell)\n SI NO OBTIENES RESPUESTA O SOLUCION CONTACTA A @ChumoGH "
+          bot_retor+=" ADQUIERE TU MEMBRESIA DESDE @$(ShellBot.username)  \n"
+          bot_retor+=" DIGITANDO O DANDO CLIK 👉 /prices\n"
+          bot_retor+=" $LINE\n"
       msj_fun
-      msj_add ${message_text[$id]}
+      msj_add ${ids}
       upfile_src
     } || {
           bot_retorno="====ERROR====\n"
