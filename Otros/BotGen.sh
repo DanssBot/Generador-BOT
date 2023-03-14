@@ -187,6 +187,18 @@ menu_print () {
 	fi
 }
 
+menu_printSN () {
+[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
+
+	if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
+				ShellBot.sendMessage 	--chat_id $var \
+				--text "<i>$(echo -e $bot_retorno)</i>" \
+				--parse_mode html \
+				--reply_markup "$(ShellBot.InlineKeyboardMarkup -b 'botao_send_id')"
+	fi
+}
+
+
 download_file () {
 # shellbot.sh editado linea 3986
 user=User-ID
@@ -351,10 +363,16 @@ msj_fun
 
 
 myid_src () {
-bot_retorno="━━━━━━━━━━━━━━━\n"
-          bot_retorno+="ID:<code>${chatuser}</code>\n"
-          bot_retorno+="━━━━━━━━━━━━━━━\n"
+bot_retorno="====================\n"
+          bot_retorno+="SU ID: ${chatuser}\n"
+          bot_retorno+="====================\n"
 msj_fun
+}
+
+deleteID_src () {
+          bot_retorno="/del"
+      reply
+      listID_src
 }
 
 deleteID_reply () {
@@ -365,29 +383,32 @@ bot_retorno="$LINE\n"
           bot_retorno+="ID: ${delid}\n"
           bot_retorno+="$LINE\n"
 msj_fun
-#upfile_src
+upfile_src
+}
+
+
+addID_src () {
+          bot_retorno="/add"
+      reply
 }
 
 addID_reply () {
       [[ $(cat ${CID}|grep "${message_text[$id]}") = "" ]] && {
         echo "/${message_text[$id]}" >> ${CID}
-          bot_retorno="$LINE\n"
+          bot_retorno="  🎊 Bienvenido al bot  🎊\n"
           bot_retorno+="✅ *ID agregado * ✅\n"
           bot_retorno+="$LINE\n"
           bot_retorno+="$(< ${CID})\n"
           bot_retorno+="$LINE\n"
           bot_retorno+="New ID: ${message_text[$id]}\n"
-          bot_retorno+="$LINE\n"
+          bot_retorno+="$LINE"
 
-          bot_retor="$LINE\n"
-          bot_retor+="   🔰 Bot generador de key 🔰\n"
-          bot_retor+="    ⚜ by @cisdan ⚜\n"
-          bot_retor+="$LINE\n"
-          bot_retor+="El Administrador te autorizo a\n"
-          bot_retor+="usar el bot generador de keys\n"
-          bot_retor+="$LINE\n"
-          bot_retor+="Usa el comando o boton menu\n"
-          bot_retor+="para actualizar el menu principal\n"
+          bot_retor="  🎊 Bienvenido al bot  🎊\n"
+          bot_retor+="El Administrador $(cat < /etc/ADM-db/resell) te autoriso\n"
+          bot_retor+="Para GENERAR Key's usar el comando /keygen\n"
+          bot_retor+="Para MENU Digita el comando /menu\n"
+          bot_retor+="Para actualizar el menu de comandos\n"
+          bot_retor+="Recuerda adquirir creditos\n"
           bot_retor+="$LINE\n"
       msj_fun
       msj_add ${message_text[$id]}
@@ -404,15 +425,16 @@ link_src () {
 	bot_retorno="$LINE\n"
 	bot_retorno+="SCRIPT LATMX x.9\n"
 	bot_retorno+="$LINE\n"
-	bot_retorno+="<code>wget https://raw.githubusercontent.com/cisdan/latam/main/latmx.sh; chmod 777 latmx.sh; ./latmx.sh</code>\n"
+	bot_retorno+="<code>wget https://raw.githubusercontent.com/morocho.sh; chmod 777 didi.sh; ./sh</code>\n"
 	bot_retorno+="$LINE\n"
+
 msj_fun
 }
 
 listID_src () {
 lsid=$(cat -n ${CID})
 local bot_retorno="$LINE\n"
-          bot_retorno+="LISTA DE ID CON ACCESO AL BOT\n"
+          bot_retorno+="Lista de id permitidos\n"
           bot_retorno+="$LINE\n"
           bot_retorno+="${lsid}\n"
           bot_retorno+="$LINE\n"
@@ -432,17 +454,18 @@ menu_src () {
 bot_retorno="┅┅┅⋙💥❯❯ ❯❯❲ 𝗕𝗢𝗧 ❳❮❮ ❮❮💥⋘┅┅┅\n"
 	 if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
 		 if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
-			 bot_retorno+="┇📆||:$(printf '%(%D⏰%H:%M:%S)T')\n"
-			bot_retorno+=" ┇👤||:${message_from_first_name[$id]}\n"
-			bot_retorno+=" ┇🆔||:[${chatuser}] \n"
-			bot_retorno+=" ┇☬ ||:@${message_from_username[$id]} \n"
-			bot_retorno+=" ┇➜ /MI_ACCESO ❪@cisdan🤖❫\n"
+			 bot_retorno+="HORA:$(printf '%(%D⏰%H:%M:%S)T')\n"
+			bot_retorno+=" NOMBRE :${message_from_first_name[$id]}\n"
+			bot_retorno+=" ID [${chatuser}] \n"
+			bot_retorno+=" USER :@${message_from_username[$id]} \n"
+			#bot_retorno+=" ┇➜ /MI_ACCESO ❪@cisdan🤖❫\n"
 			bot_retorno+="️┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅\n"
 			bot_retorno+="┅┅┅┅┅┅\n"
-			 bot_retorno+="➜/ID (muestra su ID)\n"
-			 bot_retorno+="➜/acceso (Pedir Autorizacion)\n"
-			bot_retorno+="➜/ayuda (modo de uso)\n"
-			 bot_retorno+="️┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅\n"
+			 #bot_retorno+="➜/ID (muestra su ID)\n"
+			 #bot_retorno+="➜/acceso (Pedir Autorizacion)\n"
+			#bot_retorno+="➜/ayuda (modo de uso)\n"
+			 #bot_retorno+="️┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅\n"
+                         
 			 msj_fun
 		 else
 		#creditos agregados
@@ -520,22 +543,22 @@ echo "$1" > ${USRdatabase2}/Mensaje_$chatuser.txt
 bot_retorno+="━━━━━━━━━━━━━━━━━━━━\n"
           # 
           bot_retorno+="       🔰 Bot generador de key 🔰\n"
-		bot_retorno+="          ⚜ by @Johan_AlfaPro ⚜\n"
-	   bot_retorno+="                    <code>${chatuser}</code>\n\n"
-		bot_retorno+="━━━━━━━━━━━━━━━━━━━━\n"
-		bot_retorno+="          ✅ ID enviado al admin ✅\n"
+          bot_retorno+="          ⚜ by @Johan_AlfaPro ⚜\n"
+	  bot_retorno+="                    <code>${chatuser}</code>\n\n"
+	  bot_retorno+="━━━━━━━━━━━━━━━━━━━━\n"
+	  bot_retorno+="          ✅ ID enviado al admin ✅\n"
 		#
-		#bot_retorno+="PERO SI QUIERES APOYAR EL BOT? ADELANTE ERES LIBRE DE DECIDIR PAPUS XD\n"
+	 bot_retorno+="PERO SI QUIERES APOYAR EL BOT? ADELANTE ERES LIBRE DE DECIDIR PAPUS XD\n"
 		
-#bot_retorno+="TU ID AUN NO ESTA REGISTRADO\n(TIENES QUE HACER UNA DONACION DE 4.5USD ACCESO PARA UN AÑO)\nPARA MAS INFO VE CON @ALEXMOD80\n"
+  bot_retorno+="TU ID AUN NO ESTA REGISTRADO\n(TIENES QUE HACER UNA DONACION DE 4.5USD ACCESO PARA UN AÑO)\nPARA MAS INFO VE CON NOSE \n"
   msj_fun
-bot_retor+="━━━━━━━━━━━━━━━━━━━━ \n"
-          bot_retor+="                           ${message_from_first_name[$id]}\n"
-		bot_retor+="                          @${message_from_username[$id]} \n"
-bot_retor+="                        <code>${chatuser}</code>\n"
-bot_retor+="          🔰 Bot generador de key 🔰\n"
-bot_retor+="           ⚜ by @cisdan ⚜\n"
-          bot_retor+="━━━━━━━━━━━━━━━━━━━━\n"
+  bot_retor+="━━━━━━━━━━━━━━━━━━━━ \n"
+  bot_retor+="                           ${message_from_first_name[$id]}\n"
+  bot_retor+="                          @${message_from_username[$id]} \n"
+  bot_retor+="                        <code>${chatuser}</code>\n"
+  bot_retor+="          🔰 Bot generador de key 🔰\n"
+  bot_retor+="           ⚜ by @cisdan ⚜\n"
+  bot_retor+="━━━━━━━━━━━━━━━━━━━━\n"
    ShellBot.sendMessage --chat_id ${permited[$id]} \
 							--text "<i>$(echo -e "$bot_retor")</i>" \
 							--parse_mode html
@@ -546,6 +569,11 @@ bot_retor+="           ⚜ by @cisdan ⚜\n"
 botao_conf=''
 botao_user=''
 botao_donar=''
+unset botao_send_id
+botao_send_id=''
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "MI ID" --callback_data '/ID'
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "SOLICITAR" --callback_data '/sendid'
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "SOLIC" --callback_data '/acceso'
 
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text '👤 AGREGAR ID' --callback_data '/add'
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text '🚮 ELIMINAR' --callback_data '/del'
