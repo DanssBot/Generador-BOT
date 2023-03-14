@@ -1,1 +1,204 @@
-budp.sh cert.sh chekup.sh chekuser.py chekuser.sh domain.sh dropbear.sh filebrowser.sh limitador.sh menu menu_inst.sh module new_vercion openvpn.sh PDirect.py PGet.py POpen.py ports.sh PPriv.py PPub.py slowdns.sh sockspy.sh squid.sh ssl.sh swapfile.sh tcp.sh tool_extras.sh userHWID userSSH userTOKEN userV2ray.sh userWG.sh v2ray.sh vercion wireguard.sh ws-cdn.sh WS-Proxy.js
+myid_src () {
+bot_retorno="====================\n"
+          bot_retorno+="SU ID: ${chatuser}\n"
+          bot_retorno+="====================\n"
+msj_fun
+}
+
+deleteID_src () {
+          bot_retorno="/del"
+      reply
+      listID_src
+}
+
+deleteID_reply () {
+delid=$(sed -n ${message_text[$id]}p ${CID})
+sed -i "${message_text[$id]}d" ${CID}
+bot_retorno="$LINE\n"
+          bot_retorno+="ID eliminado con exito!\n"
+          bot_retorno+="ID: ${delid}\n"
+          bot_retorno+="$LINE\n"
+msj_fun
+upfile_src
+}
+
+
+addID_src () {
+          bot_retorno="/add"
+      reply
+}
+
+addID_reply () {
+      [[ $(cat ${CID}|grep "${message_text[$id]}") = "" ]] && {
+        echo "/${message_text[$id]}" >> ${CID}
+          bot_retorno=" Bienvenido al bot MOROCHO\n"
+          bot_retorno+="✅ *ID agregado * ✅\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+="$(< ${CID})\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+="New ID: ${message_text[$id]}\n"
+          bot_retorno+="$LINE"
+
+          bot_retor="   Bienvenido al bot MOROCHO\n"
+          bot_retor+="El Administrador $(cat < /etc/ADM-db/resell) te autoriso\n"
+          bot_retor+="Para GENERAR Key's usar el comando /keygen\n"
+          bot_retor+="Para MENU Digita el comando /menu\n"
+          bot_retor+="Para actualizar el menu de comandos\n"
+          bot_retor+="Recuerda adquirir creditos\n"
+          bot_retor+="$LINE\n"
+      msj_fun
+      msj_add ${message_text[$id]}
+      upfile_src
+    } || {
+          bot_retorno="====ERROR====\n"
+          bot_retorno+="Este ID ya existe\n"
+          bot_retorno+="$LINE\n"
+      msj_fun
+    }
+}
+
+link_src () {
+	bot_retorno="$LINE\n"
+	bot_retorno+="SCRIPT LATMX x.9\n"
+	bot_retorno+="$LINE\n"
+	bot_retorno+="<code>wget https://raw.githubusercontent.com/morocho.sh; chmod 777 didi.sh; ./sh</code>\n"
+	bot_retorno+="$LINE\n"
+
+msj_fun
+}
+
+listID_src () {
+lsid=$(cat -n ${CID})
+local bot_retorno="$LINE\n"
+          bot_retorno+="Lista de id permitidos\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+="${lsid}\n"
+          bot_retorno+="$LINE\n"
+msj_fun
+}
+
+ayuda_id(){
+bot_retorno="$LINE\n"
+bot_retorno+="       Bot generador de key \n"
+bot_retorno+="       by @MorochoY\n"
+bot_retorno+="                 <code>${chatuser}</code>\n"
+			 bot_retorno+="$LINE\n"
+			msj_fun
+			}
+
+menu_src () {
+bot_retorno="┅┅┅ BOTGEN MOROCHO ┅┅┅\n"
+	 if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
+		 if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
+			 bot_retorno+="HORA:$(printf '%(%D⏰%H:%M:%S)T')\n"
+			bot_retorno+=" NOMBRE :${message_from_first_name[$id]}\n"
+			bot_retorno+=" ID [${chatuser}] \n"
+			bot_retorno+=" USER :@${message_from_username[$id]} \n"
+			#bot_retorno+=" ┇➜ /MI_ACCESO ❪@cisdan🤖❫\n"
+			bot_retorno+="️┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅\n"
+			bot_retorno+="┅┅┅┅┅┅\n"
+			 #bot_retorno+="➜/ID (muestra su ID)\n"
+			 #bot_retorno+="➜/acceso (Pedir Autorizacion)\n"
+			#bot_retorno+="➜/ayuda (modo de uso)\n"
+			 #bot_retorno+="️┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅\n"
+                         menu_printSN
+			 msj_fun
+		 else
+		#creditos agregados
+		unset creditos
+		creditos="$(cat /etc/CAT-BOT/Creditos/Mensaje_$chatuser.txt)"
+		  [[ ! $creditos ]] && credi="OFF" || credi="$creditos"
+		#menú
+		    bot_retorno+="HORA Y FECHA 📆 $(printf '%(%D⏰%H:%M:%S)T')\n"
+		bot_retorno+="┇NOMBRE ${message_from_first_name[$id]}\n"
+		bot_retorno+="ID [${chatuser}] \n"
+		bot_retorno+="USER @${message_from_username[$id]} \n"
+		#bot_retorno+="USER: @${message_from_username[$id]}\n"
+		bot_retorno+="RESELLER: $credi\n"
+		bot_retorno+="KEY USADAS: PRÓX\n"
+		bot_retorno+="DIAS REST PRÓXIMO \n"
+		bot_retorno+="/resell (add nuevo reseller)\n"
+	    bot_retorno+="/instalador (link de instalacion)\n"
+		bot_retorno+="/gerar (Generar una key)\n"
+		bot_retorno+="️┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅\n"
+		bot_retorno+="┅┅┅┅┅┅\n"
+			 menu_print
+		 fi
+		 
+	 else
+		 unset PID_GEN
+		 PID_GEN=$(ps x|grep -v grep|grep "http-server.sh")
+		 [[ ! $PID_GEN ]] && PID_GEN='(APAGADA) ❌' || PID_GEN='(EN LINEA) ✅'
+		 unset creditos
+		 creditos="$(cat /etc/CAT-BOT/Creditos/Mensaje_$chatuser.txt)"
+		  [[ ! $creditos ]] && credi="OFF" || credi="$creditos"
+		 unset usadas
+		 usadas="$(cat /etc/http-instas)"
+		 [[ ! $usadas ]] && k_used="0" || k_used="$usadas"
+		 bot_retorno+=" BIENVENIDO AL BOT MOROCHO\n"
+		bot_retorno+="Panel de control | MORCH VPS\n"
+		 bot_retorno+="ESTADO DEL BOT  $PID_GEN \n"
+                bot_retorno+="Keys Usadas [$k_used] \n"
+		bot_retorno+="RESELLER: $credi\n"
+		 #bot_retorno+="$LINE\n"
+		 bot_retorno+="ADMIN: @${message_from_username[$id]}\n"
+		 bot_retorno+="$LINE\n"
+		 menu_print
+	 fi	
+}
+
+mensajecre(){
+  error_fun () {
+local bot_retorno="$LINE\n"
+		  bot_retorno+="USAR EL COMANDO DE ESTA MANERA\n"
+		  bot_retorno+="$LINE\n"
+          bot_retorno+="Ejemplo: /resell  @MorochoY\n"
+          bot_retorno+="$LINE\n"
+	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+							--text "<i>$(echo -e "$bot_retorno")</i>" \
+							--parse_mode html
+return 0
+}
+
+[[ -z $1 ]] && error_fun && return 0
+
+echo "$1" > ${USRdatabase2}/Mensaje_$chatuser.txt
+          bot_retorno="$LINE\n"
+          bot_retorno+="✅Creditos Cambiado ✅\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+="Nuevo Reseller: $1\nPARA REGRESAR /menu\n"
+          bot_retorno+="$LINE"
+      
+          [[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
+	     ShellBot.sendMessage --chat_id $var \
+							--text "<i>$(echo -e "$bot_retorno")</i>" \
+							--parse_mode html
+							
+	return 0
+                    }
+                    
+ autori() {
+bot_retorno+="━━━━━━━━━━━━━━━━━━━━\n"
+          # 
+          bot_retorno+="        Bot generador de key \n"
+          bot_retorno+="          by MORHCO ⚜\n"
+	  bot_retorno+="                    <code>${chatuser}</code>\n\n"
+	  bot_retorno+="━━━━━━━━━━━━━━━━━━━━\n"
+	  bot_retorno+="          ✅ ID enviado al admin ✅\n"
+		#
+	 bot_retorno+="PERO SI QUIERES APOYAR EL BOT? ADELANTE ERES LIBRE DE DECIDIR PAPUS XD\n"
+		
+  bot_retorno+="TU ID AUN NO ESTA REGISTRADO\n(TIENES QUE HACER UNA DONACION DE 4.5USD ACCESO PARA UN AÑO)\nPARA MAS INFO VE CON NOSE \n"
+  msj_fun
+  bot_retor+="━━━━━━━━━━━━━━━━━━━━ \n"
+  bot_retor+="                           ${message_from_first_name[$id]}\n"
+  bot_retor+="                          @${message_from_username[$id]} \n"
+  bot_retor+="                        <code>${chatuser}</code>\n"
+  bot_retor+="          Bot generador de key \n"
+  bot_retor+="           by morucha\n"
+  bot_retor+="━━━━━━━━━━━━━━━━━━━━\n"
+   ShellBot.sendMessage --chat_id ${permited[$id]} \
+							--text "<i>$(echo -e "$bot_retor")</i>" \
+							--parse_mode html
+	return 0
+}
