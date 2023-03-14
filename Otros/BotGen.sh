@@ -72,11 +72,11 @@ keyfinal=$(ofus "$IP:8888/$valuekey/$LIST")
 local bot_retorno="┅┅┅⋙💥❯❯ ❯❯❲ BOT GEN ❳❮❮ ❮❮💥⋘┅┅┅   \n"
 bot_retorno+="\n"
 bot_retorno+="$LINE\n"
-bot_retorno+="👤 |--- RESELLER : $credill\n"
+bot_retorno+=" |--- RESELLER : $credill\n"
 bot_retorno+="$LINE\n"
-bot_retorno+="💾 |-- INSTALADOR 👇:\n"
+bot_retorno+="|-- INSTALADOR 👇:\n"
 bot_retorno+="$LINE\n"
-bot_retorno+="<code>wget https://raw.githubusercontent.com/cisdan/latam/main/latmx.sh; chmod 777 latmx.sh; ./latmx.sh</code>\n"
+bot_retorno+="<code>aquí va el link</code>\n"
 bot_retorno+="$LINE\n"
 bot_retorno+="🔑 𝗞𝗲𝘆: (𝙆𝙚𝙮 𝙑𝙖́𝙡𝙞𝙙𝙖 𝙥𝙤𝙧 𝟭 𝙝𝙤𝙧𝙖)  \n"
 bot_retorno+="$LINE\n"
@@ -369,7 +369,7 @@ bot_retorno="$LINE\n"
           bot_retor="  HOLA DE NUEVO AL BOTGEN\n"
           #bot_retor+=" HOLA『 $message_from_first_name $message_from_last_name 』\n"
           bot_retor+="Desafortunadamente tu Membresia ha Finalizado\n"
-          #bot_retor+=" ⌚⌚ Hora Actual del Bot : ⌚⌚\n"
+          #bot_retor+=" BOT SIN ACCESO ⛔️ \n"
           bot_retor+="Fecha de Corte : $(date '+%C%y-%m-%d') - $(date +%R)  \n"
           bot_retor+="Si tienes Dudas, Contacta con @cisdan\n"
           bot_retor+="$LINE\n"
@@ -396,7 +396,7 @@ addID_reply () {
 		#[[ -e /root/RegBOT/banID ]] && sed -i "/${ids}/d" /root/RegBOT/banID
         echo "/${ids} | $valid" >> ${CID}
         echo "/${ids} | $(date '+%C%y-%m-%d') | $(date +%R)" >> ${CID}.reg
-          bot_retorno="  REGISTRO ACEPTADO  \n"
+          bot_retorno=" TU ID FUE ACEPTADO EXITOSAMENTE \n"
           bot_retorno+=" 🆔 : ${ids} | ACEPTADO 🧾\n"
           bot_retorno+="$LINE\n"
           bot_retorno+=" FECHA DE REGISTRO : $(date '+%C%y-%m-%d')|$(date +%R) \n VALIDO HASTA : ${valid}|$(date +%R)\n"
@@ -427,10 +427,10 @@ done
 		  bot_retor=" HOLA @${message_from_username[$id]} SU REGISTRO FUE APROBADO \n"
 		  bot_retor+=" $LINE\n"
           bot_retor+=" EL ADM $(cat < /etc/ADM-db/resell) APROBO TU SOLICITUD\n"
-          bot_retor+="GRACIAS POR CONFIAR EN NOSOTROS\n"
+          bot_retor+="GRACIAS POR USAR EL BOT VIP\n"
           bot_retor+=" FECHA DE REGISTRO : $(date '+%C%y-%m-%d')|$(date +%R) \n VALIDO HASTA : ${valid}|$(date +%R)\n"
 		  bot_retor+=" 🆔 : ${ids} |  ACEPTADO 🧾\n"
-		  bot_retor+="SU RESELLER : ${firsnme} ${lastnm} \n"
+		  bot_retor+="Autorizado por: ${firsnme} ${lastnm} \n"
           bot_retor+=" $LINE\n"
           bot_retor+=" GENERAR Key's usar el comando /keygen\n"
           bot_retor+=" Para MENU Digita el comando /menu\n"
@@ -453,7 +453,7 @@ link_src () {
 	bot_retorno="$LINE\n"
 	bot_retorno+="SCRIPT LATMX x.9\n"
 	bot_retorno+="$LINE\n"
-	bot_retorno+="<code>wget https://raw.githubusercontent.com/morocho.sh; chmod 777 didi.sh; ./sh</code>\n"
+	bot_retorno+="<code>wget https://raw.githubusercontent.com/mo.sh; chmod 777 didi.sh; ./sh</code>\n"
 	bot_retorno+="$LINE\n"
 
 msj_fun
@@ -473,14 +473,14 @@ msj_fun
 ayuda_id(){
 bot_retorno="$LINE\n"
 bot_retorno+="       Bot generador de key \n"
-bot_retorno+="       by @MorochoY\n"
+bot_retorno+="       by @dan\n"
 bot_retorno+="                 <code>${chatuser}</code>\n"
 			 bot_retorno+="$LINE\n"
 			msj_fun
 			}
 
 menu_src () {
-bot_retorno="┅┅┅ BOTGEN MOROCHO ┅┅┅\n"
+bot_retorno="┅┅┅ 🦠BOT GEN 🧬 ┅┅┅\n"
 	 if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
 		 if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
 			 bot_retorno+="HORA:$(printf '%(%D⏰%H:%M:%S)T')\n"
@@ -495,7 +495,7 @@ bot_retorno="┅┅┅ BOTGEN MOROCHO ┅┅┅\n"
 			#bot_retorno+="➜/ayuda (modo de uso)\n"
 			 #bot_retorno+="️┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅\n"
                          menu_printSN
-			 msj_fun
+			 
 		 else
 		#creditos agregados
 		unset creditos
@@ -556,7 +556,7 @@ mensajecre(){
 local bot_retorno="$LINE\n"
 		  bot_retorno+="USAR EL COMANDO DE ESTA MANERA\n"
 		  bot_retorno+="$LINE\n"
-          bot_retorno+="Ejemplo: /resell  @MorochoY\n"
+          bot_retorno+="Ejemplo: /resell  @d\n"
           bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "<i>$(echo -e "$bot_retorno")</i>" \
@@ -585,21 +585,21 @@ echo "$1" > ${USRdatabase2}/Mensaje_$chatuser.txt
 bot_retorno+="━━━━━━━━━━━━━━━━━━━━\n"
           # 
           bot_retorno+="        Bot generador de key \n"
-          bot_retorno+="          by MORHCO ⚜\n"
+          bot_retorno+="          by  ⚜\n"
 	  bot_retorno+="                    <code>${chatuser}</code>\n\n"
 	  bot_retorno+="━━━━━━━━━━━━━━━━━━━━\n"
 	  bot_retorno+="          ✅ ID enviado al admin ✅\n"
 		#
-	 bot_retorno+="PERO SI QUIERES APOYAR EL BOT? ADELANTE ERES LIBRE DE DECIDIR PAPUS XD\n"
+	 #bot_retorno+="PERO SI QUIERES APOYAR EL BOT? ADELANTE ERES LIBRE DE DECIDIR PAPUS XD\n"
 		
-  bot_retorno+="TU ID AUN NO ESTA REGISTRADO\n(TIENES QUE HACER UNA DONACION DE 4.5USD ACCESO PARA UN AÑO)\nPARA MAS INFO VE CON NOSE \n"
+  #bot_retorno+="TU ID AUN NO ESTA REGISTRADO\n(TIENES QUE HACER UNA DONACION DE 4.5USD ACCESO PARA UN AÑO)\nPARA MAS INFO VE CON NOSE \n"
   msj_fun
   bot_retor+="━━━━━━━━━━━━━━━━━━━━ \n"
   bot_retor+="                           ${message_from_first_name[$id]}\n"
   bot_retor+="                          @${message_from_username[$id]} \n"
   bot_retor+="                        <code>${chatuser}</code>\n"
   bot_retor+="          Bot generador de key \n"
-  bot_retor+="           by morucha\n"
+  bot_retor+="           by mor\n"
   bot_retor+="━━━━━━━━━━━━━━━━━━━━\n"
    ShellBot.sendMessage --chat_id ${permited[$id]} \
 							--text "<i>$(echo -e "$bot_retor")</i>" \
