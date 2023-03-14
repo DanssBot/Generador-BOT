@@ -358,12 +358,12 @@ deleteID_src () {
 }
 
 deleteID_reply () {
-delid=$(sed -n ${message_text[$id]}p ${CID})
-sed -i "${message_text[$id]}d" ${CID}
+sed -i "${message_text[$id]}/d" ${CID}
 bot_retorno="$LINE\n"
-          bot_retorno+="ID eliminado con exito!\n"
-          bot_retorno+="ID: ${delid}\n"
+          bot_retorno+=" ID ELIMINADO EXITOSAMENTE!\n"
+          bot_retorno+=" ID Borrado: ${message_text[$id]}\n"
           bot_retorno+="$LINE\n"
+
 msj_fun
 upfile_src
 }
