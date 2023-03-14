@@ -191,7 +191,7 @@ menu_printSN () {
 [[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
 
 	if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
-				ShellBot.sendMessage 	--chat_id $var \
+				#ShellBot.sendMessage 	--chat_id $var \
 				--text "<i>$(echo -e $bot_retorno)</i>" \
 				--parse_mode html \
 				--reply_markup "$(ShellBot.InlineKeyboardMarkup -b 'botao_send_id')"
@@ -395,7 +395,7 @@ addID_src () {
 addID_reply () {
       [[ $(cat ${CID}|grep "${message_text[$id]}") = "" ]] && {
         echo "/${message_text[$id]}" >> ${CID}
-          bot_retorno="  🎊 Bienvenido al bot  🎊\n"
+          bot_retorno=" Bienvenido al bot MOROCHO\n"
           bot_retorno+="✅ *ID agregado * ✅\n"
           bot_retorno+="$LINE\n"
           bot_retorno+="$(< ${CID})\n"
@@ -403,7 +403,7 @@ addID_reply () {
           bot_retorno+="New ID: ${message_text[$id]}\n"
           bot_retorno+="$LINE"
 
-          bot_retor="  🎊 Bienvenido al bot  🎊\n"
+          bot_retor="   Bienvenido al bot MOROCHO\n"
           bot_retor+="El Administrador $(cat < /etc/ADM-db/resell) te autoriso\n"
           bot_retor+="Para GENERAR Key's usar el comando /keygen\n"
           bot_retor+="Para MENU Digita el comando /menu\n"
@@ -466,21 +466,21 @@ bot_retorno="┅┅┅⋙💥❯❯ ❯❯❲ 𝗕𝗢𝗧 ❳❮❮ ❮❮💥�
 			#bot_retorno+="➜/ayuda (modo de uso)\n"
 			 #bot_retorno+="️┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅\n"
                          menu_printSN
-			 msj_fun
+			 
 		 else
 		#creditos agregados
 		unset creditos
 		creditos="$(cat /etc/CAT-BOT/Creditos/Mensaje_$chatuser.txt)"
 		  [[ ! $creditos ]] && credi="OFF" || credi="$creditos"
 		#menú
-		    bot_retorno+="┇📆||:$(printf '%(%D⏰%H:%M:%S)T')\n"
-		bot_retorno+="┇👤||:${message_from_first_name[$id]}\n"
-		bot_retorno+="┇🆔||:[${chatuser}] \n"
-		bot_retorno+="┇☬ ||:@${message_from_username[$id]} \n"
-		#bot_retorno+="👤USER: @${message_from_username[$id]}\n"
-		bot_retorno+="👑RESELLER: $credi\n"
-		bot_retorno+="🔧SOPORTE: @cisdan\n"
-		bot_retorno+="┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅\n"
+		    bot_retorno+="HORA Y FECHA 📆 $(printf '%(%D⏰%H:%M:%S)T')\n"
+		bot_retorno+="┇NOMBRE ${message_from_first_name[$id]}\n"
+		bot_retorno+="ID [${chatuser}] \n"
+		bot_retorno+="USER @${message_from_username[$id]} \n"
+		#bot_retorno+="USER: @${message_from_username[$id]}\n"
+		bot_retorno+="RESELLER: $credi\n"
+		bot_retorno+="KEY USADAS: PRÓX\n"
+		bot_retorno+="DIAS REST PRÓXIMO \n"
 		bot_retorno+="/resell (add nuevo reseller)\n"
 	    bot_retorno+="/instalador (link de instalacion)\n"
 		bot_retorno+="/gerar (Generar una key)\n"
@@ -499,27 +499,21 @@ bot_retorno="┅┅┅⋙💥❯❯ ❯❯❲ 𝗕𝗢𝗧 ❳❮❮ ❮❮💥�
 		 unset usadas
 		 usadas="$(cat /etc/http-instas)"
 		 [[ ! $usadas ]] && k_used="0" || k_used="$usadas"
-		 bot_retorno+="🔰 BIENVENIDO AL BOT 🔰\n"
-		bot_retorno+="▫️Panel de control | DARK 9.×▫️\n"
-		 bot_retorno+="Gen $PID_GEN | Keys Used [$k_used]\n"
-		bot_retorno+="	RESELLER: $credi\n"
-		 bot_retorno+="$LINE\n"
-		 bot_retorno+="ADM: @${message_from_username[$id]}\n"
+		 bot_retorno+="🔰 BIENVENIDO AL BOT MOROCHO🔰\n"
+		bot_retorno+="Panel de control | MORCH VPS\n"
+		 bot_retorno+="ESTADO DEL BOT  $PID_GEN \n"
+                bot_retorno+="Keys Usadas [$k_used] \n"
+		bot_retorno+="RESELLER: $credi\n"
+		 #bot_retorno+="$LINE\n"
+		 bot_retorno+="ADMIN: @${message_from_username[$id]}\n"
 		 bot_retorno+="$LINE\n"
 		 menu_print
 	 fi	
 }
 mensajecre(){
-  error_fun () {
-local bot_retorno="$LINE\n"
-		  bot_retorno+="USAR EL COMANDO DE ESTA MANERA\n"
-		  bot_retorno+="$LINE\n"
-          bot_retorno+="Ejemplo: /resell  @CISDAN\n"
-          bot_retorno+="$LINE\n"
-	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-							--text "<i>$(echo -e "$bot_retorno")</i>" \
-							--parse_mode html
-return 0
+  bot_retorno="/resell"
+      reply
+
 }
 
 [[ -z $1 ]] && error_fun && return 0
@@ -543,7 +537,7 @@ echo "$1" > ${USRdatabase2}/Mensaje_$chatuser.txt
 bot_retorno+="━━━━━━━━━━━━━━━━━━━━\n"
           # 
           bot_retorno+="       🔰 Bot generador de key 🔰\n"
-          bot_retorno+="          ⚜ by @Johan_AlfaPro ⚜\n"
+          bot_retorno+="          ⚜ by MORHCO ⚜\n"
 	  bot_retorno+="                    <code>${chatuser}</code>\n\n"
 	  bot_retorno+="━━━━━━━━━━━━━━━━━━━━\n"
 	  bot_retorno+="          ✅ ID enviado al admin ✅\n"
@@ -557,7 +551,7 @@ bot_retorno+="━━━━━━━━━━━━━━━━━━━━\n"
   bot_retor+="                          @${message_from_username[$id]} \n"
   bot_retor+="                        <code>${chatuser}</code>\n"
   bot_retor+="          🔰 Bot generador de key 🔰\n"
-  bot_retor+="           ⚜ by @cisdan ⚜\n"
+  bot_retor+="           ⚜ by morucha⚜\n"
   bot_retor+="━━━━━━━━━━━━━━━━━━━━\n"
    ShellBot.sendMessage --chat_id ${permited[$id]} \
 							--text "<i>$(echo -e "$bot_retor")</i>" \
@@ -584,6 +578,7 @@ ShellBot.InlineKeyboardButton --button 'botao_conf' --line 2 --text '❌ POWER �
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 2 --text '🛠️ MENU' --callback_data '/menu'
 
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 3 --text '🔑 KEYGEN' --callback_data '/keygen'
+ShellBot.InlineKeyboardButton --button 'botao_conf' --line 3 --text '🔑 KEYGEN' --callback_data '/resell'
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text '🔑 KEYGEN' --callback_data '/keygen'
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text '🆔' --callback_data '/ID'
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text 'WHATS' --callback_data '1' --url 'https://www.paypal.me/Rufu99'
@@ -620,6 +615,7 @@ while true; do
 				/[Aa]cceso|[Aa]cceso)autori &;;
 				 /[Mm]enu|[Mm]enu|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)menu_src &;;
 				 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp)ayuda_id &;;
+                                 /sendid)send_ID;;
 				 /*|*)invalido_fun &;;
 			 esac
 		 else
@@ -643,6 +639,7 @@ while true; do
 				case ${message_reply_to_message_text[$id]} in
 					'/del')deleteID_reply;;
 					'/add')addID_reply;;
+                                        '/resell')mensajecre;;
 					*)invalido_fun;;
 				esac
 
