@@ -170,6 +170,17 @@ menu_print () {
 	fi
 }
 
+menu_printSN () {
+[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
+
+	if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
+				ShellBot.sendMessage 	--chat_id $var \
+				--text "<i>$(echo -e $bot_retorno)</i>" \
+				--parse_mode html \
+				--reply_markup "$(ShellBot.InlineKeyboardMarkup -b 'botao_send_id')"
+	fi
+}
+
 download_file () {
 # shellbot.sh editado linea 3986
 user=User-ID
@@ -542,6 +553,11 @@ bot_retorno+="━━━━━━━━━━━━━━━━━━━━\n"
 botao_conf=''
 botao_user=''
 botao_donar=''
+unset botao_send_id
+botao_send_id=''
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "MI ID" --callback_data '/ID'
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "SOLICITAR" --callback_data '/sendid'
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text 'ACCES' --callback_data '/acceso'
 
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text '👤 AGREGAR ID' --callback_data '/add'
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text '🚮 ELIMINAR' --callback_data '/del'
@@ -588,6 +604,7 @@ while true; do
 				/[Aa]cceso|[Aa]cceso)autori &;;
 				 /[Mm]enu|[Mm]enu|/[Ss]tart|[Ss]tart|[Cc]omensar|/[Cc]omensar)menu_src &;;
 				 /[Aa]yuda|[Aa]yuda|[Hh]elp|/[Hh]elp)ayuda_id &;;
+                                 /sendid)send_ID;;
 				 /*|*)invalido_fun &;;
 			 esac
 		 else
