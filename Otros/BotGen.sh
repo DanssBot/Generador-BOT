@@ -443,15 +443,15 @@ msj_fun
 
 ayuda_id(){
 bot_retorno="$LINE\n"
-bot_retorno+="      🔰 Bot generador de key 🔰\n"
-bot_retorno+="       ⚜ by @cisdan ⚜\n"
+bot_retorno+="       Bot generador de key \n"
+bot_retorno+="       by @MorochoY\n"
 bot_retorno+="                 <code>${chatuser}</code>\n"
 			 bot_retorno+="$LINE\n"
 			msj_fun
 			}
 
 menu_src () {
-bot_retorno="┅┅┅⋙💥❯❯ ❯❯❲ 𝗕𝗢𝗧 ❳❮❮ ❮❮💥⋘┅┅┅\n"
+bot_retorno="┅┅┅ BOTGEN MOROCHO ┅┅┅\n"
 	 if [[ $(echo $permited|grep "${chatuser}") = "" ]]; then
 		 if [[ $(cat ${CID}|grep "${chatuser}") = "" ]]; then
 			 bot_retorno+="HORA:$(printf '%(%D⏰%H:%M:%S)T')\n"
@@ -466,7 +466,7 @@ bot_retorno="┅┅┅⋙💥❯❯ ❯❯❲ 𝗕𝗢𝗧 ❳❮❮ ❮❮💥�
 			#bot_retorno+="➜/ayuda (modo de uso)\n"
 			 #bot_retorno+="️┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅\n"
                          menu_printSN
-			 
+			 msj_fun
 		 else
 		#creditos agregados
 		unset creditos
@@ -499,7 +499,7 @@ bot_retorno="┅┅┅⋙💥❯❯ ❯❯❲ 𝗕𝗢𝗧 ❳❮❮ ❮❮💥�
 		 unset usadas
 		 usadas="$(cat /etc/http-instas)"
 		 [[ ! $usadas ]] && k_used="0" || k_used="$usadas"
-		 bot_retorno+="🔰 BIENVENIDO AL BOT MOROCHO🔰\n"
+		 bot_retorno+=" BIENVENIDO AL BOT MOROCHO\n"
 		bot_retorno+="Panel de control | MORCH VPS\n"
 		 bot_retorno+="ESTADO DEL BOT  $PID_GEN \n"
                 bot_retorno+="Keys Usadas [$k_used] \n"
@@ -516,7 +516,7 @@ mensajecre(){
 local bot_retorno="$LINE\n"
 		  bot_retorno+="USAR EL COMANDO DE ESTA MANERA\n"
 		  bot_retorno+="$LINE\n"
-          bot_retorno+="Ejemplo: /resell  @CISDAN\n"
+          bot_retorno+="Ejemplo: /resell  @MorochoY\n"
           bot_retorno+="$LINE\n"
 	      ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
 							--text "<i>$(echo -e "$bot_retorno")</i>" \
@@ -544,8 +544,8 @@ echo "$1" > ${USRdatabase2}/Mensaje_$chatuser.txt
  autori() {
 bot_retorno+="━━━━━━━━━━━━━━━━━━━━\n"
           # 
-          bot_retorno+="       🔰 Bot generador de key 🔰\n"
-          bot_retorno+="          ⚜ by MORHCO ⚜\n"
+          bot_retorno+="        Bot generador de key \n"
+          bot_retorno+="          by MORHCO ⚜\n"
 	  bot_retorno+="                    <code>${chatuser}</code>\n\n"
 	  bot_retorno+="━━━━━━━━━━━━━━━━━━━━\n"
 	  bot_retorno+="          ✅ ID enviado al admin ✅\n"
@@ -558,8 +558,8 @@ bot_retorno+="━━━━━━━━━━━━━━━━━━━━\n"
   bot_retor+="                           ${message_from_first_name[$id]}\n"
   bot_retor+="                          @${message_from_username[$id]} \n"
   bot_retor+="                        <code>${chatuser}</code>\n"
-  bot_retor+="          🔰 Bot generador de key 🔰\n"
-  bot_retor+="           ⚜ by morucha⚜\n"
+  bot_retor+="          Bot generador de key \n"
+  bot_retor+="           by morucha\n"
   bot_retor+="━━━━━━━━━━━━━━━━━━━━\n"
    ShellBot.sendMessage --chat_id ${permited[$id]} \
 							--text "<i>$(echo -e "$bot_retor")</i>" \
@@ -586,14 +586,14 @@ ShellBot.InlineKeyboardButton --button 'botao_conf' --line 2 --text '❌ POWER �
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 2 --text '🛠️ MENU' --callback_data '/menu'
 
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 3 --text '🔑 KEYGEN' --callback_data '/keygen'
-ShellBot.InlineKeyboardButton --button 'botao_conf' --line 3 --text '🔑 KEYGEN' --callback_data '/resell'
+ShellBot.InlineKeyboardButton --button 'botao_conf' --line 3 --text '🔑 RESELLER' --callback_data '/resell'
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text '🔑 KEYGEN' --callback_data '/keygen'
-ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text '🆔' --callback_data '/ID'
-ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text 'WHATS' --callback_data '1' --url 'https://www.paypal.me/Rufu99'
-ShellBot.InlineKeyboardButton --button 'botao_user' --line 2 --text 'CANAL ORG' --callback_data '1' --url 'https://t.me/ChumoGHADM'
-ShellBot.InlineKeyboardButton --button 'botao_user' --line 2 --text 'GRUPO ORG' --callback_data '1' --url 'https://t.me/ChumoGH_ADM'
-ShellBot.InlineKeyboardButton --button 'botao_user' --line 3 --text '👨‍💻ADMIN MOD👨‍💻' --callback_data '1' --url 'https://t.me/ChumoGHADM'
-ShellBot.InlineKeyboardButton --button 'botao_user' --line 4 --text 'PRECIOS 💰' --callback_data '1' --url 'https://t.me/ChumoGH_ADM'
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text ID' --callback_data '/ID'
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text 'BOT 2' --callback_data '1' --url 'https://www.paypal.me/Rufu99'
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 2 --text 'BOT 1' --callback_data '1' --url 'https://t.me/ChumoGHADM'
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 2 --text 'BOT 3' --callback_data '1' --url 'https://t.me/ChumoGH_ADM'
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 3 --text 'MOROCHO' --callback_data '1' --url 'https://t.me/@MorochoY'
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 4 --text 'PRECIOS' --callback_data '1' --url 'https://t.me/ChumoGH_ADM'
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 4 --text 'MENU' --callback_data '1' --url 'https://t.me/ChumoGH_ADM'
 
 
@@ -647,7 +647,7 @@ while true; do
 				case ${message_reply_to_message_text[$id]} in
 					'/del')deleteID_reply;;
 					'/add')addID_reply;;
-                                        '/resell')mensajecre;;
+                                        '/resell')error_fun;;
 					*)invalido_fun;;
 				esac
 
