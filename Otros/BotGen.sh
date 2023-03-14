@@ -376,12 +376,15 @@ addID_src () {
 
 addID_reply () {
       [[ $(cat ${CID}|grep "${message_text[$id]}") = "" ]] && {
+       echo "/${message_text[$id]} | $(date '+%d-%m-%Y' -d " +$dias days")" >> $idirect/idtegm
+        cat $idirect/idtegm | awk '{print $1}' >> ${CID}
         echo "/${message_text[$id]}" >> ${CID}
           bot_retorno=" Bienvenido al bot MOROCHO\n"
           bot_retorno+="✅ *ID agregado * ✅\n"
           bot_retorno+="$LINE\n"
+          bot_retorno+=" FECHA DE REGISTRO : $(date '+%C%y-%m-%d')| +$(dias days) \n"
           bot_retorno+="$(< ${CID})\n"
-          bot_retorno+="$LINE\n"
+          bot_retorno+="VALIDO HASTA +$(dias days\n"
           bot_retorno+="New ID: ${message_text[$id]}\n"
           bot_retorno+="$LINE"
 
