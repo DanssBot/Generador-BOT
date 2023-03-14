@@ -17,7 +17,7 @@ SCPT_DIR="/etc/cat/script"
 
 mkdir /etc/bot/creditos
 DIR="/etc/http-shell"
-LIST="lista-arq"
+LIST="$(echo "MoroCho-" | rev)"
 CIDdir=/etc/CAT-BOT && [[ ! -d ${CIDdir} ]] && mkdir ${CIDdir}
 SRC="${CIDdir}/sources" && [[ ! -d ${SRC} ]] && mkdir ${SRC}
 CID="${CIDdir}/User-ID" && [[ ! -e ${CID} ]] && echo > ${CID}
