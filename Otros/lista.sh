@@ -358,15 +358,28 @@ deleteID_src () {
 }
 
 deleteID_reply () {
+ids=$(echo ${message_text[$id]} | awk '{print $1}' | sed -e 's/[^a-z0-9 -]//ig')
+idc=$(echo ${message_text[$id]} | awk '{print $3}' | sed -e 's/[^a-z0-9 -]//ig')
 sed -i "${message_text[$id]}/d" ${CID}
 bot_retorno="$LINE\n"
           bot_retorno+=" ID ELIMINADO EXITOSAMENTE!\n"
-          bot_retorno+=" ID Borrado: ${message_text[$id]}\n"
+          bot_retorno+=" ID Eliminado: ${ids}\n"
           bot_retorno+="$LINE\n"
+			
+          bot_retor="  HOLA DE NUEVO AL BOTGEN\n"
+          #bot_retor+=" HOLA『 $message_from_first_name $message_from_last_name 』\n"
+          bot_retor+="Desafortunadamente tu Membresia ha Finalizado\n"
+          #bot_retor+=" ⌚⌚ Hora Actual del Bot : ⌚⌚\n"
+          bot_retor+="Fecha de Corte : $(date '+%C%y-%m-%d') - $(date +%R)  \n"
+          bot_retor+="Si tienes Dudas, Contacta con @cisdan\n"
+          bot_retor+="$LINE\n"
+          bot_retor+="Recuerda adquirir creditos, o Realizar una Colaboracion\n $(cat < /etc/mpayu) \n"
+          #bot_retor+="Para mantener tu acceso al BotGen Recuerda Mostrar tu Token de Donacion o Compra\n"
+          bot_retor+="$LINE\n"
+      msj_fun
+      msj_add ${ids}
+      upfile_src
 
-
-msj_fun
-upfile_src
 }
 
 
@@ -376,29 +389,57 @@ addID_src () {
 }
 
 addID_reply () {
-      [[ $(cat ${CID}|grep "${message_text[$id]}") = "" ]] && {
-       valid=$(date '+%C%y-%m-%d' -d " +$idc days")
-        echo "/${message_text[$id]}} | $valid" >> ${CID}
-        echo "/${message_text[$id]}} | $(date '+%C%y-%m-%d') | $(date +%R)" >> ${CID}.reg
-        echo "/${message_text[$id]}" >> ${CID}
-          bot_retorno=" Bienvenido al bot MOROCHO\n"
-          bot_retorno+="✅ *ID agregado * ✅\n"
+     ids=$(echo ${message_text[$id]} | awk '{print $1}' | sed -e 's/[^a-z0-9 -]//ig')
+        idc=$(echo ${message_text[$id]} | awk '{print $3}' | sed -e 's/[^a-z0-9 -]//ig')
+        valid=$(date '+%C%y-%m-%d' -d " +$idc days")
+	  [[ $(cat ${CID}|grep "$ids" ) = "" ]] && {
+		#[[ -e /root/RegBOT/banID ]] && sed -i "/${ids}/d" /root/RegBOT/banID
+        echo "/${ids} | $valid" >> ${CID}
+        echo "/${ids} | $(date '+%C%y-%m-%d') | $(date +%R)" >> ${CID}.reg
+          bot_retorno="  REGISTRO ACEPTADO  \n"
+          bot_retorno+=" 🆔 : ${ids} | ACEPTADO 🧾\n"
           bot_retorno+="$LINE\n"
-          bot_retorno+=" FECHA DE REGISTRO : $(date '+%C%y-%m-%d')| $(date +%R)\n"
-          bot_retorno+="$(< ${CID})\n"
-          bot_retorno+="VALIDO HASTA ${valid}|$(date +%R)\n"
-          bot_retorno+="New ID: ${message_text[$id]}\n"
-          bot_retorno+="$LINE"
-
-          bot_retor="   Bienvenido al bot MOROCHO\n"
-          bot_retor+="El Administrador $(cat < /etc/ADM-db/resell) te autoriso\n"
-          bot_retor+="Para GENERAR Key's usar el comando /keygen\n"
-          bot_retor+="Para MENU Digita el comando /menu\n"
-          bot_retor+="Para actualizar el menu de comandos\n"
-          bot_retor+="Recuerda adquirir creditos\n"
-          bot_retor+="$LINE\n"
+          bot_retorno+=" FECHA DE REGISTRO : $(date '+%C%y-%m-%d')|$(date +%R) \n VALIDO HASTA : ${valid}|$(date +%R)\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+="  ✅ ID REGISTRADO EXITOSAMENTE ✅\n"
+          bot_retorno+="$LINE\n"
+          bot_retorno+="        ⚜ Power ⚜\n"
+unset i
+for i in $(cat /etc/CAT-BOT/User-ID | awk '{print $3}'); do 
+[[ "$(date -d $(date '+%C%y-%m-%d') +%s)" -ge "$(date -d $i +%s)" ]] && {
+for id in $(cat /etc/CAT-BOT/User-ID | grep "$i" | awk '{print $1}' | sed -e 's/[^a-z0-9 -]//ig'); do
+sed -i "/${id}/d" /etc/CAT-BOT/User-ID
+          bot_retor="   HOLA DE NUEVO AL BOT 🤖 \n"
+          bot_retor+=" SU MEMBRESIA HA FINALIZADO \n"
+          bot_retor+=" FIN DEL ACCESO : $(date '+%C%y-%m-%d') - $(date +%R) \n"
+          bot_retor+=" SI DESEAS APELAR TU CONTRADO, CONTACTA CON $(cat < /etc/ADM-db/resell)\n"
+          bot_retor+=" $LINE\n"
+          bot_retor+=" ADQUIERE TU MEMBRESIA DESDE @$(ShellBot.username) , DIGITANDO /prices \n"
+          bot_retor+=" RECUERDA MANTENER TU CAPTURA DE PAGO, PARA ALGUN RECLAMO!\n"
+          bot_retor+=" $LINE\n"
+msj_add ${id}
+done
+}
+done
+[[ -z ${callback_query_from_username} ]] && nUSER=${message_from_username} || nUSER=${callback_query_from_username}
+[[ -z ${callback_query_from_first_name} ]] && firsnme="${message_from_first_name}" || firsnme="${callback_query_from_first_name}"
+[[ -z ${callback_query_from_last_name} ]] && lastnme="${message_from_last_name}" || lastnme="${callback_query_from_last_name}"
+		  bot_retor=" HOLA @${nUSER} SU REGISTRO FUE APROBADO \n"
+		  bot_retor+=" $LINE\n"
+          bot_retor+=" EL ADM $(cat < /etc/ADM-db/resell) APROBO TU SOLICITUD\n"
+          bot_retor+="GRACIAS POR CONFIAR EN NOSOTROS\n"
+          bot_retor+=" FECHA DE REGISTRO : $(date '+%C%y-%m-%d')|$(date +%R) \n VALIDO HASTA : ${valid}|$(date +%R)\n"
+		  bot_retor+=" 🆔 : ${ids} |  ACEPTADO 🧾\n"
+		  bot_retor+="SU RESELLER : ${firsnme} ${lastnm} \n"
+          bot_retor+=" $LINE\n"
+          bot_retor+=" GENERAR Key's usar el comando /keygen\n"
+          bot_retor+=" Para MENU Digita el comando /menu\n"
+          bot_retor+=" $LINE\n"
+          bot_retor+=" ADQUIERE TU MEMBRESIA DESDE @$(ShellBot.username)  \n"
+          #bot_retor+=" DIGITANDO O DANDO CLIK 👉 /prices\n"
+          bot_retor+=" $LINE\n"
       msj_fun
-      msj_add ${message_text[$id]}
+      msj_add ${ids}
       upfile_src
     } || {
           bot_retorno="====ERROR====\n"
@@ -421,7 +462,8 @@ msj_fun
 listID_src () {
 lsid=$(cat -n ${CID})
 local bot_retorno="$LINE\n"
-          bot_retorno+="Lista de id permitidos\n"
+          bot_retorno+="Recuerda para eliminar ejem /id \n"
+          bot_retorno+="Listado de ID ACTIVOS\n"
           bot_retorno+="$LINE\n"
           bot_retorno+="${lsid}\n"
           bot_retorno+="$LINE\n"
@@ -460,14 +502,23 @@ bot_retorno="┅┅┅ BOTGEN MOROCHO ┅┅┅\n"
 		creditos="$(cat /etc/CAT-BOT/Creditos/Mensaje_$chatuser.txt)"
 		  [[ ! $creditos ]] && credi="OFF" || credi="$creditos"
 		#menú
+                 data_user=$(cat ${CID}|grep "${chatuser}" | awk -F "|" '{print $2}')
+			data_sec=$(date +%s)
+			data_user_sec=$(date +%s --date="$data_user")
+			variavel_soma=$(($data_user_sec - $data_sec))
+			dias_use=$(($variavel_soma / 86400))
+			[[ "$dias_use" -le 0 ]] && dias_use=0 || dias_use=$(($dias_use + 1))
+			bot_retorno+="$LINE\n"
+			 bot_retorno+="ACCESO ILIMITADO POR ⏳ $dias_use DIAS \n"
+			 bot_retorno+="ID AUTORIZADO HASTA EL $data_user | $(date +%R) \n"
 		    bot_retorno+="HORA Y FECHA 📆 $(printf '%(%D⏰%H:%M:%S)T')\n"
-		bot_retorno+="┇NOMBRE ${message_from_first_name[$id]}\n"
+		bot_retorno+="NOMBRE TELEGRAM ${message_from_first_name[$id]}\n"
 		bot_retorno+="ID [${chatuser}] \n"
-		bot_retorno+="USER @${message_from_username[$id]} \n"
+		bot_retorno+="USUARIO @${message_from_username[$id]} \n"
 		#bot_retorno+="USER: @${message_from_username[$id]}\n"
 		bot_retorno+="RESELLER: $credi\n"
-		bot_retorno+="KEY USADAS: PRÓX\n"
-		bot_retorno+="DIAS REST PRÓXIMO \n"
+		bot_retorno+="KEY USADAS: [$k_used] \n"
+		#bot_retorno+="DIAS REST PRÓXIMO \n"
 		bot_retorno+="/resell (add nuevo reseller)\n"
 	    bot_retorno+="/instalador (link de instalacion)\n"
 		bot_retorno+="/gerar (Generar una key)\n"
@@ -486,7 +537,7 @@ bot_retorno="┅┅┅ BOTGEN MOROCHO ┅┅┅\n"
 		 unset usadas
 		 usadas="$(cat /etc/http-instas)"
 		 [[ ! $usadas ]] && k_used="0" || k_used="$usadas"
-		 bot_retorno+=" BIENVENIDO AL BOT MOROCHO\n"
+		 bot_retorno+=" BIENVENIDO AL BOTGEN\n"
 		bot_retorno+="Panel de control | MORCH VPS\n"
 		 bot_retorno+="ESTADO DEL BOT  $PID_GEN \n"
                 bot_retorno+="Keys Usadas [$k_used] \n"
@@ -561,8 +612,8 @@ botao_donar=''
 unset botao_send_id
 botao_send_id=''
 ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "MI ID" --callback_data '/ID'
-ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "SOLICITAR" --callback_data '/sendid'
-ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text 'ACCES' --callback_data '/acceso'
+#ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 1 --text "SOLICITAR" --callback_data '/sendid'
+ShellBot.InlineKeyboardButton --button 'botao_send_id' --line 2 --text 'SOLICITAR' --callback_data '/acceso'
 
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text '👤 AGREGAR ID' --callback_data '/add'
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 1 --text '🚮 ELIMINAR' --callback_data '/del'
