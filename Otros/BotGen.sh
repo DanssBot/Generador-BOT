@@ -503,13 +503,22 @@ bot_retorno="┅┅┅ BOTGEN MOROCHO ┅┅┅\n"
 		creditos="$(cat /etc/CAT-BOT/Creditos/Mensaje_$chatuser.txt)"
 		  [[ ! $creditos ]] && credi="OFF" || credi="$creditos"
 		#menú
+                 data_user=$(cat ${CID}|grep "${chatuser}" | awk -F "|" '{print $2}')
+			data_sec=$(date +%s)
+			data_user_sec=$(date +%s --date="$data_user")
+			variavel_soma=$(($data_user_sec - $data_sec))
+			dias_use=$(($variavel_soma / 86400))
+			[[ "$dias_use" -le 0 ]] && dias_use=0 || dias_use=$(($dias_use + 1))
+			bot_retorno+="$LINE\n"
+			 bot_retorno+="  ✅ ACCESO ILIMITADO POR『 $dias_use 』DIAS ✅ \n"
+			 bot_retorno+=" ✩ ID AUTORIZADO HASTA EL $data_user | $(date +%R) \n"
 		    bot_retorno+="HORA Y FECHA 📆 $(printf '%(%D⏰%H:%M:%S)T')\n"
 		bot_retorno+="┇NOMBRE ${message_from_first_name[$id]}\n"
 		bot_retorno+="ID [${chatuser}] \n"
 		bot_retorno+="USER @${message_from_username[$id]} \n"
 		#bot_retorno+="USER: @${message_from_username[$id]}\n"
 		bot_retorno+="RESELLER: $credi\n"
-		bot_retorno+="KEY USADAS: PRÓX\n"
+		bot_retorno+="KEY USADAS: [$k_used] \n"
 		bot_retorno+="DIAS REST PRÓXIMO \n"
 		bot_retorno+="/resell (add nuevo reseller)\n"
 	    bot_retorno+="/instalador (link de instalacion)\n"
