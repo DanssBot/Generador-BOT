@@ -508,6 +508,9 @@ bot_retorno="┅┅┅ BOTGEN MOROCHO ┅┅┅\n"
 			variavel_soma=$(($data_user_sec - $data_sec))
 			dias_use=$(($variavel_soma / 86400))
 			[[ "$dias_use" -le 0 ]] && dias_use=0 || dias_use=$(($dias_use + 1))
+                        unset usadas
+		 usadas="$(cat /etc/http-instas)"
+		 [[ ! $usadas ]] && k_used="0" || k_used="$usadas"
 			bot_retorno+="$LINE\n"
 			 bot_retorno+="ACCESO ILIMITADO POR ⏳ $dias_use DIAS \n"
 			 bot_retorno+="VENCE HASTA EL $data_user | $(date +%R) \n"
@@ -518,7 +521,6 @@ bot_retorno="┅┅┅ BOTGEN MOROCHO ┅┅┅\n"
 		#bot_retorno+="USER: @${message_from_username[$id]}\n"
 		bot_retorno+="RESELLER: $credi\n"
 		bot_retorno+="KEY USADAS: [$k_used] \n"
-		bot_retorno+="BOT  $PID_GEN \n"
 		bot_retorno+="/resell (add nuevo reseller)\n"
 	    bot_retorno+="/instalador (link de instalacion)\n"
 		bot_retorno+="/gerar (Generar una key)\n"
@@ -538,7 +540,7 @@ bot_retorno="┅┅┅ BOTGEN MOROCHO ┅┅┅\n"
 		 usadas="$(cat /etc/http-instas)"
 		 [[ ! $usadas ]] && k_used="0" || k_used="$usadas"
 		 bot_retorno+=" BIENVENIDO AL BOTGEN\n"
-		bot_retorno+="Panel de control | MORCH VPS\n"
+		bot_retorno+="Panel de control | SCRIPT VPS\n"
 		 bot_retorno+="ESTADO DEL BOT  $PID_GEN \n"
                 bot_retorno+="Keys Usadas [$k_used] \n"
 		bot_retorno+="RESELLER: $credi\n"
@@ -624,14 +626,14 @@ ShellBot.InlineKeyboardButton --button 'botao_conf' --line 2 --text '❌ POWER �
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 2 --text '🛠️ MENU' --callback_data '/menu'
 
 ShellBot.InlineKeyboardButton --button 'botao_conf' --line 3 --text '🔑 KEYGEN' --callback_data '/keygen'
-ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text '🔑 ressel' --callback_data '/resell'
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text '🔑 KEYGEN' --callback_data '/keygen'
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text '🆔' --callback_data '/ID'
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 1 --text 'WHATS' --callback_data '1' --url 'https://www.paypal.meRufu99'
-ShellBot.InlineKeyboardButton --button 'botao_user' --line 2 --text 'CANAL ORG' --callback_data '1' --url 'https://t.me/ChumoGHAD'
-ShellBot.InlineKeyboardButton --button 'botao_user' --line 2 --text 'GRUPO ORG' --callback_data '1' --url 'https://t.me/ChumoG_ADM'
-ShellBot.InlineKeyboardButton --button 'botao_user' --line 3 --text '👨‍💻ADMIN MOD👨‍💻' --callback_data '1' --url 'https://t.me/ChumoGHADM'
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 2 --text 'CANAL ORG' --callback_data '1' --url 'https://t.me/ChumoGHA'
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 2 --text 'GRUPO ORG' --callback_data '1' --url 'https://t.me/d_ADM'
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 3 --text '👨‍💻ADMIN MOD👨‍💻' --callback_data '1' --url 'https://t.me/ChumoGHAD'
 ShellBot.InlineKeyboardButton --button 'botao_user' --line 4 --text 'PRECIOS 💰' --callback_data '1' --url 'https://t.me/_ADM'
-ShellBot.InlineKeyboardButton --button 'botao_user' --line 4 --text 'MENU' --callback_data '1' --url 'https://t.me/ChumoG_ADM'
+ShellBot.InlineKeyboardButton --button 'botao_user' --line 4 --text 'MENU' --callback_data '1' --url 'https://t.me/d_ADM'
 
 
 
