@@ -435,7 +435,7 @@ done
           bot_retor+=" GENERAR Key's usar el comando /keygen\n"
           bot_retor+=" Para MENU Digita el comando /menu\n"
           bot_retor+=" $LINE\n"
-          #bot_retor+=" CONTACTA ESCRIBE AL ADM $(cat < /etc/ADM-db/resell)\n SI NO OBTIENES RESPUESTA O SOLUCION CONTACTA A @ChumoGH "
+          #bot_retor+=" CONTACTA ESCRIBE AL ADM $(cat < /etc/CAT-BOT/resell)\n SI NO OBTIENES RESPUESTA O SOLUCION CONTACTA A @ChumoGH "
           bot_retor+=" ADQUIERE TU MEMBRESIA DESDE @$(ShellBot.username)  \n"
           bot_retor+=" DIGITANDO O DANDO CLIK 👉 /prices\n"
           bot_retor+=" $LINE\n"
