@@ -69,12 +69,12 @@ valuekey="$(date | md5sum | head -c10)"
 valuekey+="$(echo $(($RANDOM*10))|head -c 5)"
 fun_list "$valuekey"
 keyfinal=$(ofus "$IP:8888/$valuekey/$LIST")
-local bot_retorno="┅┅┅⋙💥❯❯ ❯❯❲ 𝗟𝗮𝘁𝗶𝗠𝘅 x.9 ❳❮❮ ❮❮💥⋘┅┅┅   \n"
+local bot_retorno="┅┅┅⋙💥❯❯ ❯❯❲ BOT GEN ❳❮❮ ❮❮💥⋘┅┅┅   \n"
 bot_retorno+="\n"
 bot_retorno+="$LINE\n"
-bot_retorno+="👤 |---📟 𝗥𝗲𝘀𝗲𝗹𝗹𝗲𝗿: $credill\n"
+bot_retorno+="👤 |--- RESELLER : $credill\n"
 bot_retorno+="$LINE\n"
-bot_retorno+="💾 |---📱 𝗜𝗻𝘀𝘁𝗮𝗹𝗮𝗱𝗼𝗿 𝗟𝗮𝘁𝗠𝘅 👇:\n"
+bot_retorno+="💾 |-- INSTALADOR 👇:\n"
 bot_retorno+="$LINE\n"
 bot_retorno+="<code>wget https://raw.githubusercontent.com/cisdan/latam/main/latmx.sh; chmod 777 latmx.sh; ./latmx.sh</code>\n"
 bot_retorno+="$LINE\n"
@@ -87,7 +87,7 @@ bot_retorno+=" 👀 𝗞𝗘𝗬 𝗚𝗘𝗡𝗘𝗥𝗔𝗗𝗔𝗦:  [  $(ls 
 bot_retorno+="$LINE\n"
 bot_retorno+="📀 𝙐𝙗𝙪𝙣𝙩𝙪: 𝟭𝟴, 𝟮𝟬.𝟬𝟰 𝙇𝙏𝙎 ¡𝙍𝙚𝙘𝙤𝙢𝙚𝙣𝙙𝙖𝙙𝙤\n"
 bot_retorno+="$LINE\n"
-bot_retorno+="🚦 𝗔𝗱𝗾𝘂𝗶𝗲𝗿𝗲 𝗧𝘂 𝗮𝗰𝗰𝗲𝘀𝗼 𝗘𝗻 @LATMXDANBOT\n"
+#bot_retorno+="🚦 𝗔𝗱𝗾𝘂𝗶𝗲𝗿𝗲 𝗧𝘂 𝗮𝗰𝗰𝗲𝘀𝗼 𝗘𝗻 @LATMXDANBOT\n"
 
 msj_fun
 echo -e $bot_retorno >> ${keytxt}/key_${chatuser}.txt
@@ -216,8 +216,8 @@ upfile_fun () {
 invalido_fun () {
 	[[ ! -z ${callback_query_message_chat_id[$id]} ]] && var=${callback_query_message_chat_id[$id]} || var=${message_chat_id[$id]}
 local bot_retorno="━━━━━━━━━━━━━━━━━━━━\n"
-         bot_retorno+="        🔰 Bot generador de key 🔰 \n"
-         bot_retorno+="         ⚜ by @cisdan⚜\n"
+         bot_retorno+="        LO SIENTO 😞 PUSISTE ALGO INCORRECTO \n"
+         bot_retorno+="         TE AYUDO 👇\n"
          bot_retorno+="       Quizas debes usar este /keygen\n"
          bot_retorno+=" ━━━━━━━━━━━━━━━━━━━━\n"
 	     ShellBot.sendMessage --chat_id $var \
