@@ -463,7 +463,8 @@ msj_fun
 listID_src () {
 lsid=$(cat -n ${CID})
 local bot_retorno="$LINE\n"
-          bot_retorno+="Lista de id permitidos\n"
+          bot_retorno+="Recuerda para eliminar ejem /id \n"
+          bot_retorno+="Listado de ID ACTIVOS\n"
           bot_retorno+="$LINE\n"
           bot_retorno+="${lsid}\n"
           bot_retorno+="$LINE\n"
