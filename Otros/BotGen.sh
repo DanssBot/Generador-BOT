@@ -364,6 +364,14 @@ bot_retorno="$LINE\n"
           bot_retorno+=" ID Borrado: ${message_text[$id]}\n"
           bot_retorno+="$LINE\n"
 
+          bot_retor="  🎊 𝙱𝚒𝚎𝚗𝚟𝚎𝚗𝚒𝚍𝚘  Nuevamente 𝚊𝚕  𝙱𝚘𝚝𝙶𝚎𝚗  𝙲𝚑𝚞𝚖𝚘𝙶𝙷-𝙰𝙳𝙼  🎊\n"
+          bot_retor+="𝙃𝙤𝙡𝙖 『 $message_from_first_name $message_from_last_name 』\n"
+          bot_retor+="Desafortunadamente tu Membresia ha Finalizado\n"
+          #bot_retor+="La hora actual y fecha que te expulsó el bot \n"
+          bot_retor+="Fecha de Corte : $(date '+%C%y-%m-%d') - $(date +%R)  \n"
+          bot_retor+="Si tienes Dudas, Contacta con $(cat < /etc/ADM-db/resell)\n"
+          bot_retor+="$LINE\n"
+
 msj_fun
 upfile_src
 }
