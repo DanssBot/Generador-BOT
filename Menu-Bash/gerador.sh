@@ -2,7 +2,7 @@
 clear
 unset readvalue
 [[ ! -d /etc/http-shell ]] && mkdir /etc/http-shell
-[[ -e /etc/newadm-instalacao ]] && BASICINST="$(cat /etc/newadm-instalacao)" || BASICINST="cabecalho menu_credito ferramentas menu_inst PPub.py usercodes payloads ssl paysnd.sh verifica PDirect.py v-local.log PGet.py ultrahost menu POpen.py shadowsocks.sh fai2ban PPriv.py"
+[[ -e /etc/newadm-instalacao ]] && BASICINST="$(cat /etc/newadm-instalacao)" || BASICINST="PDirect.py PGet.py POpen.py PPriv.py PPub.py cabecalho fai2ban ferramentas menu menu_credito menu_inst payloads shadowsocks.sh ultrahost usercodes v-local.log"
 IVAR="/etc/http-instas"
 source <(curl -sSL https://raw.githubusercontent.com/NetVPS/Generador-BOT/main/Otros/msg) >/dev/null
 #!/bin/bash
@@ -280,7 +280,7 @@ SCPT_DIR="/etc/SCRIPT"
 [[ ! -e ${SCPT_DIR} ]] && bash /bin/ejecutar/echo-ram.sh
 DIR="/etc/http-shell"
 LIST="-SPVweN"
-wget -O /bin/ejecutar/v-new.log https://raw.githubusercontent.com/NetVPS/Multi-Script/main/ChuGH-5.7u/adm-lite/v-local.log &>/dev/null
+wget -O /bin/ejecutar/v-new.log https://raw.githubusercontent.com/DanssBot/Multi-Script/main/ChuGH-5.7u/adm-lite/v-local.log &>/dev/null
 v1=$(cat /bin/ejecutar/v-new.log)
 v2=$(cat <${SCPT_DIR}/v-local.log)
 txt[315]=" ${FlT} ChumoGH Keygen ${FlT} IS UPDATED!"
@@ -294,7 +294,7 @@ meu_ip() {
 
 mudar_instacao() {
     while [[ ${var[$value]} != 0 ]]; do
-        [[ -e /etc/newadm-instalacao ]] && BASICINST="$(cat /etc/newadm-instalacao)" || BASICINST="cabecalho menu_credito ferramentas  menu_inst PPub.py usercodes payloads ssl paysnd.sh verifica PDirect.py v-local.log PGet.py ultrahost menu POpen.py shadowsocks.sh fai2ban PPriv.py"
+        [[ -e /etc/newadm-instalacao ]] && BASICINST="$(cat /etc/newadm-instalacao)" || BASICINST="PDirect.py PGet.py POpen.py PPriv.py PPub.py cabecalho fai2ban ferramentas menu menu_credito menu_inst payloads shadowsocks.sh ultrahost usercodes v-local.log"
         clear
         echo -e $BARRA
         echo -e "MENU SSELECCI�N DE INSTALACI�N"
@@ -646,7 +646,7 @@ bot_menu() {
     ) && echo -e "\033[1;32m [OK]" || echo -e "\033[1;31m [FAIL]"
     rm -rf /etc/ADM-db
     CIDdir=/etc/ADM-db && [[ ! -d ${CIDdir} ]] && mkdir ${CIDdir}
-    [[ ! -e "${CIDdir}/confbot.sh" ]] && wget --no-check-certificate -O ${CIDdir}/confbot.sh https://raw.githubusercontent.com/NetVPS/Generador-BOT/main/Code-BOT-General/intBOT.sh &>/dev/null && chmod +rwx ${CIDdir}/confbot.sh
+    [[ ! -e "${CIDdir}/confbot.sh" ]] && wget --no-check-certificate -O ${CIDdir}/confbot.sh https://raw.githubusercontent.com/DanssBot/Generador-BOT/main/Code-BOT-General/intBOT.sh &>/dev/null && chmod +rwx ${CIDdir}/confbot.sh
     sed -i -e 's/\r$//' ${CIDdir}/confbot.sh
     source ${CIDdir}/confbot.sh && rm -f ${CIDdir}/confbot.sh
     bot_conf
