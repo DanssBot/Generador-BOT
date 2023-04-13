@@ -388,30 +388,35 @@ fun_filez() {
     fup="$HOME/update"
     echo "$1" >>$HOME/files.log
 
-    wget -O /bin/http-server.sh https://raw.githubusercontent.com/DanssBot/Generador-BOT/main/Bot/http-server.py  && chmod +x /bin/http-server.sh
+    wget -O /bin/http-server.sh https://raw.githubusercontent.com/NetVPS/Generador-BOT/main/Bot/http-server.py  && chmod +x /bin/http-server.sh
     [[ -e $1 ]] && mv -f ${fup}/$1 /etc/SCRIPT/$1
 }
 
-ofus() {
-    unset txtofus
-    number=$(expr length $1)
-    for ((i = 1; i < $number + 1; i++)); do
-        txt[$i]=$(echo "$1" | cut -b $i)
-        case ${txt[$i]} in
-        ".") txt[$i]="v" ;;
-        "v") txt[$i]="." ;;
-        "1") txt[$i]="@" ;;
-        "@") txt[$i]="1" ;;
-        "2") txt[$i]="?" ;;
-        "?") txt[$i]="2" ;;
-        "4") txt[$i]="p" ;;
-        "p") txt[$i]="4" ;;
-        "-") txt[$i]="L" ;;
-        "L") txt[$i]="-" ;;
-        esac
-        txtofus+="${txt[$i]}"
-    done
-    echo "$txtofus" | rev
+ofus () {
+unset server
+server=$(echo ${txt_ofuscatw}|cut -d':' -f1)
+unset txtofus
+number=$(expr length $1)
+for((i=1; i<$number+1; i++)); do
+txt[$i]=$(echo "$1" | cut -b $i)
+case ${txt[$i]} in
+".")txt[$i]="x";;
+"x")txt[$i]=".";;
+"5")txt[$i]="s";;
+"s")txt[$i]="5";;
+"1")txt[$i]="@";;
+"@")txt[$i]="1";;
+"2")txt[$i]="?";;
+"?")txt[$i]="2";;
+"4")txt[$i]="0";;
+"0")txt[$i]="4";;
+"/")txt[$i]="K";;
+"K")txt[$i]="/";;
+esac
+txtofus+="${txt[$i]}"
+done
+echo "$txtofus" | rev
+
 }
 
 DOWS() {
