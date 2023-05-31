@@ -688,18 +688,18 @@ AZUL='\e[34m' && MAGENTA='\e[35m' && MAG='\033[1;36m' &&NEGRITO='\e[1m' && SEMCO
  number=$(expr length $1) 
  for((i=1; i<$number+1; i++)); do 
  txt[$i]=$(echo "$1" | cut -b $i) 
- case ${txt[$i]} in 
- ".")txt[$i]="C";; 
- "C")txt[$i]=".";; 
- "3")txt[$i]="@";; 
- "@")txt[$i]="3";; 
- "5")txt[$i]="9";; 
- "9")txt[$i]="5";; 
- "6")txt[$i]="P";; 
- "P")txt[$i]="6";; 
- "L")txt[$i]="O";; 
- "O")txt[$i]="L";; 
- esac 
+  case ${txt[$i]} in
+        ".") txt[$i]="Q" ;;
+        "Q") txt[$i]="." ;;
+        "3") txt[$i]="@" ;;
+        "@") txt[$i]="3" ;;
+        "5") txt[$i]="9" ;;
+        "9") txt[$i]="5" ;;
+        "6") txt[$i]="P" ;;
+        "P") txt[$i]="6" ;;
+        "L") txt[$i]="O" ;;
+        "O") txt[$i]="L" ;;
+        esac
  txtofus+="${txt[$i]}" 
  done 
  echo "$txtofus" | rev 
