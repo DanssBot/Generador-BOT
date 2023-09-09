@@ -1,6 +1,6 @@
-🟢 Probado 
+Perro 
 
-👉 IP USA: `209.151.152.146`
+👉 IP USA: "209.151.152.146"
 
 💥 GROUPCGHMX
 🔑 457865
@@ -17,17 +17,17 @@
 ━━━━━━━━━━━━━━━━━━━━━
 👉 Su NameServer:
 
-`slowdns.ycrnet.tk`                                  
+'slowdns.ycrnet.tk'                                   
 ━━━━━━━━━━━━━━━━━━━━━━
 👉 Su Llave: 
 
-```d19ec9ac49600dc611f63cc6a3d5ba6d2575705a1f49671d95343c06e2f1b52c```
+'d19ec9ac49600dc611f63cc6a3d5ba6d2575705a1f49671d95343c06e2f1b52c'
 ━━━━━━━━━━━━━━━━━━━━━
 👉 Dominios Cloudflare:
 
-vip.ycrnet.tk
+'vip.ycrnet.tk'
 
 Soporte Websocket 
 ━━━━━━━━━━━━━━━━━━━━━
 PASA TU CAPTURA DE QUE ESTAS CONECTADO PARA MANTENER LA VPS ACTIVA O DE LO CONTRARIO SERA ELIMINADA (@ADM_MX)
-
+━━━━━━━━━━━━━━━━━━
