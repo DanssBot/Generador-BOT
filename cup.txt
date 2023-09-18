@@ -1,4 +1,4 @@
-botlat|2023-09-19
-btlxgen|2023-09-17
-genblxg|2023-09-18
-genfree|2023-09-18
+cupogenfre|2023-09-19
+danmsfre|2023-09-19
+genblxg|2023-09-19
+genfree|2023-09-19
