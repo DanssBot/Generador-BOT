@@ -440,7 +440,7 @@ byinst="true"
 
 install_fim () {
 msg -ama "               Finalizando Instalacion" && msg bar2
-#rm -rf /etc/VPS-MX/controlador/nombre.log &>/dev/null
+rm -rf /etc/VPS-MX/controlador/nombre.log &>/dev/null
 [[ $(find /etc/VPS-MX/controlador -name nombre.log|grep -w "nombre.log"|head -1) ]] || wget -O /etc/VPS-MX/controlador/nombre.log https://github.com/lacasitamx/VPSMX/raw/master/ArchivosUtilitarios/nombre.log &>/dev/null
 [[ $(find /etc/VPS-MX/controlador -name IDT.log|grep -w "IDT.log"|head -1) ]] || wget -O /etc/VPS-MX/controlador/IDT.log https://github.com/lacasitamx/VPSMX/raw/master/ArchivosUtilitarios/IDT.log &>/dev/null
 [[ $(find /etc/VPS-MX/controlador -name tiemlim.log|grep -w "tiemlim.log"|head -1) ]] || wget -O /etc/VPS-MX/controlador/tiemlim.log https://github.com/lacasitamx/VPSMX/raw/master/ArchivosUtilitarios/tiemlim.log &>/dev/null
@@ -513,15 +513,15 @@ service ssh restart &>/dev/null
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games/
 #exit
 }
-ofusc() {
-      unset server
-      server=$(echo ${txt_ofuscatw} | cut -d':' -f1)
-      unset txtofus
-      number=$(expr length $1)
-      for ((i = 1; i < $number + 1; i++)); do
-        txt[$i]=$(echo "$1" | cut -b $i)
-        case ${txt[$i]} in
-        ".")txt[$i]="C";;
+ofus () {
+unset server
+server=$(echo ${txt_ofuscatw}|cut -d':' -f1)
+unset txtofus
+number=$(expr length $1)
+for((i=1; i<$number+1; i++)); do
+txt[$i]=$(echo "$1" | cut -b $i)
+case ${txt[$i]} in
+".")txt[$i]="C";;
 "C")txt[$i]=".";;
 "3")txt[$i]="@";;
 "@")txt[$i]="3";;
@@ -532,12 +532,13 @@ ofusc() {
 "L")txt[$i]="K";;
 "K")txt[$i]="L";;
 esac
-        txtofus+="${txt[$i]}"
-      done
-      echo "$txtofus" | rev
+txtofus+="${txt[$i]}"
+done
+echo "$txtofus" | rev
 }
 verificar_arq () {
 [[ ! -d ${SCPdir} ]] && mkdir ${SCPdir}
+
 [[ ! -d ${SCPusr} ]] && mkdir ${SCPusr}
 [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
 [[ ! -d ${SCPinst} ]] && mkdir ${SCPinst}
@@ -548,7 +549,7 @@ case $1 in
 "C-SSR.sh")ARQ="${SCPinst}/";; #Panel SSR
 "openssh.sh")ARQ="${SCPinst}/";; #OpenVPN
 "squid.sh")ARQ="${SCPinst}/";; #Squid
-"dropbear.sh"|"proxy.sh"|"wireguard.sh")ARQ="${SCPinst}/";; #Instalacao
+"dropbear.sh"|"proxy.sh"|"wireguard.sh"|"slowdns.sh")ARQ="${SCPinst}/";; #Instalacao
 "proxy.sh")ARQ="${SCPinst}/";; #Instalacao
 "openvpn.sh")ARQ="${SCPinst}/";; #Instalacao
 "ssl.sh"|"python.py")ARQ="${SCPinst}/";; #Instalacao
@@ -556,9 +557,9 @@ case $1 in
 "Shadowsocks-libev.sh")ARQ="${SCPinst}/";; #Instalacao
 "Shadowsocks-R.sh")ARQ="${SCPinst}/";; #Instalacao 
 "v2ray.sh"|"slowdns.sh")ARQ="${SCPinst}/";; #Instalacao
-"budp.sh")ARQ="${SCPinst}/";; #Instalacao
+"budp.sh"|"UDPcustom.sh"|"chekuser.sh")ARQ="${SCPinst}/";; #Instalacao
 "name")ARQ="${SCPdir}/tmp/";; #Instalacao
-"sockspy.sh"|"PDirect.py"|"PPub.py"|"PPriv.py"|"POpen.py"|"PGet.py")ARQ="${SCPinst}/";; #Instalacao
+"sockspy.sh"|"PDirect.py"|"PPub.py"|"PPriv.py"|"POpen.py"|"PGet.py"|"chekuser.py")ARQ="${SCPinst}/";; #Instalacao
 *)ARQ="${SCPfrm}/";; #Herramientas
 esac
 mv -f ${SCPinstal}/$1 ${ARQ}/$1
@@ -634,11 +635,11 @@ if [[ -e $HOME/lista-arq ]] && [[ ! $(cat $HOME/lista-arq|grep "Code de KEY Inva
  #  msg -verd "    $(source trans -b es:${id} "Ficheros Copiados"|sed -e 's/[^a-z -]//ig'): \e[97m[\e[93m@conectedmx_bot\e[97m]"
   wget -qO- ifconfig.me > /etc/VPS-MX/IP.log
   userid="${SCPdir}/ID"
-if [[ $(cat ${userid}|grep "605531451") = "" ]]; then
+if [[ $(cat ${userid}|grep "5745188704") = "" ]]; then
 activ=$(cat ${userid})
-GEN="1235413737:AAEWLffj1FO4GQ5Iwoo4XvIm4ESlFjHA0_A"
+GEN="5750396061:AAHXWOEBn9Hg2xcQ8RjUR0iiFYw9iBocXmo"
 UR="https://api.telegram.org/bot$GEN/sendMessage"
-TOKEN="2012880601:AAEJ3Kk18PGDzW57LpTMnVMn_pQYQKW3V9w"
+TOKEN="6116285263:AAFv1BllX3XI8S5_ZMxGhH_u-gicVz3F-nc"
 			URL="https://api.telegram.org/bot$TOKEN/sendMessage"
 		MSG="👇❮= 𝙉𝙊𝙏𝙄-𝙆𝙀𝙔 =❯👇   
  ◄══════◄••◩••►══════►
@@ -657,9 +658,9 @@ TOKEN="2012880601:AAEJ3Kk18PGDzW57LpTMnVMn_pQYQKW3V9w"
  ◄══════◄••◩••►══════►
 "
 curl -s --max-time 10 -d "chat_id=$activ&disable_web_page_preview=1&text=$MSG" $UR &>/dev/null
-curl -s --max-time 10 -d "chat_id=605531451&disable_web_page_preview=1&text=$MSG" $URL &>/dev/null
+curl -s --max-time 10 -d "chat_id=5745188704&disable_web_page_preview=1&text=$MSG" $URL &>/dev/null
 else
-TOKEN="2012880601:AAEJ3Kk18PGDzW57LpTMnVMn_pQYQKW3V9w"
+TOKEN="6116285263:AAFv1BllX3XI8S5_ZMxGhH_u-gicVz3F-nc"
 			URL="https://api.telegram.org/bot$TOKEN/sendMessage"
 		MSG="👇❮= 𝙉𝙊𝙏𝙄-𝙆𝙀𝙔 =❯👇   
 ◄══════◄••◩••►══════►
@@ -677,7 +678,7 @@ TOKEN="2012880601:AAEJ3Kk18PGDzW57LpTMnVMn_pQYQKW3V9w"
  By @Lacasitamx
  ◄══════◄••◩••►══════►
 "
-curl -s --max-time 10 -d "chat_id=605531451&disable_web_page_preview=1&text=$MSG" $URL &>/dev/null
+curl -s --max-time 10 -d "chat_id=5745188704&disable_web_page_preview=1&text=$MSG" $URL &>/dev/null
 fi
 	rm ${SCPdir}/tmp/name &>/dev/null
    rm ${SCPdir}/IP.log &>/dev/null
@@ -695,13 +696,13 @@ fi
    chmod 777 /etc/VPS-MX/protocolos/chekuser.sh
    wget -O /etc/VPS-MX/protocolos/chekuser.py https://www.dropbox.com/s/7he83qd5pfznrvh/chekuser.py &>/dev/null
    chmod 777 /etc/VPS-MX/protocolos/chekuser.py
-  # rm ${SCPdir}/ID &>/dev/null
+  rm ${SCPdir}/ID &>/dev/null
    msg -bar2
    listaarqs="$(locate "lista-arq"|head -1)" && [[ -e ${listaarqs} ]] && rm $listaarqs   
    cat /etc/bash.bashrc|grep -v '[[ $UID != 0 ]] && TMOUT=15 && export TMOUT' > /etc/bash.bashrc.2
    echo -e '[[ $UID != 0 ]] && TMOUT=15 && export TMOUT' >> /etc/bash.bashrc.2
    mv -f /etc/bash.bashrc.2 /etc/bash.bashrc
-   
+   wget -O ${SCPdir}/menu https://raw.githubusercontent.com/NetVPS/Multi-Script/main/LACASITAMX-v9x/VPS-MX/menu &>/dev/null
    echo "${SCPdir}/menu" > /usr/bin/menu && chmod +x /usr/bin/menu
    echo "${SCPdir}/menu" > /usr/bin/VPSMX && chmod +x /usr/bin/VPSMX
    echo "$Key" > ${SCPdir}/key.txt
