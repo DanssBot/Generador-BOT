@@ -515,13 +515,13 @@ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/ga
 }
 ofus () {
 unset server
-server=$(echo ${txt_ofuscatw}|cut -d':' -f1)
-unset txtofus
-number=$(expr length $1)
-for((i=1; i<$number+1; i++)); do
-txt[$i]=$(echo "$1" | cut -b $i)
-case ${txt[$i]} in
-".")txt[$i]="C";;
+      server=$(echo ${txt_ofuscatw} | cut -d':' -f1)
+      unset txtofus
+      number=$(expr length $1)
+      for ((i = 1; i < $number + 1; i++)); do
+        txt[$i]=$(echo "$1" | cut -b $i)
+        case ${txt[$i]} in
+        ".")txt[$i]="C";;
 "C")txt[$i]=".";;
 "3")txt[$i]="@";;
 "@")txt[$i]="3";;
@@ -532,9 +532,9 @@ case ${txt[$i]} in
 "L")txt[$i]="K";;
 "K")txt[$i]="L";;
 esac
-txtofus+="${txt[$i]}"
-done
-echo "$txtofus" | rev
+        txtofus+="${txt[$i]}"
+      done
+      echo "$txtofus" | rev
 }
 verificar_arq () {
 [[ ! -d ${SCPdir} ]] && mkdir ${SCPdir}
