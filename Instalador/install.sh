@@ -1,633 +1,471 @@
-#By @drowkid01|Plus
-clear&&clear
+##!/bin/bashlink
+#Instalador del BOT
+coo=1
+IVAR="/etc/http-instas"
+SCPT_DIR="/etc/SCRIPT"
+rm -f gera*
+source <(curl -sSL https://raw.githubusercontent.com/NetVPS/Generador-BOT/main/Otros/msg) >/dev/null
+#!/bin/bash
 
-[[ -e /bin/ejecutar/msg ]] && source /bin/ejecutar/msg > /dev/null || source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/msg-bar/msg) > /dev/null
+# menu maker (opciones 1, 2, 3,.....)
 
+flech='➮' cOlM='⁙' && TOP='‣' && TTini='=====>>►► 🐲' && TTfin='🐲 ◄◄<<=====' && TTcent='💥' && RRini='【  ★' && RRfin='★  】' && CHeko='✅' && ScT='🛡️' && FlT='⚔️' && BoLCC='🪦' && ceLL='🧬' && aLerT='⚠️' && lLaM='🔥' && pPIniT='∘' && bOTg='🤖' && rAy='⚡' && tTfIn='】' && TtfIn='【' tTfLe='►' && rUlq='🔰' && h0nG='🍄' && lLav3='🗝️' && m3ssg='📩' && pUn5A='⚜' && p1t0='•'
+cOpyRig='©' && mbar2=' •••••••••••••••••••••••'
 
-RED="\033[31m"
-GREEN="\033[32m"
-YELLOW="\033[33m"
-PLAIN="\033[0m"
-
-APP_IMPORT_GUIDE="  Open 'HTTP Injector' \n  app -> Tunnel Type set 'Hysteria' -> \n  Settings -> Hysteria -> \n Pegue el URI de configuraci�n de Hysteria2 para importar \n "
-
-ip=$(cat < /bin/ejecutar/IPcgh) || ip=$(curl -s4m8 ip.sb -k)
-
-red(){
-    echo -e "\033[31m\033[01m$1\033[0m"
-}
-
-green(){
-    echo -e "\033[32m\033[01m$1\033[0m"
-}
-
-yellow(){
-    echo -e "\033[33m\033[01m$1\033[0m"
-}
-
-
-starthysteria(){
-    systemctl start hysteria-server &>/dev/null
-    systemctl enable hysteria-server &>/dev/null 2>&1
-}
-
-stophysteria(){
-    systemctl stop hysteria-server &>/dev/null
-    systemctl disable hysteria-server &>/dev/null 2>&1
-}
-
-showConf(){
-    #yellow "Hysteria 2 client YML configuration file hy-client.yaml is as follows and saved to /root/hy/hy-client.yaml"
-    #red "$(cat /root/hy/hy-client.yaml)"
-    #yellow "Hysteria 2 client JSON configuration file hy-client.json is as follows and saved to /root/hy/hy-client.json"
-    #red "$(cat /root/hy/hy-client.json)"
-    green "$APP_IMPORT_GUIDE"
-    yellow "Hysteria 2 config URI (with port hop) is as follows and saved to /root/hy/url.txt"
-    red "$(cat /root/hy/url.txt)"
-    yellow "Hysteria 2 config URI (without port hop) is as follows and saved to /root/hy/url-nohop.txt"
-    red "$(cat /root/hy/url-nohop.txt)"
-}
-
-
-
-inst_port(){
-    iptables -t nat -F PREROUTING &>/dev/null 2>&1
-	msg -bar
-	echo -e "Configure el puerto Hysteria2 entre [1-65535] "
-    read -p " (Enter para puerto aleatorio) : " port
-    [[ -z $port ]] && port=$(shuf -i 2000-65535 -n 1)
-    until [[ -z $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$port") ]]; do
-        if [[ -n $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$port") ]]; then
-            echo -e "${RED} $port ${PLAIN} El puerto ya est� ocupado por otro programa, �cambie el puerto e int�ntelo de nuevo! "
-            echo -e "Configure el puerto Hysteria2 entre [1-65535] "
-			read -p " (Enter para puerto aleatorio) : " port
-            [[ -z $port ]] && port=$(shuf -i 2000-65535 -n 1)
-        fi
+menu_func() {
+    local options=${#@}
+    local array
+    for ((num = 1; num <= $options; num++)); do
+        echo -ne "$(msg -verd " [$num]") $(msg -verm2 ">") "
+        array=(${!num})
+        case ${array[0]} in
+        "-vd") echo -e "\033[1;33m[!]\033[1;32m ${array[@]:1}" ;;
+        "-vm") echo -e "\033[1;33m[!]\033[1;31m ${array[@]:1}" ;;
+        "-fi") echo -e "${array[@]:2} ${array[1]}" ;;
+        -bar | -bar2 | -bar3 | -bar4) echo -e "\033[1;37m${array[@]:1}\n$(msg ${array[0]})" ;;
+        *) echo -e "\033[1;37m${array[@]}" ;;
+        esac
     done
-    inst_jump
 }
 
-inst_jump(){
-    green "El modo de uso del puerto Hysteria 2 es el siguiente:"
-    echo ""
-    echo -e " ${GREEN}1.${PLAIN} Puerto Unico ${YELLOW}410default411${PLAIN}"
-    echo -e " ${GREEN}2.${PLAIN} Puerto RANGOS/RAMDOM (INICIO-FIN )"
-    echo ""
-    read -rp "Escoge [1-2]: " jumpInput
-    if [[ $jumpInput == 2 ]]; then
-        read -p "Configure el puerto de inicio del puerto de rango (recomendado entre 10000-65535):" firstport
-        read -p "Configure el puerto final de un puerto de rango (recomendado entre 10000-65535, debe ser m�s grande que el puerto de inicio anterior):" endport
-        if [[ $firstport -ge $endport ]]; then
-            until [[ $firstport -le $endport ]]; do
-                if [[ $firstport -ge $endport ]]; then
-                    red "El puerto de inicio que configur� es menor que el puerto final; vuelva a ingresar el puerto inicial y final"
-                    read -p "Configure el puerto de inicio del puerto de rango (recomendado entre 10000-65535): " firstport
-                    read -p ":" endport
-                fi
-            done
+selection_fun() {
+    local selection="null"
+    local range
+    for ((i = 0; i <= $1; i++)); do range[$i]="$i "; done
+    while [[ ! $(echo ${range[*]} | grep -w "$selection") ]]; do
+        echo -ne "\033[1;37m ► Opcion : " >&2
+        read selection
+        tput cuu1 >&2 && tput dl1 >&2
+    done
+    echo $selection
+}
+
+tittle() {
+    [[ -z $1 ]] && rt='adm-lite' || rt='ADMcgh'
+    clear && clear
+    msg -bar
+    echo -e "\033[1;44;44m   \033[1;33m=====>>►► 🐲 ChumoGH 💥 Plus 🐲 ◄◄<<=====  \033[0m \033[0;33m[$(less /etc/${rt}/v-local.log)]"
+    msg -bar
+}
+in_opcion() {
+    unset opcion
+    if [[ -z $2 ]]; then
+        msg -nazu " $1: " >&2
+    else
+        msg $1 " $2: " >&2
+    fi
+    read opcion
+    echo "$opcion"
+}
+# centrado de texto
+print_center() {
+    if [[ -z $2 ]]; then
+        text="$1"
+    else
+        col="$1"
+        text="$2"
+    fi
+
+    while read line; do
+        unset space
+        x=$(((54 - ${#line}) / 2))
+        for ((i = 0; i < $x; i++)); do
+            space+=' '
+        done
+        space+="$line"
+        if [[ -z $2 ]]; then
+            msg -azu "$space"
+        else
+            msg "$col" "$space"
         fi
-        iptables -t nat -A PREROUTING -p udp --dport $firstport:$endport  -j DNAT --to-destination :$port
-        ip6tables -t nat -A PREROUTING -p udp --dport $firstport:$endport  -j DNAT --to-destination :$port
-        netfilter-persistent save &>/dev/null 2>&1
+    done <<<$(echo -e "$text")
+}
+# titulos y encabesados
+title() {
+    clear
+    msg -bar
+    if [[ -z $2 ]]; then
+        print_center -azu "$1"
     else
-        red " DEFAULD MODO UNICO PUERTO"
+        print_center "$1" "$2"
     fi
+    msg -bar
 }
 
-
-install_bin(){
-clear&&clear
-msg -bar
-NAME=hysteria
-VERSION=$(curl -fsSL https://api.github.com/repos/apernet/hysteria/releases/latest | grep -w tag_name |sed -e 's/[^v.0-9 -]//ig'| tr -d '[:space:]')
-[[ $(uname -m 2> /dev/null) != x86_64 ]] && TARBALL="$NAME-linux-arm64" || TARBALL="$NAME-linux-amd64"
-msg -nama "     Descargando Modulo ${VERSION}.(Evozi)."
-if wget -O /bin/Hysteria2 https://github.com/apernet/hysteria/releases/download/app/${VERSION}/${TARBALL} &>/dev/null ; then
-		chmod +x /bin/Hysteria2
-		msg -verd ' OK'
-	else
-		msg -verm2 ' FAIL '
-		rm -f /bin/Hysteria2
-fi
-echo "
-[Unit]
-Description=Hysteria2 Server Service DrowKid
-After=network.target
-
-[Service]
-Type=simple
-ExecStart=/bin/Hysteria2 server --config /etc/adm-lite/HYSTERIA/config.yaml
-WorkingDirectory=~
-User=root
-Group=root
-Environment=HYSTERIA_LOG_LEVEL=info
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
-NoNewPrivileges=true
-
-[Install]
-WantedBy=multi-user.target
-" > /hysteria-server.service
-chmod +x /hysteria-server.service
-install -Dm644 /hysteria-server.service /etc/systemd/system
-#systemctl disable hysteria-server.service &>/dev/null
-#systemctl start hysteria-server.service &>/dev/null
-#systemctl enable hysteria-server.service &>/dev/null
-#rm -f /hysteria-server.service 
-}
-
-inst_pwd(){
-    read -p "Establecer contrase�a de Hysteria2 (ingrese para obtener una contrase�a aleatoria): " auth_pwd
-    [[ -z $auth_pwd ]] && auth_pwd=$(date +%s%N | md5sum | cut -c 1-8)
-}
-
-inst_site(){
-msg -bar
-echo -e "INGRESA SU SNI ( HOST FAKE ) "
-msg -bar
-    echo -e "Ingrese su Sitio WEB Falso A Hysteria 2 (elimine https://) "
-	read -rp  " [Default : plus.admcgh.online]: " proxysite
-    [[ -z $proxysite ]] && proxysite='plus.admcgh.online'
-}
-
-inst_cert(){
-msg -bar
-echo -ne " Ingresa Tu Dominio Enlazado a este IP ( Omite con Enter ) :"
-read -p " " domainH2
-[[ -z ${domainH2} ]] && domainH2='Hysteria2'
-        cert_path="/etc/hysteria/cert.crt"
-        key_path="/etc/hysteria/private.key"
-        openssl ecparam -genkey -name prime256v1 -out /etc/hysteria/private.key
-        openssl req -new -x509 -days 36500 -key /etc/hysteria/private.key -out /etc/hysteria/cert.crt -subj "/CN=${domainH2}"
-        chmod 777 /etc/hysteria/cert.crt
-        chmod 777 /etc/hysteria/private.key
-        hy_domain=$domainH2
-        domain=$domainH2
-}
-
-_hysteria2(){
-[[ -d /etc/hysteria ]] || mkdir /etc/hysteria
-[[ -d /etc/adm-lite/HYSTERIA ]] || mkdir /etc/adm-lite/HYSTERIA/
-    install_bin
-	clear&&clear
-    # Ask user for Hysteria configuration
-    inst_cert
-	clear&&clear
-    inst_port
-	clear&&clear
-    inst_pwd
-	clear&&clear
-    inst_site
-	clear&&clear
-    # Set up the Hysteria configuration file
-#cat << EOF > /etc/hysteria/config.yaml
-cat << EOF > /etc/adm-lite/HYSTERIA/config.yaml
-listen: :$port
-
-tls:
-  cert: $cert_path
-  key: $key_path
-
-obfs:
-  type: salamander
-  salamander:
-    password: $auth_pwd
-
-quic:
-  initStreamReceiveWindow: 16777216
-  maxStreamReceiveWindow: 16777216
-  initConnReceiveWindow: 33554432
-  maxConnReceiveWindow: 33554432
-
-auth:
-  type: password
-  password: $auth_pwd
-
-masquerade:
-  type: proxy
-  proxy:
-    url: https://$proxysite
-    rewriteHost: true
-EOF
-
-    # Determine the final inbound port range
-    if [[ -n $firstport ]]; then
-        last_port="$port,$firstport-$endport"
+# finalizacion de tareas
+enter() {
+    msg -bar
+    text="►► Presione enter para continuar ◄◄"
+    if [[ -z $1 ]]; then
+        print_center -ama "$text"
     else
-        last_port=$port
+        print_center "$1" "$text"
     fi
+    read
+}
 
-    # Add brackets to the IPv6 address
-    if [[ -n $(echo $ip | grep ":") ]]; then
-        last_ip="[$ip]"
+# opcion, regresar volver/atras
+back() {
+    msg -bar
+    echo -ne "$(msg -verd " [0]") $(msg -verm2 ">") " && msg -bra "\033[1;41mVOLVER"
+    msg -bar
+}
+
+msg() {
+    local colors="/etc/new-adm-color"
+    if [[ ! -e $colors ]]; then
+        COLOR[0]='\033[1;37m' #BRAN='\033[1;37m'
+        COLOR[1]='\e[31m'     #VERMELHO='\e[31m'
+        COLOR[2]='\e[32m'     #VERDE='\e[32m'
+        COLOR[3]='\e[33m'     #AMARELO='\e[33m'
+        COLOR[4]='\e[34m'     #AZUL='\e[34m'
+        COLOR[5]='\e[35m'     #MAGENTA='\e[35m'
+        COLOR[6]='\033[1;97m' #MAG='\033[1;36m'
+        COLOR[7]='\033[1;49;95m'
+        COLOR[8]='\033[1;49;96m'
     else
-        last_ip=$ip
+        local COL=0
+        for number in $(cat $colors); do
+            case $number in
+            1) COLOR[$COL]='\033[1;37m' ;;
+            2) COLOR[$COL]='\e[31m' ;;
+            3) COLOR[$COL]='\e[32m' ;;
+            4) COLOR[$COL]='\e[33m' ;;
+            5) COLOR[$COL]='\e[34m' ;;
+            6) COLOR[$COL]='\e[35m' ;;
+            7) COLOR[$COL]='\033[1;36m' ;;
+            8) COLOR[$COL]='\033[1;49;95m' ;;
+            9) COLOR[$COL]='\033[1;49;96m' ;;
+            esac
+            let COL++
+        done
     fi
+    NEGRITO='\e[1m'
+    SEMCOR='\e[0m'
+    case $1 in
+    -ne) cor="${COLOR[1]}${NEGRITO}" && echo -ne "${cor}${2}${SEMCOR}" ;;
+    -ama) cor="${COLOR[3]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}" ;;
+    -verm) cor="${COLOR[3]}${NEGRITO}[!] ${COLOR[1]}" && echo -e "${cor}${2}${SEMCOR}" ;;
+    -verm2) cor="${COLOR[1]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}" ;;
+    -aqua) cor="${COLOR[8]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}" ;;
+    -azu) cor="${COLOR[6]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}" ;;
+    -verd) cor="${COLOR[2]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}" ;;
+    -bra) cor="${COLOR[0]}${SEMCOR}" && echo -e "${cor}${2}${SEMCOR}" ;;
+    -nazu) cor="${COLOR[6]}${NEGRITO}" && echo -ne "${cor}${2}${SEMCOR}" ;;
+    -nverd) cor="${COLOR[2]}${NEGRITO}" && echo -ne "${cor}${2}${SEMCOR}" ;;
+    -nama) cor="${COLOR[3]}${NEGRITO}" && echo -ne "${cor}${2}${SEMCOR}" ;;
+    -verm3) cor="${COLOR[1]}" && echo -e "${cor}${2}${SEMCOR}" ;;
+    -teal) cor="${COLOR[7]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}" ;;
+    -teal2) cor="${COLOR[7]}" && echo -e "${cor}${2}${SEMCOR}" ;;
+    -blak) cor="${COLOR[8]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}" ;;
+    -blak2) cor="${COLOR[8]}" && echo -e "${cor}${2}${SEMCOR}" ;;
+    -blu) cor="${COLOR[9]}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}" ;;
+    -blu1) cor="${COLOR[9]}" && echo -e "${cor}${2}${SEMCOR}" ;;
+    #-bar)ccor="${COLOR[1]}•••••••••••••••••••••••••••••••••••••••••••••••••" && echo -e "${SEMCOR}${ccor}${SEMCOR}";;
+    -bar) ccor="${COLOR[1]}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && echo -e "${SEMCOR}${ccor}${SEMCOR}" ;;
+    -bar1) ccor="${COLOR[1]}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && echo -e "${SEMCOR}${ccor}${SEMCOR}" ;;
+    -bar2) ccor="${COLOR[1]}=====================================================" && echo -e "${SEMCOR}${ccor}${SEMCOR}" ;;
+    -bar3) ccor="${COLOR[3]}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && echo -e "${SEMCOR}${ccor}${SEMCOR}" ;;
+    -bar4) ccor="${COLOR[5]}•••••••••••••••••••••••••••••••••••••••••••••••••" && echo -e "${SEMCOR}${ccor}${SEMCOR}" ;;
+    esac
+}
 
-    mkdir /root/hy
-    cat << EOF > /root/hy/hy-client.yaml
-server: $ip:$last_port
+fun_bar() {
+    comando[0]="$1"
+    comando[1]="$2"
+    (
+        [[ -e $HOME/fim ]] && rm $HOME/fim
+        ${comando[0]} -y >/dev/null 2>&1
+        ${comando[1]} -y >/dev/null 2>&1
+        touch $HOME/fim
+    ) >/dev/null 2>&1 &
+    echo -ne "\033[1;33m ["
+    while true; do
+        for ((i = 0; i < 18; i++)); do
+            echo -ne "\033[1;31m##"
+            sleep 0.1s
+        done
+        [[ -e $HOME/fim ]] && rm $HOME/fim && break
+        echo -e "\033[1;33m]"
+        sleep 1s
+        tput cuu1
+        tput dl1
+        echo -ne "\033[1;33m ["
+    done
+    echo -e "\033[1;33m]\033[1;31m -\033[1;32m 100%\033[1;37m"
+}
 
-auth: $auth_pwd
+del() {
+    for ((i = 0; i < $1; i++)); do
+        tput cuu1 && tput dl1
+    done
+}
 
-tls:
-  sni: $hy_domain
-  insecure: true
+[[ -d /bin/ejecutar ]] && {
+    [[ -e /bin/ejecutar/msg ]] || wget -q -O /bin/ejecutar/msg https://raw.githubusercontent.com/NetVPS/Generador-BOT/main/Otros/msg
+} || mkdir /bin/ejecutar
+cor[0]="\033[0m"
+cor[1]="\033[1;34m"
+cor[2]="\033[1;32m"
+cor[3]="\033[1;37m"
+cor[4]="\033[1;36m"
+cor[5]="\033[1;33m"
+cor[6]="\033[1;35m"
+export -f msg
+export -f fun_bar
+export -f tittle
+export -f enter
+export -f back
+export -f print_center
+export -f in_opcion
+export -f del
 
-obfs: $auth_pwd
+add-apt-repository universe
+apt update -y
+apt upgrade -y
 
-quic:
-  initStreamReceiveWindow: 16777216
-  maxStreamReceiveWindow: 16777216
-  initConnReceiveWindow: 33554432
-  maxConnReceiveWindow: 33554432
-
-fastOpen: true
-
-socks5:
-  listen: 127.0.0.1:5080
-
-transport:
-  udp:
-    hopInterval: 30s 
-EOF
-    cat << EOF > /root/hy/hy-client.json
-{
-  "server": "$ip:$last_port",
-  "auth": "$auth_pwd",
-  "tls": {
-    "sni": "$hy_domain",
-    "insecure": true
-  },
-  "obfs": "$auth_pwd",
-  "quic": {
-    "initStreamReceiveWindow": 16777216,
-    "maxStreamReceiveWindow": 16777216,
-    "initConnReceiveWindow": 33554432,
-    "maxConnReceiveWindow": 33554432
-  },
-  "fastOpen": true,
-  "socks5": {
-    "listen": "127.0.0.1:5080"
-  },
-  "transport": {
-    "udp": {
-      "hopInterval": "30s"
+install_ini() {
+    clear
+    msg -bar
+    echo -e "\033[92m        -- INSTALANDO PAQUETES NECESARIOS -- "
+    msg -bar
+    ESTATUS=$(echo -e "\033[92mINSTALADO") &>/dev/null
+    locale-gen en_US.UTF-8 >/dev/null 2>&1
+    update-locale LANG=en_US.UTF-8 >/dev/null 2>&1
+    echo -e "\033[97m  # Instalando  UTF...................... $ESTATUS "
+    apt-get install gawk -y >/dev/null 2>&1
+    #bc
+    [[ $(dpkg --get-selections | grep -w "jq" | head -1) ]] || apt-get install jq -y &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "jq" | head -1) ]] || ESTATUS=$(echo -e "\033[91mFALLO DE INSTALACION") &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "jq" | head -1) ]] && ESTATUS=$(echo -e "\033[92mINSTALADO") &>/dev/null
+    echo -e "\033[97m  # apt-get install jq................... $ESTATUS "
+    #SCREEN
+    [[ $(dpkg --get-selections | grep -w "screen" | head -1) ]] || apt-get install screen -y &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "screen" | head -1) ]] || ESTATUS=$(echo -e "\033[91mFALLO DE INSTALACION") &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "screen" | head -1) ]] && ESTATUS=$(echo -e "\033[92mINSTALADO") &>/dev/null
+    echo -e "\033[97m  # apt-get install screen............... $ESTATUS "
+    #apache2
+    [[ $(dpkg --get-selections | grep -w "apache2" | head -1) ]] || {
+        apt-get install apache2 -y &>/dev/null
+        sed -i "s;Listen 80;Listen 81;g" /etc/apache2/ports.conf
+        service apache2 restart >/dev/null 2>&1 &
     }
-  }
-}
-EOF
-echo " IP : $(cat < /bin/ejecutar/IPcgh)" > /etc/adm-lite/HYSTERIA/data.yaml
-echo " DOMINIO : ${domainH2}" >> /etc/adm-lite/HYSTERIA/data.yaml
-echo " Authentication : ${auth_pwd}" >> /etc/adm-lite/HYSTERIA/data.yaml
-echo " PUERTO : ${port}" >> /etc/adm-lite/HYSTERIA/data.yaml
-echo " SNI : ${proxysite}" >> /etc/adm-lite/HYSTERIA/data.yaml
-echo " RANGO DE PUERTOS : 10000:65000" >> /etc/adm-lite/HYSTERIA/data.yaml
-echo -e " \n 	Power By @drowkid01" >> /etc/adm-lite/HYSTERIA/data.yaml
-    url="hy2://$auth_pwd@$ip:$last_port/?insecure=1&sni=$hy_domain&obfs=salamander&obfs-password=$auth_pwd#HttpInjector-hysteria2"
-    echo $url > /root/hy/url.txt
-    nohopurl="hy2://$auth_pwd@$ip:$port/?insecure=1&sni=$hy_domain&obfs=salamander&obfs-password=$auth_pwd#HttpInjector-hysteria2"
-    echo $nohopurl > /root/hy/url-nohop.txt
-    systemctl daemon-reload &>/dev/null
-    systemctl enable hysteria-server &>/dev/null
-    systemctl start hysteria-server &>/dev/null
-    if [[ -n $(systemctl status hysteria-server 2>/dev/null | grep -w active) && -f '/etc/adm-lite/HYSTERIA/config.yaml' ]]; then
-        green " Servicio Hysteria2 Iniciado Exitosamente"
-    else
-        red "ERROR, NO SE PUDO EJECUTAR EL SERVICIO DE HYSTERIA2 , \n\nEjecute systemctl status hysteria-server para ver el estado del servicio"
-    fi
-    #yellow "Hysteria 2 client YML configuration file hy-client.yaml is as follows and saved to /root/hy/hy-client.yaml"
-    #red "$(cat /root/hy/hy-client.yaml)"
-    #yellow "Hysteria 2 client JSON configuration file hy-client.json is as follows and saved to /root/hy/hy-client.json"
-    #red "$(cat /root/hy/hy-client.json)"
-msg -bar
-cat /etc/adm-lite/HYSTERIA/data.yaml
-msg -bar
-    green "$APP_IMPORT_GUIDE"
-    yellow "El URI de configuraci�n de Hysteria 2 (con salto de puerto) "
-    red "$(cat /root/hy/url.txt)"
-    yellow "El URI de configuraci�n de Hysteria 2 (sin salto de puerto) "
-    red "$(cat /root/hy/url-nohop.txt)"
-read -p "$(green "Hysteria 2 Modulos UDP By @drowkid01 Finalizado ") "
-}
-
-_hysteria(){
-clear&&clear
-[[ ! -d /etc/adm-lite/HYSTERIA ]] && mkdir /etc/adm-lite/HYSTERIA
-NAME=hysteria
-#VERSION=$(curl -fsSL https://api.github.com/repos/HyNetwork/hysteria/releases/latest | grep tag_name | sed -E 's/.*"v(.*)".*/\1/')
-VERSION=$(curl -fsSL https://api.github.com/repos/HyNetwork/hysteria/releases/latest | grep -w tag_name |sed -e 's/[^v.0-9 -]//ig'| tr -d '[:space:]')
-[[ $(uname -m 2> /dev/null) != x86_64 ]] && TARBALL="$NAME-linux-arm64" || TARBALL="$NAME-linux-amd64"
-interfas="$(ip -4 route ls|grep default|grep -Po '(?<=dev )(\S+)'|head -1)"
-#https://github.com/apernet/hysteria/releases/download/app%2Fv2.0.2/hysteria-linux-amd64
-
-sys="$(which sysctl)"
-
-ip4t=$(which iptables)
-ip6t=$(which ip6tables)
-
-#OBFS=$(head /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 10)
-OBFS='ADMcghPLUS'
-
-msg -nama '   INGRESA TU SUBDOMINIO/DOMINIO  \n'
-#msg -nama '              Prederteminado ( ENTER )\n'
-read -p "               DOMAIN : " domain
-sleep 4s
-del 1
-msg -nama "     COMPIANDO CERTIFICADO SSL (UDP). . . . "
-[[ -e /etc/adm-lite/HYSTERIA/udpmod.ca.key && -e /etc/adm-lite/HYSTERIA/udpmod.server.crt ]] && {
-msg -verd ' OK'
-} || {
-#(
-#openssl genrsa -out /etc/adm-lite/HYSTERIA/udpmod.ca.key 2048  2048
-#openssl req -new -x509 -days 3650 -key /etc/adm-lite/HYSTERIA/udpmod.ca.key -subj "/C=CN/ST=GD/L=SZ/O=DrowKid, Inc./CN=DrowKid Root CA" -out /etc/adm-lite/HYSTERIA/udpmod.ca.crt
-#openssl req -newkey rsa:2048 -nodes -keyout /etc/adm-lite/HYSTERIA/udp.server.key -subj "/C=CN/ST=GD/L=SZ/O=DrowKid, Inc./CN=${domain}" -out /etc/adm-lite/HYSTERIA/udpmod.server.csr
-#openssl x509 -req -extfile <(printf "subjectAltName=DNS:${domain},DNS:${domain}") -days 3650 -in /etc/adm-lite/HYSTERIA/udpmod.server.csr -CA /etc/adm-lite/HYSTERIA/udpmod.ca.crt -CAkey /etc/adm-lite/HYSTERIA/udpmod.ca.key -CAcreateserial -out /etc/adm-lite/HYSTERIA/udp.server.crt
-#
-(openssl genpkey -algorithm RSA -out /etc/adm-lite/HYSTERIA/udpmod.ca.key
-openssl req -x509 -new -nodes -key /etc/adm-lite/HYSTERIA/udpmod.ca.key -days 3650 -out /etc/adm-lite/HYSTERIA/udpmod.ca.crt -subj "/C=CN/ST=GD/L=SZ/O=DrowKid, Inc./CN=DrowKid Root CA"
-openssl req -newkey rsa:2048 -nodes -keyout /etc/adm-lite/HYSTERIA/udp.server.key -subj "/C=CN/ST=GD/L=SZ/O=DrowKid, Inc./CN=${domain}" -out /etc/adm-lite/HYSTERIA/udpmod.server.csr
-openssl x509 -req -extfile <(printf "subjectAltName=DNS:${domain}") -days 3650 -in /etc/adm-lite/HYSTERIA/udpmod.server.csr -CA /etc/adm-lite/HYSTERIA/udpmod.ca.crt -CAkey /etc/adm-lite/HYSTERIA/udpmod.ca.key -CAcreateserial -out /etc/adm-lite/HYSTERIA/udp.server.crt
-) &>/dev/null && msg -verd ' OK'
-
-}
-del 1
-[[ -e /etc/adm-lite/HYSTERIA/udp.server.crt ]] && chmod +x /etc/adm-lite/HYSTERIA/udp.server.crt
-[[ -e /etc/adm-lite/HYSTERIA/udp.server.key ]] && chmod +x /etc/adm-lite/HYSTERIA/udp.server.key
-msg -nama "     Descargando BINARIO  v${VERSION}.(FAKE). "
-#if wget -O /bin/hysteria https://github.com/apernet/hysteria/releases/download/app%2F${VERSION}/${TARBALL} &>/dev/null ; then
-if wget -O /bin/hysteria https://github.com/apernet/hysteria/releases/download/v1.3.5/${TARBALL} &>/dev/null ; then
-		chmod +x /bin/hysteria
-		msg -verd ' OK'
-	else
-		msg -verm2 ' FAIL '
-		rm -f /bin/hysteria
-fi
-sleep 4s && del 1
-msg -nama '     Descargando Motor JSON . . . . '
-if wget -O /etc/adm-lite/HYSTERIA/config.json https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu_inst/UDPserver-sh/config.json &>/dev/null ; then
-		chmod +x /etc/adm-lite/HYSTERIA/config.json
-		sed -i "s/setobfs/${OBFS}/" /etc/adm-lite/HYSTERIA/config.json
-		msg -verd ' OK'
-	else
-		msg -verm2 ' FAIL '
-		rm -rf /etc/adm-lite/HYSTERIA/config.json
-fi
-sleep 4s && del 1
-msg -nama '     COMPILANDO GoLang AUTHSSH '
-#if wget -O /bin/authSSH https://raw.githubusercontent.com/DrowKid/ADMcgh/main/Plugins/authSSH &>/dev/null ; then
-if wget -O /bin/authSSH https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu_inst/UDPserver-sh/authSSH &>/dev/null ; then
-		chmod +x /bin/authSSH
-		msg -verd ' OK'
-	else
-		msg -verm2 ' FAIL '
-		rm -rf /bin/authSSH
-fi
-sleep 4s && del 1
-msg -nama '     COMPILANDO BINARIO DE SYSTEMA . . . . '
-if wget -O /etc/adm-lite/HYSTERIA/hysteria.service https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu_inst/UDPserver-sh/hysteria.service &>/dev/null ; then
-		chmod +x /etc/adm-lite/HYSTERIA/hysteria.service
-		systemctl disable hysteria.service &>/dev/null
-		#rm -f /etc/systemd/system/hysteria.service
-		
-		msg -verd ' OK'
-	else
-		msg -verm2 ' FAIL '
-		rm -f /etc/adm-lite/HYSTERIA/hysteria.service
-fi
-sleep 4s && del 1
-		sed -i "s%sysb%${sys}%g" /etc/adm-lite/HYSTERIA/hysteria.service
-		sed -i "s%ip4tbin%${ip4t}%g" /etc/adm-lite/HYSTERIA/hysteria.service
-		sed -i "s%ip6tbin%${ip6t}%g" /etc/adm-lite/HYSTERIA/hysteria.service
-		sed -i "s%iptb%${interfas}%g" /etc/adm-lite/HYSTERIA/hysteria.service
-		
-install -Dm644 /etc/adm-lite/HYSTERIA/hysteria.service /etc/systemd/system
-
-systemctl start hysteria &>/dev/null
-systemctl enable hysteria &>/dev/null
-rm -f /etc/adm-lite/HYSTERIA/hysteria.service /etc/adm-lite/HYSTERIA/udpmod*
-echo " IP : $(cat < /bin/ejecutar/IPcgh)" > /etc/adm-lite/HYSTERIA/data
-echo " DOMINIO : ${domain}" >> /etc/adm-lite/HYSTERIA/data
-echo " OBFS : ${OBFS}" >> /etc/adm-lite/HYSTERIA/data
-echo " PUERTO : 36712" >> /etc/adm-lite/HYSTERIA/data
-echo " ALPN : h3" >> /etc/adm-lite/HYSTERIA/data
-echo " RANGO DE PUERTOS : 10000:65000" >> /etc/adm-lite/HYSTERIA/data
-echo -e " \n 	Power By @drowkid01" >> /etc/adm-lite/HYSTERIA/data
-msg -bar
-echo ""
-echo " --- TUS DATOS DE SERVICIO SON ---"
-msg -bar
-figlet -p -f smslant Hysteria | lolcat
-msg -bar
-cat /etc/adm-lite/HYSTERIA/data
-msg -bar
-enter
-[[ $(ps x | grep hysteria| grep -v grep) ]] && echo -e "$(msg -verd 'SERVICIO HYSTERIA INICIADO EXITOSAMENTE')" || echo -e "$(msg -verm2 'SERVICIO HYSTERIA NO INICIADO')"
-_menuH
+    [[ $(dpkg --get-selections | grep -w "apache2" | head -1) ]] || ESTATUS=$(echo -e "\033[91mFALLO DE INSTALACION") &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "apache2" | head -1) ]] && ESTATUS=$(echo -e "\033[92mINSTALADO") &>/dev/null
+    echo -e "\033[97m  # apt-get install apache2.............. $ESTATUS "
+    #curl
+    [[ $(dpkg --get-selections | grep -w "curl" | head -1) ]] || apt-get install curl -y &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "curl" | head -1) ]] || ESTATUS=$(echo -e "\033[91mFALLO DE INSTALACION") &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "curl" | head -1) ]] && ESTATUS=$(echo -e "\033[92mINSTALADO") &>/dev/null
+    echo -e "\033[97m  # apt-get install curl................. $ESTATUS "
+    #socat
+    [[ $(dpkg --get-selections | grep -w "socat" | head -1) ]] || apt-get install socat -y &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "socat" | head -1) ]] || ESTATUS=$(echo -e "\033[91mFALLO DE INSTALACION") &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "socat" | head -1) ]] && ESTATUS=$(echo -e "\033[92mINSTALADO") &>/dev/null
+    echo -e "\033[97m  # apt-get install socat................ $ESTATUS "
+    #netcat
+    [[ $(dpkg --get-selections | grep -w "netcat" | head -1) ]] || apt-get install netcat -y &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "netcat" | head -1) ]] || ESTATUS=$(echo -e "\033[91mFALLO DE INSTALACION") &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "netcat" | head -1) ]] && ESTATUS=$(echo -e "\033[92mINSTALADO") &>/dev/null
+    echo -e "\033[97m  # apt-get install netcat............... $ESTATUS "
+    #netcat-traditional
+    [[ $(dpkg --get-selections | grep -w "netcat-traditional" | head -1) ]] || apt-get install netcat-traditional -y &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "netcat-traditional" | head -1) ]] || ESTATUS=$(echo -e "\033[91mFALLO DE INSTALACION") &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "netcat-traditional" | head -1) ]] && ESTATUS=$(echo -e "\033[92mINSTALADO") &>/dev/null
+    echo -e "\033[97m  # apt-get install netcat-traditional... $ESTATUS "
+    #net-tools
+    [[ $(dpkg --get-selections | grep -w "net-tools" | head -1) ]] || apt-get install net-tools -y &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "net-tools" | head -1) ]] || ESTATUS=$(echo -e "\033[91mFALLO DE INSTALACION") &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "net-tools" | head -1) ]] && ESTATUS=$(echo -e "\033[92mINSTALADO") &>/dev/null
+    echo -e "\033[97m  # apt-get install net-tools............ $ESTATUS "
+    #cowsay
+    [[ $(dpkg --get-selections | grep -w "cowsay" | head -1) ]] || apt-get install cowsay -y &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "cowsay" | head -1) ]] || ESTATUS=$(echo -e "\033[91mFALLO DE INSTALACION") &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "cowsay" | head -1) ]] && ESTATUS=$(echo -e "\033[92mINSTALADO") &>/dev/null
+    echo -e "\033[97m  # apt-get install cowsay............... $ESTATUS "
+    #figlet
+    [[ $(dpkg --get-selections | grep -w "figlet" | head -1) ]] || apt-get install figlet -y &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "figlet" | head -1) ]] || ESTATUS=$(echo -e "\033[91mFALLO DE INSTALACION") &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "figlet" | head -1) ]] && ESTATUS=$(echo -e "\033[92mINSTALADO") &>/dev/null
+    echo -e "\033[97m  # apt-get install figlet............... $ESTATUS "
+    #lolcat
+    apt-get install lolcat -y &>/dev/null
+    sudo gem install lolcat &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "lolcat" | head -1) ]] || ESTATUS=$(echo -e "\033[91mFALLO DE INSTALACION") &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "lolcat" | head -1) ]] && ESTATUS=$(echo -e "\033[92mINSTALADO") &>/dev/null
+    echo -e "\033[97m  # apt-get install lolcat............... $ESTATUS "
+    #PV
+    [[ $(dpkg --get-selections | grep -w "pv" | head -1) ]] || apt-get install pv -y &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "pv" | head -1) ]] || ESTATUS=$(echo -e "\033[91mFALLO DE INSTALACION") &>/dev/null
+    [[ $(dpkg --get-selections | grep -w "pv" | head -1) ]] && ESTATUS=$(echo -e "\033[92mINSTALADO") &>/dev/null
+    echo -e "\033[97m  # apt-get install PV   ................ $ESTATUS "
+    msg -bar
+    echo -e "\033[92m La instalacion de paquetes necesarios a finalizado"
+    msg -bar
+    echo -e "\033[97m Si la instalacion de paquetes tiene fallas"
+    echo -ne "\033[97m     Reintentar Install Paquetes [ s/n ]: "
+    read inst
+    [[ $inst = @(s|S|y|Y) ]] && install_ini
 }
 
-_menuH(){
-clear&&clear
-msg -bar
-cat /etc/adm-lite/HYSTERIA/data
-msg -bar
-unset op
-[[ $(cat /etc/adm-lite/HYSTERIA/config.json | grep -w '//"alpn"') ]] && _ap='\033[0;31mOFF' || _ap='\033[0;32mON'
-menu_func "CAMBIAR PUERTO" "CAMBIAR OBFS" "ALPN (http injector)  \033[0;32m[ ${_ap}\033[0;32m ]" "REINICIAR SERVICIO" "\033[0;31mREMOVER SERVICIO"
-msg -bar
-  selecy=$(selection_fun 5)  
-case $selecy in
-1)
-clear&&clear
-unset _col
-msg -bar
-echo  -e "INGRESE EL NUEVO PUERTO DE SERVICIO "
-read -p " PUERTO : " _col
-#_PA=$(cat /etc/adm-lite/HYSTERIA/config.json | grep -i listen |cut -d '"' -f4 |sed -e 's/[^0-9]//ig')
-_PA=$(cat /etc/adm-lite/HYSTERIA/config.json |jq -r .listen |sed -e 's/[^0-9]//ig')
-  #sed -i "s%/bin/false%filemancgh%g" /etc/adm-lite/HYSTERIA/config.json
-[[ ${_col} ]] && { 
-sed -i "s/${_PA}/${_col}/" /etc/adm-lite/HYSTERIA/config.json 
-sed -i "s/${_PA}/${_col}/" /etc/adm-lite/HYSTERIA/data
-systemctl restart hysteria &>/dev/null
+check_ip() {
+    MIP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
+    MIP2=$(wget -qO- ipv4.icanhazip.com)
+    [[ "$MIP" != "$MIP2" ]] && IP="$MIP2" || IP="$MIP"
+    echo "$IP" >/usr/bin/vendor_code
 }
-  ;;
-  2)
-clear&&clear
-unset _col
-msg -bar
-echo  -e "INGRESE SU NUEVO OBFS "
-read -p " OBFS : " _col
-_obfs=$(cat /etc/adm-lite/HYSTERIA/config.json |jq -r .obfs)
-  #sed -i "s%/bin/false%filemancgh%g" /etc/adm-lite/HYSTERIA/config.json
-[[ ${_col} ]] && { 
-sed -i "s/${_obfs}/${_col}/" /etc/adm-lite/HYSTERIA/config.json 
-sed -i "s/${_obfs}/${_col}/" /etc/adm-lite/HYSTERIA/data
-systemctl restart hysteria &>/dev/null
-}
-;;
-3)
-clear&&clear
-[[ $(cat /etc/adm-lite/HYSTERIA/config.json | grep -w '//"alpn"') ]] && { 
-sed -i '12d' /etc/adm-lite/HYSTERIA/config.json 
-sed -i '12i\        "alpn": "h3",' /etc/adm-lite/HYSTERIA/config.json 
-} || {
-sed -i '12d' /etc/adm-lite/HYSTERIA/config.json 
-sed -i '12i\        //"alpn": "h3",' /etc/adm-lite/HYSTERIA/config.json 
-}
-systemctl restart hysteria &>/dev/null
-;;
-4)
-clear&&clear
-unset _col
-msg -bar
-systemctl restart hysteria &>/dev/null
-;;
-5)
-clear&&clear
-rm -f /etc/adm-lite/HYSTERIA/*
-systemctl disable hysteria &>/dev/null
-systemctl remove hysteria &>/dev/null
-rm -f /etc/systemd/system/hysteria.service
-systemctl stop hysteria &>/dev/null
-exit
-;;
-  esac  
+function_verify() {
+    unset keybot
+    msg -bar
+    [[ ! -e /etc/nivbot ]] && echo >/etc/nivbot
+    echo -e "\e[31m          BOTGEN LIBRE TE LO VENDIERON ?\e[32m"
+    [[ "$(echo "$(cat </etc/nivbot)")" < "3" ]] && {
+        [[ -e /bin/downloadbot ]] && {
+            [[ -z $(cat </bin/downloadbot) ]] && read -p " DIGITE SI O NO : " keybot || unset keybot
+        }
+    } || read -p " DIGITE SI O NO: " keybot
+    [[ -z $keybot ]] && {
+        [[ -e /bin/downloadbot ]] && link="$(cat </bin/downloadbot)" || link='https://raw.githubusercontent.com'
+        [[ $link = 'https://raw.githubusercontent.com' ]] && echo "CONTROL MEDIANTE GitHub" || echo "CONTROL EXTERNO"
+        permited=$(curl -sSL "https://raw.githubusercontent.com/NetVPS/Multi-Script/main/ChuGH-5.7u/Bot/Control-Bot")
+    } || {
+        permited=$(curl -sSL "https://raw.githubusercontent.com/NetVPS/Multi-Script/main/ChuGH-5.7u/Bot/Control-Bot")
+        [[ -z $keybot ]] && echo $link >/bin/downloadbot || echo -e "$(ofus $keybot)" >/bin/downloadbot
+    }
+    permited=$(curl -sSL "https://raw.githubusercontent.com/NetVPS/Multi-Script/main/ChuGH-5.7u/Bot/Control-Bot")
+    [[ $(echo $permited | grep "${IP}") = "" ]] || {
+        clear
+        msg -bar
+        echo -e "\n"
+        echo -e "\e[31m    LA IP $(wget -qO- ipv4.icanhazip.com) FUE RECHAZADA!"
+        echo -e " $link No AUTORIZADA el ACCESO "
+        echo -e " SI DESEAS USAR EL BOTGEN CONTACTE A @ChumoGH"
+        msg -bar
+        [[ -e "/bin/ShellBot.sh" ]] && rm /bin/ShellBot.sh
+        [[ -e /bin/downloadbot ]] && rm -f /bin/downloadbot
+        echo -e "\n"
+        msg -bar
+        exit 1
+    } && {
+        ### INTALAR VERCION DE SCRIPT
+        clear && clear
+        msg -bar
+        echo -e "\e[32m      LA IP $(wget -qO- ipv4.icanhazip.com) ESTA AUTORIZADA!"
+        [[ -e /usr/bin/downBase ]] || echo 'https://raw.githubusercontent.com/DanssBot/Generador-BOT/main/Otros/lista' >/usr/bin/downBase && chmod 777 /usr/bin/downBase
+        v1=$(curl -sSL "https://raw.githubusercontent.com/NetVPS/Multi-Script/main/ChuGH-5.7u/adm-lite/v-local.log")
+        [[ ! -e /bin/downloadbot ]] && {
+            [[ $link = 'https://raw.githubusercontent.com' ]] && echo "https://raw.githubusercontent.com" >/bin/downloadbot || echo "$(ofus $keybot)" >/bin/downloadbot
+            chmod +x /bin/downloadbot
+        }
+        [[ -e /etc/nivbot ]] && {
+            i=$(cat </etc/nivbot)
+            lv=$(($i + 1))
+            echo $lv >/etc/nivbot
+        } || echo "1" >/etc/nivbot
+        echo $Key >/etc/valkey && chmod +x /etc/valkey
+        [[ -e /usr/bin/downBase ]] || echo 'https://raw.githubusercontent.com/DanssBot/Generador-BOT/main/Otros/lista' >/usr/bin/downBase && chmod 777 /usr/bin/downBase
+        [[ -e /bin/ShellBot.sh ]] && wget -O /bin/ShellBot.sh https://raw.githubusercontent.com/NetVPS/Generador-BOT/main/Otros/ShellBot.sh >/dev/null && chmod +rwx /bin/ShellBot.sh
+
+        sleep 3s
+    }
+
 }
 
-_menuH2(){
-clear&&clear
-msg -bar
-cat /etc/adm-lite/HYSTERIA/data.yaml
-msg -bar
-green "$APP_IMPORT_GUIDE"
-yellow "El URI de configuraci�n de Hysteria 2 (con salto de puerto) "
-red "$(cat /root/hy/url.txt)"
-yellow "El URI de configuraci�n de Hysteria 2 (sin salto de puerto) "
-red "$(cat /root/hy/url-nohop.txt)"
-msg -bar
-unset op
-[[ $(cat /etc/adm-lite/HYSTERIA/config.yaml | grep -w '//"alpn"') ]] && _ap='\033[0;31mOFF' || _ap='\033[0;32mON'
-menu_func "CAMBIAR PUERTO" "CAMBIAR CONTRASE�A" "REINICIAR SERVICIO" "\033[0;31mREMOVER SERVICIO"
-msg -bar
-  selecy=$(selection_fun 5)  
-case $selecy in
-1)
-clear&&clear
-unset _col
-msg -bar
-    oldport=$(cat /etc/adm-lite/HYSTERIA/config.yaml 2>/dev/null | sed -n 1p | awk '{print $2}' | awk -F ":" '{print $2}')    
-	echo  -e "INGRESE EL NUEVO PUERTO DE SERVICIO "
-	read -p "Puerto [1-65535] (Puerto Ramdom Enter): " port
-    [[ -z $port ]] && port=$(shuf -i 2000-65535 -n 1)
-    until [[ -z $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$port") ]]; do
-        if [[ -n $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$port") ]]; then
-            echo -e "${RED} $port ${PLAIN} Puerto Ocupado , Reintente Nuevamente!  "
-            read -p "Puerto [1-65535] (Puerto Ramdom Enter): " port
-            [[ -z $port ]] && port=$(shuf -i 2000-65535 -n 1)
-        fi
+echo '0' >/etc/http-instas 
+[[ -d $SCPT_DIR ]] && rm -rf $SCPT_DIR
+
+#CORES
+cor[1]="\033[1;36m"
+cor[2]="\033[1;32m"
+cor[3]="\033[1;31m"
+cor[4]="\033[1;33m"
+cor[0]="\033[1;37m"
+
+#TEXTOS
+
+#COMPARA
+fun_filez() {
+    fup="$HOME/update"
+    echo "$1" >>$HOME/files.log
+
+    wget -O /bin/http-server.sh https://raw.githubusercontent.com/DanssBot/Generador-BOT/main/Bot/http-server.py  && chmod +x /bin/http-server.sh
+    [[ -e $1 ]] && mv -f ${fup}/$1 /etc/SCRIPT/$1
+}
+
+ofus() {
+    unset txtofus
+    number=$(expr length $1)
+    for ((i = 1; i < $number + 1; i++)); do
+        txt[$i]=$(echo "$1" | cut -b $i)
+        case ${txt[$i]} in
+        ".") txt[$i]="v" ;;
+        "v") txt[$i]="." ;;
+        "1") txt[$i]="@" ;;
+        "@") txt[$i]="1" ;;
+        "2") txt[$i]="?" ;;
+        "?") txt[$i]="2" ;;
+        "4") txt[$i]="p" ;;
+        "p") txt[$i]="4" ;;
+        "-") txt[$i]="L" ;;
+        "L") txt[$i]="-" ;;
+        esac
+        txtofus+="${txt[$i]}"
     done
-    sed -i "1s#$oldport#$port#g" /etc/adm-lite/HYSTERIA/config.yaml
-    sed -i "1s#$oldport#$port#g" /root/hy/hy-client.yaml
-    sed -i "2s#$oldport#$port#g" /root/hy/hy-client.json
-    sed -i "s#$oldport#$port#g" /root/hy/url.txt
-    stophysteria && starthysteria
-    green "Su puerto fue modificado Exitosamente : $port"
-    cat /root/hy/url.txt
-  ;;
-  2)
-clear&&clear
-unset _col
-msg -bar
-    oldpasswd=$(cat /etc/adm-lite/HYSTERIA/config.yaml 2>/dev/null | sed -n 20p | awk '{print $2}')
-    oldobfs=$(cat /etc/adm-lite/HYSTERIA/config.yaml 2>/dev/null | sed -n 10p | awk '{print $2}')
-	echo  -e "INGRESE SU NUEVA CLAVE/CONTRASE�A "
-    read -p " (Enter Clave RAMDON): " passwd
-    [[ -z $passwd ]] && passwd=$(date +%s%N | md5sum | cut -c 1-8)
-
-    sed -i "20s#$oldpasswd#$passwd#g" /etc/adm-lite/HYSTERIA/config.yaml
-    sed -i "10s#$oldobfs#$passwd#g" /etc/adm-lite/HYSTERIA/config.yaml
-    sed -i "3s#$oldpasswd#$passwd#g" /root/hy/hy-client.yaml
-    sed -i "9s#$oldobfs#$passwd#g" /root/hy/hy-client.yaml
-    sed -i "3s#$oldpasswd#$passwd#g" /root/hy/hy-client.json
-    sed -i "8s#$oldobfs#$passwd#g" /root/hy/hy-client.json
-    sed -i "s#$oldpasswd#$passwd#g" /root/hy/url.txt
-    sed -i "s#$oldobfs#$passwd#g" /root/hy/url.txt
-    stophysteria && starthysteria
-    green "Su nueva contrase�a $passwd se aplico Exitosamente"
-    cat /root/hy/url.txt
-;;
-3)
-stophysteria && starthysteria
-;;
-4)
-clear&&clear
-rm -f /etc/adm-lite/HYSTERIA/*
-    systemctl stop hysteria-server.service >/dev/null 2>&1
-    systemctl disable hysteria-server.service >/dev/null 2>&1
-    rm -f /lib/systemd/system/hysteria-server.service /lib/systemd/system/hysteria-server@.service
-    rm -rf /bin/Hysteria2 /etc/hysteria /root/hy /root/hysteria.sh
-    rm -f /bin/Hysteria2
-    iptables -t nat -F PREROUTING >/dev/null 2>&1
-    netfilter-persistent save >/dev/null 2>&1
-exit
-;;
-  esac  
+    echo "$txtofus" | rev
 }
 
-unset _So _Cu _HIS _HIS2
-while : 
-[[ $(ps x | grep -w 'udpServer'| grep -v grep) ]] && _So="$(msg -verd 'ON')" || _So="$(msg -verm2 'OFF')"
-[[ $(ps x | grep -w 'UDP-Custom'| grep -v grep) ]] && _Cu="$(msg -verd 'ON')" || _Cu="$(msg -verm2 'OFF')"
-[[ $(ps x | grep -w '/bin/hysteria' | grep -v grep) ]] && _HIS="$(msg -verd 'ON')" || _HIS="$(msg -verm2 'OFF')"
-[[ $(ps x | grep -w '/bin/Hysteria2'| grep -v grep) ]] && _HIS2="$(msg -verd 'ON')" || _HIS2="$(msg -verm2 'OFF')"
-_MSYS=" \n$(print_center "\033[0;35mUsuarios SSH del Sistema")"
-_MSYS2="\n$(print_center "\033[0;35mNO SOPORTA USERS DE SISTEMA")"
-
-do
-unset port
-  tittle
-  #menu_func " UDP-REQUEST  SocksIP    \033[0;31m[${_So}\033[0;31m]${_MSYS}" "UDP-CUSTOM HTTPCustom \033[0;31m[${_Cu}\033[0;31m]${_MSYS}" "UDP-Hysteria APPMod's \033[0;31m[${_HIS}\033[0;31m] ${_MSYS}"
-  echo -e "\033[0;35m [${cor[2]}01\033[0;35m]\033[0;33m ${flech}${cor[3]}UDP-REQUEST  SocksIP         \033[0;31m[${_So}\033[0;31m] ${_MSYS}" 
-  echo -e "\033[0;35m [${cor[2]}02\033[0;35m]\033[0;33m ${flech}${cor[3]}UDP-CUSTOM HTTPCustom        \033[0;31m[${_Cu}\033[0;31m] ${_MSYS}" 
-  echo -e "\033[0;35m [${cor[2]}03\033[0;35m]\033[0;33m ${flech}${cor[3]}UDP-Hysteria APPMod's        \033[0;31m[${_HIS}\033[0;31m] ${_MSYS}"
-  echo -e "\033[0;35m [${cor[2]}04\033[0;35m]\033[0;33m ${flech}${cor[3]}UDP-Hysteria2 HTTP-Injector  \033[0;31m[${_HIS2}\033[0;31m] ${_MSYS2}"
-  msg -bar
-  echo -ne "$(msg -verd "  [0]") $(msg -verm2 "=>>") " && msg -bra "\033[1;41m Volver "
-  msg -bar
-  opcion=$(selection_fun 4)
-  case $opcion in
-  1) source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu_inst/UDPserver.org.sh) && exit;;
-  2) source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu_inst/udp-custom.sh) && exit;;
-  3) [[ $(ps x | grep -w "/bin/hysteria"| grep -v grep) ]] && _menuH || _hysteria ;;
-  4) [[ $(ps x | grep -w "/bin/Hysteria2"| grep -v grep) ]] && _menuH2 || _hysteria2 ;;
-  0) exit;;
-  esac  
-done
-
-pruebas(){
-
-echo '[Unit]
-Description=HysteriaUDP MOD Service BY @drowkid01
-After=network.target
-
-[Service]
-User=root
-Group=root'	> /etc/adm-lite/HYSTERIA/hysteria.service
-echo "ExecStartPost=${sys} net.ipv4.ip_forward=1
-ExecStartPost=${sys} net.ipv4.conf.all.rp_filter=0
-ExecStartPost=${sys} net.ipv4.conf.${interfas}.rp_filter=0
-ExecStartPost=${ip4t} -t nat -A PREROUTING -i ${interfas} -p udp --dport 10000:65000 -j DNAT --to-destination :36712
-ExecStartPost=${ip6t} -t nat -A PREROUTING -i ${interfas} -p udp --dport 10000:65000 -j DNAT --to-destination :36712
-ExecStopPost=${ip4t} -t nat -D PREROUTING -i ${interfas} -p udp --dport 10000:65000 -j DNAT --to-destination :36712
-ExecStopPost=${ip6t} -t nat -D PREROUTING -i ${interfas} -p udp --dport 10000:65000 -j DNAT --to-destination :36712" >> /etc/adm-lite/HYSTERIA/hysteria.service
-
-echo 'WorkingDirectory=/etc/adm-lite/HYSTERIA
-Environment="PATH=/etc/adm-lite/HYSTERIA"
-ExecStart=/bin/hysteria -config /etc/adm-lite/HYSTERIA/config.json server
-
-[Install]
-WantedBy=multi-user.target
-' >> /etc/adm-lite/HYSTERIA/hysteria.service
-		
+DOWS() {
+    wget -O /root/lista https://raw.githubusercontent.com/DanssBot/Generador-BOT/main/Otros/lista
+    wget --no-check-certificate -i $HOME/lista
 }
+
+function aguarde() {
+    sleep 1
+    fun_ejec=$1
+    helice() {
+        DOWS >/dev/null 2>&1 &
+        tput civis
+        while [ -d /proc/$! ]; do
+            for i in / - \\ \|; do
+                sleep .1
+                echo -ne "\e[1D$i"
+            done
+        done
+        tput cnorm
+    }
+    echo -ne "\033[1;37m TRASLADANDO FILES \033[1;32mSCRIPT \033[1;37me \033[1;32mAUTOGEN\033[1;32m.\033[1;33m.\033[1;31m. \033[1;33m"
+    helice
+    echo -e "\e[1D REALIZADO"
+}
+
+atualiza_fun() {
+    msg -bar
+    [[ -d ./update ]] && rm -rf ./update/* || mkdir ./update
+    cd ./update/
+    aguarde
+    unset arqs
+    n=1
+    rm -f $HOME/files.log
+    for arqs in $(ls $HOME/update); do
+        echo -ne "\033[1;33m FILE \e[32m [${n}.gen] \e[0m "
+        fun_filez $arqs >/dev/null 2>&1 && echo -e "\033[1;31m- \033[1;31m $arqs (no Trasladado!)" || echo -e "\033[1;31m- \033[1;32m $arqs Trasladado!"
+        n=$(($n + 1))
+    done
+    mkdir -p /etc/SCRIPT
+    mv -f /root/update/* /etc/SCRIPT/
+    wget -q -O /usr/bin/gerar https://raw.githubusercontent.com/DanssBot/Generador-BOT/main/Menu-Bash/gerador.sh && chmod +rwx /usr/bin/gerar
+    cd $HOME
+    msg -bar
+    echo -e "\033[1;92m           DIGITE EL COMANDO: \033[1;33mgerar  "
+    msg -bar
+    [[ -e $HOME/lista ]] && rm $HOME/lista
+    [[ -d $HOME/update ]] && rm -rf $HOME/update
+}
+
+unset Key
+[[ $1 = '--install' ]] && install_ini
+[[ $1 = '' ]] && clear && echo " DESTRUYENDO FICHERO rm -rf /bin " && exit
+clear
+check_ip
+function_verify
+atualiza_fun
