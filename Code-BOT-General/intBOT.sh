@@ -175,7 +175,7 @@ if [[ ! $PIDGEN ]]; then
 [[ $bot_ini = @(s|S|y|Y) ]] && {
 
 	echo -e "[Unit]
-Description=BotGen Service by @ChumoGH
+Description=BotGen Service by @drowkid01
 After=network.target
 StartLimitIntervalSec=0
 
